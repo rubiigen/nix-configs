@@ -89,6 +89,8 @@
     pkgs.blueman
     pkgs.bluez
     pkgs.bluez-alsa
+    pkgs.swaynotificationcenter
+    pkgs.xdg-desktop-portal-hyprland
   ];
 
   fonts.fonts = with pkgs; [
