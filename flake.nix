@@ -85,12 +85,12 @@
       };
 
       # this is another sample host
-      Andromeda = nixpkgs.lib.nixosSystem {
+      Nebula = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules =
           [
             # > Our main nixos configuration file <
-            ./nixos/hosts/Andromeda # this imports the entirety of host2's configs
+            ./nixos/hosts/Nebula # this imports the entirety of host2's configs
             ./modules/nixos
           ]
           ++ sharedModules;
@@ -101,7 +101,18 @@
         modules =
           [
             # > Our main nixos configuration file <
-            ./nixos/hosts/Dysnomia # this imports the entirety of host2's configs
+            ./nixos/hosts/Dysnomia # this imports the entirety of host3's configs
+            ./modules/nixos
+          ]
+          ++ sharedModules;
+      };
+
+      Andromeda = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules =
+          [
+            # > Our main nixos configuration file <
+            ./nixos/hosts/Andromeda # this imports the entirety of host4's configs
             ./modules/nixos
           ]
           ++ sharedModules;

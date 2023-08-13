@@ -72,20 +72,43 @@
     steam.enable = true;
     nm-applet.enable = true;
     sway.enable = true;
+    adb.enable = true;
   };
 
   environment.systemPackages = [
     pkgs.swaylock
     pkgs.swayidle
+    (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
+    pkgs.temurin-jre-bin-8
+    pkgs.temurin-bin-18
+    pkgs.libinput
+    pkgs.font-awesome
+    (pkgs.discord-canary.override {
+	withVencord = true;
+    })
+    pkgs.blueman
+    pkgs.bluez
+    pkgs.bluez-alsa
   ];
+
+  fonts.fonts = with pkgs; [
+	font-awesome
+  ];
+
+
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   # TODO: Set your hostname
   networking.hostName = "Dysnomia";
 
+
+  virtualisation.vmware.host.enable = true;
+
   # TODO: This is just an example, be sure to use whatever bootloader you prefer
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.loader.efi.efiSysMountPoint = "/boot/";
 
   # enable networking
   networking.networkmanager.enable = true;
@@ -138,7 +161,7 @@
   users.users.rion = {
     isNormalUser = true;
     description = "Rion";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "adbusers"];
     openssh.authorizedKeys.keys = [
       # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
     ];

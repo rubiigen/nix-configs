@@ -100,7 +100,7 @@
   services.blueman.enable = true;
 
   # TODO: Set your hostname
-  networking.hostName = "Andromeda";
+  networking.hostName = "Nebula";
 
 
   virtualisation.vmware.host.enable = true;
