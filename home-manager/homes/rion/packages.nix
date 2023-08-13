@@ -18,5 +18,7 @@
     timidity
     wl-clipboard
     wev
+    tidal-hifi
+    transmission
   ];
 }

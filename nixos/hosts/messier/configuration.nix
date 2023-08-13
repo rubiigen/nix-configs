@@ -91,6 +91,7 @@
     pkgs.bluez-alsa
     pkgs.swaynotificationcenter
     pkgs.xdg-desktop-portal-hyprland
+    pkgs.libsForQt5.polkit-kde-agent
   ];
 
   fonts.fonts = with pkgs; [
