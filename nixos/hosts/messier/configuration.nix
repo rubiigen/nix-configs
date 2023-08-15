@@ -92,10 +92,12 @@
     pkgs.swaynotificationcenter
     pkgs.xdg-desktop-portal-hyprland
     pkgs.libsForQt5.polkit-kde-agent
+    pkgs.jetbrains-mono
   ];
 
   fonts.fonts = with pkgs; [
 	font-awesome
+        jetbrains-mono
   ];
 
 
@@ -150,21 +152,20 @@
   services.printing.enable = true;
 
   # Sound (kill me now)
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
   };
 
   # define user acc
   users.users.rion = {
     isNormalUser = true;
     description = "Rion";
-    extraGroups = ["networkmanager" "wheel" "adbusers"];
+    extraGroups = ["networkmanager" "wheel" "adbusers" "audio" ];
     openssh.authorizedKeys.keys = [
       # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
     ];

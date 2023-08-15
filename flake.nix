@@ -12,7 +12,13 @@
     # Home manager
     home-manager.url = "github:nix-community/home-manager/";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
+    
+    # arrpc
+    arrpc = {
+	url = "github:notashelf/arrpc-flake";
+	inputs.nixpkgs.follows = "nixpkgs";
+    };
+	
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
 

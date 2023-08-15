@@ -16,6 +16,7 @@
     # ./nvim.nix
     ./packages.nix # home.packages and similar stuff
     ./programs.nix # programs.<programName>.enable
+    ./arrpc.nix
   ];
 
   # TODO: Set your username
