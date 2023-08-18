@@ -95,6 +95,11 @@
     pkgs.jetbrains-mono
     pkgs.libsForQt5.qt5ct
   ];
+  
+  fonts.packages = with pkgs; [
+	font-awesome
+	jetbrains-mono
+  ];
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
