@@ -89,18 +89,23 @@
     pkgs.blueman
     pkgs.bluez
     pkgs.bluez-alsa
+    pkgs.swaynotificationcenter
+    pkgs.xdg-desktop-portal-hyprland
+    pkgs.libsForQt5.polkit-kde-agent
+    pkgs.jetbrains-mono
+    pkgs.libsForQt5.qt5ct
   ];
-
-  fonts.fonts = with pkgs; [
+  
+  fonts.packages = with pkgs; [
 	font-awesome
+	jetbrains-mono
   ];
-
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
   # TODO: Set your hostname
-  networking.hostName = "Andromeda";
+  networking.hostName = "Pluto";
 
 
   virtualisation.vmware.host.enable = true;

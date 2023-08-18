@@ -113,12 +113,12 @@
           ++ sharedModules;
       };
 
-      Andromeda = nixpkgs.lib.nixosSystem {
+      Pluto = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules =
           [
             # > Our main nixos configuration file <
-            ./nixos/hosts/Andromeda # this imports the entirety of host4's configs
+            ./nixos/hosts/pluto # this imports the entirety of host4's configs
             ./modules/nixos
           ]
           ++ sharedModules;
@@ -130,7 +130,31 @@
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
       # FIXME replace with your username@hostname
-      "rion@Messier" = home-manager.lib.homeManagerConfiguration {
+       "rion@Messier" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [
+          # > Our main home-manager configuration file <
+          ./home-manager/homes/rion
+        ];
+      };
+       "rion@Dysnomia" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [
+          # > Our main home-manager configuration file <
+          ./home-manager/homes/rion
+        ];
+      };
+       "rion@Nebula" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [
+          # > Our main home-manager configuration file <
+          ./home-manager/homes/rion
+        ];
+      };
+       "rion@Pluto" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
