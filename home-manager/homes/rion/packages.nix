@@ -19,5 +19,6 @@
     wev
     tidal-hifi
     transmission
+    spotify
   ];
 }

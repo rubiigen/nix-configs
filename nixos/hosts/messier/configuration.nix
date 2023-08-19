@@ -94,6 +94,7 @@
     pkgs.libsForQt5.polkit-kde-agent
     pkgs.jetbrains-mono
     pkgs.libsForQt5.qt5ct
+    pkgs.gparted
   ];
   
   fonts.packages = with pkgs; [
