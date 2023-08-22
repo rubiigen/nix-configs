@@ -71,13 +71,12 @@
     hyprland.enable = true;
     steam.enable = true;
     nm-applet.enable = true;
-    sway.enable = true;
     adb.enable = true;
   };
 
   environment.systemPackages = [
-    pkgs.swaylock
     pkgs.swayidle
+    pkgs.gtklock
     (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
     pkgs.temurin-jre-bin-8
     pkgs.temurin-bin-18
@@ -86,18 +85,30 @@
     (pkgs.discord-canary.override {
 	withVencord = true;
     })
-    pkgs.blueman
-    pkgs.bluez
-    pkgs.bluez-alsa
+    pkgs.swaynotificationcenter
+    pkgs.polkit_gnome
+    pkgs.jetbrains-mono
+    pkgs.libsForQt5.qt5ct
+    pkgs.xdg-desktop-portal-hyprland
+    pkgs.udiskie
+    pkgs.adwaita-qt
+    pkgs.adwaita-qt6
+    pkgs.deepin.udisks2-qt5
+    pkgs.cinnamon.nemo
   ];
+  
+  xdg.portal.enable = true;
 
-  fonts.fonts = with pkgs; [
+  security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
+
+  fonts.packages = with pkgs; [
 	font-awesome
+	jetbrains-mono
   ];
 
-
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
+  environment.variables = {
+	QT_QPA_PLATFORMTHEME="qt5ct";
+  };
 
   # TODO: Set your hostname
   networking.hostName = "Nebula";
@@ -133,7 +144,6 @@
 
   # Enable X11 Windowing system
   services.xserver.enable = true;
-
   # Enable display Manager
   services.xserver.displayManager.sddm.enable = true;
 
@@ -147,7 +157,6 @@
   services.printing.enable = true;
 
   # Sound (kill me now)
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -156,6 +165,26 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
+  security.polkit.enable = true;
+
+ systemd = {
+  user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+  };
+};
+
+  services.lvm.enable = true;
 
   # define user acc
   users.users.rion = {

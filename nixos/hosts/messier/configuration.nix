@@ -153,7 +153,6 @@
   services.printing.enable = true;
 
   # Sound (kill me now)
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
