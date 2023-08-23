@@ -2,11 +2,9 @@
   description = "Your new nix config";
 
   inputs = {
-    # Nixpkgs
+    # Nixpkgs (unstable)
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # You can access packages and modules from different nixpkgs revs
-    # at the same time. Here's an working example:
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
     # Home manager
@@ -19,18 +17,15 @@
 	inputs.nixpkgs.follows = "nixpkgs";
     };
 	
-    # TODO: Add any other flake you might need
-    # hardware.url = "github:nixos/nixos-hardware";
-
-    # Shameless plug: looking for a way to nixify your themes and make
-    # everything match nicely? Try nix-colors!
-    # nix-colors.url = "github:misterio77/nix-colors";
+    # hyprland 
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = {
     self,
     nixpkgs,
     home-manager,
+    hyprland,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -71,60 +66,7 @@
 
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
-    nixosConfigurations = let
-      home-manager = inputs.home-manager.nixosModules.home-manager; # get home-manager module from the flake
-
-      homes = ./home-manager; # shared homes module
-      nixos = ./modules/nixos; # shared nixos module
-      sharedModules = [homes nixos home-manager]; # a list that contains modules to be shared
-    in {
-      # FIXME replace with your hostname
-      Messier = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules =
-          [
-            # > Our main nixos configuration file <
-            ./nixos/hosts/messier # this imports the entirety of messier's configs
-            ./modules/nixos # this imports the shared nixos module that lets you re-use settings between hosts
-          ]
-          ++ sharedModules;
-      };
-
-      # this is another sample host
-      Nebula = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules =
-          [
-            # > Our main nixos configuration file <
-            ./nixos/hosts/Nebula # this imports the entirety of host2's configs
-            ./modules/nixos
-          ]
-          ++ sharedModules;
-      };
-
-      Dysnomia = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules =
-          [
-            # > Our main nixos configuration file <
-            ./nixos/hosts/Dysnomia # this imports the entirety of host3's configs
-            ./modules/nixos
-          ]
-          ++ sharedModules;
-      };
-
-      Pluto = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules =
-          [
-            # > Our main nixos configuration file <
-            ./nixos/hosts/pluto # this imports the entirety of host4's configs
-            ./modules/nixos
-          ]
-          ++ sharedModules;
-      };
-
-    };
+    nixosConfigurations = import ./hosts {inherit nixpkgs self outputs;};
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
@@ -136,6 +78,8 @@
         modules = [
           # > Our main home-manager configuration file <
           ./home-manager/homes/rion
+          hyprland.homeManagerModules.default
+          {wayland.windowManager.hyprland.enable = true;}
         ];
       };
        "rion@Dysnomia" = home-manager.lib.homeManagerConfiguration {
@@ -144,6 +88,8 @@
         modules = [
           # > Our main home-manager configuration file <
           ./home-manager/homes/rion
+          hyprland.homeManagerModules.default
+          {wayland.windowManager.hyprland.enable = true;}
         ];
       };
        "rion@Nebula" = home-manager.lib.homeManagerConfiguration {
@@ -152,6 +98,8 @@
         modules = [
           # > Our main home-manager configuration file <
           ./home-manager/homes/rion
+          hyprland.homeManagerModules.default
+          {wayland.windowManager.hyprland.enable = true;}
         ];
       };
        "rion@Pluto" = home-manager.lib.homeManagerConfiguration {
@@ -160,6 +108,8 @@
         modules = [
           # > Our main home-manager configuration file <
           ./home-manager/homes/rion
+          hyprland.homeManagerModules.default
+          {wayland.windowManager.hyprland.enable = true;}
         ];
       };
     };

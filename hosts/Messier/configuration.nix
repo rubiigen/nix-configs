@@ -25,7 +25,6 @@
   ];
 
   nixpkgs = {
-    # You can add overlays here
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
       outputs.overlays.additions
@@ -36,11 +35,11 @@
       # neovim-nightly-overlay.overlays.default
 
       # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
+        (self: super: {
+          waybar = super.waybar.overrideAttrs (oldAttrs: {
+            mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+          });
+        })
     ];
     # Configure your nixpkgs instance
     config = {
@@ -71,12 +70,10 @@
     hyprland.enable = true;
     steam.enable = true;
     nm-applet.enable = true;
-    #sway.enable = true;
     adb.enable = true;
   };
 
   environment.systemPackages = [
-    #pkgs.swaylock
     pkgs.swayidle
     pkgs.gtklock
     (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
@@ -101,9 +98,12 @@
     pkgs.adwaita-qt6
     pkgs.deepin.udisks2-qt5
     pkgs.cinnamon.nemo
+    pkgs.waybar
   ];
   
-  xdg.portal.enable = true;
+  xdg.portal = {
+      enable = true;
+  };
 
   security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
 
@@ -121,7 +121,7 @@
   services.blueman.enable = true;
 
   # TODO: Set your hostname
-  networking.hostName = "Dysnomia";
+  networking.hostName = "Messier";
 
 
   virtualisation.vmware.host.enable = true;
@@ -155,8 +155,9 @@
   # Enable X11 Windowing system
   services.xserver.enable = true;
   # Enable display Manager
-  services.xserver.displayManager.sddm.enable = true;
-
+  #services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;
   # configure keymap (x11)
   services.xserver = {
     layout = "gb";
@@ -167,7 +168,6 @@
   services.printing.enable = true;
 
   # Sound (kill me now)
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -195,7 +195,6 @@
 };
 
   services.lvm.enable = true;
-  services.fprintd.enable = true;
 
   # define user acc
   users.users.rion = {

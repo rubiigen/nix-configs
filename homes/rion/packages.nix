@@ -19,5 +19,6 @@
     tidal-hifi
     transmission
     spotify
+    vscodium
   ];
 }

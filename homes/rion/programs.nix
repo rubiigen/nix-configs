@@ -1,7 +1,6 @@
 _: {
   # enable programs
   programs = {
-    waybar.enable = true;
     git = {
 	enable = true;
 	userName = "RionWren";

@@ -10,8 +10,9 @@
       inherit inputs self;
     };
     users = {
-      rion = ./homes/rion;
+      rion = ./rion;
       # more users can go here, the format is only for convenience
     };
   };
 }
+
