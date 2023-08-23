@@ -10,6 +10,7 @@
 }: {
   # You can import other NixOS modules here
   imports = [
+	<nixos-hardware/microsoft/surface/surface-pro-intel>
     # If you want to use modules your own flake exports (from modules/nixos):
     # outputs.nixosModules.example
 
@@ -67,7 +68,10 @@
 
   # the configuration (pain)
   programs = {
-    hyprland.enable = true;
+    hyprland = {
+	enable = true;
+	xwayland.enable = true;
+    };
     steam.enable = true;
     nm-applet.enable = true;
     adb.enable = true;
@@ -121,7 +125,7 @@
   services.blueman.enable = true;
 
   # TODO: Set your hostname
-  networking.hostName = "Messier";
+  networking.hostName = "Pluto";
 
 
   virtualisation.vmware.host.enable = true;
@@ -195,6 +199,7 @@
 };
 
   services.lvm.enable = true;
+  services.fprintd.enable = true;
 
   # define user acc
   users.users.rion = {

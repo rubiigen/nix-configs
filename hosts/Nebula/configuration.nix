@@ -68,7 +68,9 @@
 
   # the configuration (pain)
   programs = {
-    hyprland.enable = true;
+    hyprland = {
+	enable = true;
+	xwayland.enable = true;
     steam.enable = true;
     nm-applet.enable = true;
     adb.enable = true;
