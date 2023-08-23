@@ -25,6 +25,7 @@
   ];
 
   nixpkgs = {
+    # You can add overlays here
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
       outputs.overlays.additions
@@ -34,7 +35,7 @@
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
 
-      # Or define it inline, for example:
+        # Or define it inline, for example:
         (self: super: {
           waybar = super.waybar.overrideAttrs (oldAttrs: {
             mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
@@ -71,7 +72,7 @@
     steam.enable = true;
     nm-applet.enable = true;
     adb.enable = true;
-  };
+    };
 
   environment.systemPackages = [
     pkgs.swayidle
@@ -84,15 +85,11 @@
     (pkgs.discord-canary.override {
 	withVencord = true;
     })
-    pkgs.blueman
-    pkgs.bluez
-    pkgs.bluez-alsa
     pkgs.swaynotificationcenter
     pkgs.polkit_gnome
     pkgs.jetbrains-mono
     pkgs.libsForQt5.qt5ct
     pkgs.xdg-desktop-portal-hyprland
-    pkgs.gparted
     pkgs.udiskie
     pkgs.adwaita-qt
     pkgs.adwaita-qt6
@@ -103,9 +100,27 @@
   
   xdg.portal = {
       enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-hyprland
+    ];
+  };
+  security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
+  
+  services.mpd = {
+    enable = true;
+    user = "rion";
+    extraConfig = ''
+	audio_output {
+    		type "pipewire"
+    		name "My PipeWire Output"
+        }
+    '';
   };
 
-  security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
+  systemd.services.mpd.environment = {
+    # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/609
+    XDG_RUNTIME_DIR = "/run/user/1000"; # User-id 1000 must match above user. MPD will look inside this directory for the PipeWire socket.
+  };
 
   fonts.packages = with pkgs; [
 	font-awesome
@@ -116,12 +131,8 @@
 	QT_QPA_PLATFORMTHEME="qt5ct";
   };
 
-
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
-
   # TODO: Set your hostname
-  networking.hostName = "Messier";
+  networking.hostName = "Nebula";
 
 
   virtualisation.vmware.host.enable = true;
@@ -155,9 +166,9 @@
   # Enable X11 Windowing system
   services.xserver.enable = true;
   # Enable display Manager
-  #services.xserver.displayManager.sddm.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
+
   # configure keymap (x11)
   services.xserver = {
     layout = "gb";
@@ -213,7 +224,7 @@
     # Forbid root login through SSH.
     permitRootLogin = "yes";
     # Use keys only. Remove if you want to SSH using password (not recommended)
-    passwordAuthentication = false;
+    passwordAuthentication = true;
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
