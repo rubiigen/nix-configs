@@ -6,17 +6,17 @@
   lib,
   config,
   pkgs,
+  nixos-hardware,
   ...
 }: {
   # You can import other NixOS modules here
   imports = [
-    <nixos-hardware/microsoft/surface/common>
     # If you want to use modules your own flake exports (from modules/nixos):
     # outputs.nixosModules.example
 
     # Or modules from other flakes (such as nixos-hardware):
-    # inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-ssd
+    # nixos-hardware.nixosModules.microsoft-surface-common
+    inputs.nixos-hardware.nixosModules.microsoft-surface-common
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
