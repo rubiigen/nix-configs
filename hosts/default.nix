@@ -2,6 +2,7 @@
   nixpkgs,
   self,
   outputs,
+  nixos-hardware,
   ...
 }: let
   inputs = self.inputs;
@@ -14,7 +15,6 @@ in {
     modules = [
       # this list defines which files will be imported to be used as "modules" in the system config
       ./Dysnomia/configuration.nix
-
       # use the nixos-module for home-manager
       home-manager
       homes
@@ -48,9 +48,8 @@ in {
   Pluto = nixpkgs.lib.nixosSystem {
     specialArgs = {inherit inputs outputs;};
     modules = [
-      # this list defines which files will be imported to be used as "modules" in the system config
+      nixos-hardware.nixosModules.microsoft-surface-pro-intel
       ./Pluto/configuration.nix
-
       # use the nixos-module for home-manager
       home-manager
       homes

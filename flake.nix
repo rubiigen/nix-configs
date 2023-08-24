@@ -19,6 +19,9 @@
 	
     # hyprland 
     hyprland.url = "github:hyprwm/Hyprland";
+
+    # nixos-hardware
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = {
@@ -26,6 +29,7 @@
     nixpkgs,
     home-manager,
     hyprland,
+    nixos-hardware,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -66,7 +70,7 @@
 
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
-    nixosConfigurations = import ./hosts {inherit nixpkgs self outputs;};
+    nixosConfigurations = import ./hosts {inherit nixpkgs self outputs nixos-hardware;};
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'

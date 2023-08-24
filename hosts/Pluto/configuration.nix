@@ -10,7 +10,7 @@
 }: {
   # You can import other NixOS modules here
   imports = [
-	<nixos-hardware/microsoft/surface/surface-pro-intel>
+    <nixos-hardware/microsoft/surface/common>
     # If you want to use modules your own flake exports (from modules/nixos):
     # outputs.nixosModules.example
 
