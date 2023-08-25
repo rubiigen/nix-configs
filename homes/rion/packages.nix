@@ -20,5 +20,8 @@
     transmission
     spotify
     vscodium
+    vivaldi
+    fluffychat
+    firefox-devedition
   ];
 }
