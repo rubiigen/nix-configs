@@ -23,5 +23,6 @@
     vivaldi
     fluffychat
     firefox-devedition
+    stellarium
   ];
 }

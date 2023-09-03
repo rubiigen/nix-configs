@@ -31,16 +31,6 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
-
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-        # Or define it inline, for example:
-        (self: super: {
-          waybar = super.waybar.overrideAttrs (oldAttrs: {
-            mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-          });
-        })
     ];
     # Configure your nixpkgs instance
     config = {
@@ -66,38 +56,35 @@
     };
   };
 
-  # the configuration (pain)
+  # pain from here on out
   programs = {
     hyprland = {
-	enable = true;
-	xwayland.enable = true;
+      enable = true;
+      xwayland.enable = true;
+    };
     steam.enable = true;
     nm-applet.enable = true;
     adb.enable = true;
     };
 
-  environment.systemPackages = [
-    pkgs.swayidle
-    pkgs.gtklock
+  environment.systemPackages = with pkgs; [
+    swayidle
+    gtklock
     (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
-    pkgs.temurin-jre-bin-8
-    pkgs.temurin-bin-18
-    pkgs.libinput
-    pkgs.font-awesome
-    (pkgs.discord-canary.override {
-	withVencord = true;
-    })
-    pkgs.swaynotificationcenter
-    pkgs.polkit_gnome
-    pkgs.jetbrains-mono
-    pkgs.libsForQt5.qt5ct
-    pkgs.xdg-desktop-portal-hyprland
-    pkgs.udiskie
-    pkgs.adwaita-qt
-    pkgs.adwaita-qt6
-    pkgs.deepin.udisks2-qt5
-    pkgs.cinnamon.nemo
-    pkgs.waybar
+    temurin-jre-bin-8
+    temurin-bin-18
+    libinput
+    font-awesome
+    swaynotificationcenter
+    polkit_gnome
+    jetbrains-mono
+    libsForQt5.qt5ct
+    xdg-desktop-portal-hyprland
+    udiskie
+    adwaita-qt
+    adwaita-qt6
+    deepin.udisks2-qt5
+    cinnamon.nemo
   ];
   
   xdg.portal = {
@@ -108,22 +95,6 @@
   };
   security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
   
-  services.mpd = {
-    enable = true;
-    user = "rion";
-    extraConfig = ''
-	audio_output {
-    		type "pipewire"
-    		name "My PipeWire Output"
-        }
-    '';
-  };
-
-  systemd.services.mpd.environment = {
-    # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/609
-    XDG_RUNTIME_DIR = "/run/user/1000"; # User-id 1000 must match above user. MPD will look inside this directory for the PipeWire socket.
-  };
-
   fonts.packages = with pkgs; [
 	font-awesome
 	jetbrains-mono
