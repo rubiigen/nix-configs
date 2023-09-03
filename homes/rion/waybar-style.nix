@@ -14,17 +14,21 @@
     padding-bottom: 2px;
     border-radius: 8px;
     transition: none;
-
   }
 
 window#waybar {
     background: #ffffff;
     padding: 2px 2px 2px 0px;
+    margin: 7;
     /* background: transparent; */
 }
 
 window#waybar.empty {
     animation: fadeIn 5s;
+}
+
+# tray {
+    padding: 0 10px;
 }
 
 window#waybar.hidden {
@@ -56,7 +60,7 @@ tooltip {
 }
 
 #workspaces {
-  padding: 0 10px;
+    padding: 0 10px;
 }
 
 /*-----modules indv----*/
@@ -114,11 +118,6 @@ tooltip {
 #custom-updates {
     padding: 0px 0px
 }
-
-#tray {
-  padding: 0 10px;
-}
-
 
 #keyboard-state {
   padding-left: 0px;

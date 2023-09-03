@@ -1,19 +1,25 @@
 {
   mainBar = {
+    margin-top = 7;
+    margin-left = 7;
+    margin-right = 7;
+    mode = "dock";
     layer = "top";
     position = "top";
-    height = 27;
     fixed-center = true;
+
     modules-left = [
       "hyprland/workspaces"
       "tray"
       "custom/power"
     ];
+
     modules-center = [
       "clock"
       "sep"
       "custom/notification"
     ];
+    
     modules-right = [
       "battery"
       "cpu"
@@ -91,6 +97,8 @@
     };
 
     "temperature" = {
+      critical-threshold = 85;
+      format-critical = "{temperatureC}°C {icon}";
       format = "{icon} {temperatureC}°C";
       format-icons = [" " "" " "];
     };
