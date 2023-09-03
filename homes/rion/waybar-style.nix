@@ -1,7 +1,7 @@
 ''
 * {
     border: none;
-    font-family: "JetbrainsMono Nerd Font" ;
+    font-family: "JetbrainsMono Nerd Font", "Font Awesome 5" ;
     font-size: 14px;
     border-radius: 12px; /* Controls Rounding */
 }
@@ -56,7 +56,7 @@ tooltip {
 }
 
 #workspaces {
-  padding-right: 0px;
+  padding: 0 10px;
 }
 
 /*-----modules indv----*/
@@ -107,21 +107,16 @@ tooltip {
     padding: 0px 4px
 }
 
-#battery,
-#cpu,
-#memory,
-#temperature,
-#network,
-#pulseaudio,
-#custom-media,
+#battery, #cpu, #memory, #temperature, #network, #pulseaudio, #custom-media, #backlight {
+    padding: 0 10px;
+}
 
 #custom-updates {
     padding: 0px 0px
 }
 
 #tray {
-  padding-left: 0px;
-  padding-right: 0px;
+  padding: 0 10px;
 }
 
 
@@ -131,7 +126,10 @@ tooltip {
  }
 
 #mode,
-#custom-power,
+#custom-power {
+    padding: 0 10px;
+}
+
 #custom-launcher {
     font-weight: bold;
     /* padding-right: 7px */

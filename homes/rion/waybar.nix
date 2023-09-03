@@ -6,9 +6,7 @@
     fixed-center = true;
     modules-left = [
       "hyprland/workspaces"
-      "custom/sep"
       "tray"
-      "custom/sep"
       "custom/power"
     ];
     modules-center = [
@@ -17,21 +15,17 @@
       "custom/notification"
     ];
     modules-right = [
+      "battery"
       "cpu"
-      "custom/sep_r"
       "temperature"
-      "custom/sep_r"
+      "backlight"
       "disk"
-      "custom/sep_r"
       "memory"
-      "custom/sep_r"
       "pulseaudio"
-      "custom/sep_r"
       "network"
-      "custom/sep_r"
     ];
 
-    "custon/sep_r" = {
+    "custom/sep_r" = {
       format = " ";
     };
 
@@ -41,6 +35,12 @@
 
     "custom/sep_l" = {
       format = " ";
+    };
+
+    "backlight" = {
+      device = "acpi_video1";
+      format = "{icon}{percent}%";
+      format-icons = [" " " " " " " " " " " " " " " " " "];
     };
 
     "custom/notification" = {
@@ -88,6 +88,11 @@
     "hyprland/language" = {
       format = "{}";
       format-tr = "TR";
+    };
+
+    "temperature" = {
+      format = "{icon} {temperatureC}°C";
+      format-icons = [" " "" " "];
     };
 
     "hyprland/window" = {
@@ -152,7 +157,7 @@
       format-charging = " {capacity}%  ";
       format-plugged = " {capacity}%  ";
       format-alt = "{icon}{time}";
-      format-icoms = ["  " "  " "  " "  " "  "];
+      format-icons = ["  " "  " "  " "  " "  "];
     };
 
     "network" = {
