@@ -26,16 +26,11 @@
     homeDirectory = "/home/rion";
   };
 
-  wayland.windowManager.hyprland = if hostName == "Messier"
-    then {
-      enable = true;
-      systemdIntegration = true;
-      settings = import ./hyprland.nix;
-    }
-    else hostName == "Dysnomia" {
-      settings = import ./hyprlandx230.nix;
+  wayland.windowManager.hyprland = lib.mkIf (hostName == "Messier") {
+    enable = true;
+    systemdIntegration = true;
+    settings = import ./hyprland.nix;
   };
-  
   # let HM manage itself when in standalone mode
   programs.home-manager.enable = true;
 
