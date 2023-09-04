@@ -9,6 +9,7 @@
 
   home-manager = inputs.home-manager.nixosModules.home-manager;
   homes = ../homes;
+
 in {
   Dysnomia = nixpkgs.lib.nixosSystem {
     specialArgs = {inherit inputs outputs;};

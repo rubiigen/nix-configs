@@ -92,7 +92,7 @@
     adwaita-qt6
     deepin.udisks2-qt5
     cinnamon.nemo
-    waybar
+    playonlinux
   ];
   
   xdg.portal = {
@@ -175,9 +175,9 @@
  systemd = {
   user.services.polkit-gnome-authentication-agent-1 = {
     description = "polkit-gnome-authentication-agent-1";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
+    wantedBy = [ "basic.target" ];
+    wants = [ "basic.target" ];
+    after = [ "basic.target" ];
     serviceConfig = {
         Type = "simple";
         ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
@@ -187,9 +187,7 @@
       };
   };
 };
-
   services.lvm.enable = true;
-
   # define user acc
   users.users.rion = {
     isNormalUser = true;

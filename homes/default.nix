@@ -1,6 +1,7 @@
 {
   inputs,
   self,
+  config,
   ...
 }: {
   home-manager = {
@@ -8,6 +9,7 @@
     useGlobalPkgs = true;
     extraSpecialArgs = {
       inherit inputs self;
+      inherit (config.networking) hostName;
     };
     users = {
       rion = ./rion;
