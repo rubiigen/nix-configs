@@ -35,11 +35,6 @@
       # neovim-nightly-overlay.overlays.default
 
       # Or define it inline, for example:
-        (self: super: {
-          waybar = super.waybar.overrideAttrs (oldAttrs: {
-            mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-          });
-        })
     ];
     # Configure your nixpkgs instance
     config = {
@@ -76,32 +71,27 @@
     adb.enable = true;
   };
 
-  environment.systemPackages = [
-    pkgs.swayidle
-    pkgs.gtklock
+  environment.systemPackages = with pkgs; [
+    swayidle
+    gtklock
     (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
-    pkgs.temurin-jre-bin-8
-    pkgs.temurin-bin-18
-    pkgs.libinput
-    pkgs.font-awesome
-    (pkgs.discord-canary.override {
-	withVencord = true;
-    })
-    pkgs.blueman
-    pkgs.bluez
-    pkgs.bluez-alsa
-    pkgs.swaynotificationcenter
-    pkgs.polkit_gnome
-    pkgs.jetbrains-mono
-    pkgs.libsForQt5.qt5ct
-    pkgs.xdg-desktop-portal-hyprland
-    pkgs.gparted
-    pkgs.udiskie
-    pkgs.adwaita-qt
-    pkgs.adwaita-qt6
-    pkgs.deepin.udisks2-qt5
-    pkgs.cinnamon.nemo
-    pkgs.waybar
+    temurin-jre-bin-8
+    temurin-bin-18
+    libinput
+    font-awesome
+    blueman
+    bluez
+    bluez-alsa
+    swaynotificationcenter
+    polkit_gnome
+    jetbrains-mono
+    libsForQt5.qt5ct
+    xdg-desktop-portal-hyprland
+    udiskie
+    adwaita-qt
+    adwaita-qt6
+    deepin.udisks2-qt5
+    cinnamon.nemo
   ];
   
   xdg.portal = {
@@ -124,7 +114,7 @@
   services.blueman.enable = true;
 
   # TODO: Set your hostname
-  networking.hostName = "Dysnomia";
+  networking.hostName = "Messier";
 
 
   virtualisation.vmware.host.enable = true;
@@ -184,9 +174,9 @@
  systemd = {
   user.services.polkit-gnome-authentication-agent-1 = {
     description = "polkit-gnome-authentication-agent-1";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
+    wantedBy = [ "basic.target" ];
+    wants = [ "basic.target" ];
+    after = [ "basic.target" ];
     serviceConfig = {
         Type = "simple";
         ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
@@ -196,7 +186,6 @@
       };
   };
 };
-
   services.lvm.enable = true;
   services.fprintd.enable = true;
 

@@ -11,7 +11,7 @@
   ];
 
    monitor = [
-    "eDP-1,1366x768,0x0,1"
+    "LVDS-1,1366x768,0x0,1"
   ];
 
   "env" = "XCURSOR_SIZE,24";
@@ -100,8 +100,8 @@
       "$mod, up, movewindow, up"
       "$mod, down, movewindow, down"
       # Brightness (I like my mostly non-functional eyes)
-      ", XF86MonBrightnessUp, exec, brightnessctl --device=amdgpu_bl0 s +10"
-      ", XF86MonBrightnessDown, exec, brightnessctl --device=amdgpu_bl0 s 10-"
+      ", XF86MonBrightnessUp, exec, brightnessctl --device=intel_backlight s 255+"
+      ", XF86MonBrightnessDown, exec, brightnessctl --device=intel_backlight s 255-"
       # Switch workspaces
       "$mod, 1, workspace, 1"
       "$mod, 2, workspace, 2"
@@ -132,8 +132,5 @@
       "$mod, mouse:272, movewindow"
       "$mod, mouse:273, resizewindow"
     ];
-    "device:etps/2-elantech-touchpad" = {
-      enabled = false;
-    };
 }
 
