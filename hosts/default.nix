@@ -8,7 +8,10 @@
   inputs = self.inputs;
 
   home-manager = inputs.home-manager.nixosModules.home-manager;
-  homes = ../homes;
+  homeMessier = ../homes/Messier;
+  homeNebula = ../homes/Nebula;
+  homePluto = ../homes/Pluto;
+  homeDysnomia = ../homes/Dysnomia;
 
 in {
   Dysnomia = nixpkgs.lib.nixosSystem {
@@ -18,7 +21,7 @@ in {
       ./Dysnomia/configuration.nix
       # use the nixos-module for home-manager
       home-manager
-      homes
+      homeDysnomia
     ];
   };
 
@@ -30,7 +33,7 @@ in {
 
       # use the nixos-module for home-manager
       home-manager
-      homes
+      homeNebula
     ];
   };
 
@@ -42,7 +45,7 @@ in {
 
       # use the nixos-module for home-manager
       home-manager
-      homes
+      homeMessier
     ];
   };
 
@@ -53,7 +56,7 @@ in {
       ./Pluto/configuration.nix
       # use the nixos-module for home-manager
       home-manager
-      homes
+      homePluto
     ];
   };
 }

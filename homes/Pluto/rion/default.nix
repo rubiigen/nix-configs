@@ -2,7 +2,6 @@
   pkgs,
   outputs,
   lib,
-  hostName,
   ...
 }: {
   # You can import other home-manager modules here
@@ -15,18 +14,17 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-    ./packages.nix # home.packages and similar stuff
-    ./programs.nix # programs.<programName>.enable
-    ./arrpc.nix
+    ../../packages.nix # home.packages and similar stuff
+    ../../programs.nix # programs.<programName>.enable
+    ../../arrpc.nix
   ];
 
-  # TODO: Set your username
   home = {
     username = "rion";
     homeDirectory = "/home/rion";
   };
 
-  wayland.windowManager.hyprland = lib.mkIf (hostName == "Messier") {
+  wayland.windowManager.hyprland = {
     enable = true;
     systemdIntegration = true;
     settings = import ./hyprland.nix;

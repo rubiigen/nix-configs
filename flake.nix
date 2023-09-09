@@ -81,7 +81,7 @@
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main home-manager configuration file <
-          ./homes/rion
+          ./homes/Messier
           hyprland.homeManagerModules.default
           {wayland.windowManager.hyprland.enable = true;}
         ];
@@ -91,7 +91,7 @@
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main home-manager configuration file <
-          ./homes/rion
+          ./homes/Dysnomia
           hyprland.homeManagerModules.default
           {wayland.windowManager.hyprland.enable = true;}
         ];
@@ -101,7 +101,7 @@
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main home-manager configuration file <
-          ./homes/rion
+          ./homes/Nebula
           hyprland.homeManagerModules.default
           {wayland.windowManager.hyprland.enable = true;}
         ];
@@ -111,7 +111,7 @@
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main home-manager configuration file <
-          ./homes/rion
+          ./homes/Pluto
           hyprland.homeManagerModules.default
           {wayland.windowManager.hyprland.enable = true;}
         ];
