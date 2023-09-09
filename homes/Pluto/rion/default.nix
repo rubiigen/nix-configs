@@ -14,9 +14,9 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-    ../../packages.nix # home.packages and similar stuff
-    ../../programs.nix # programs.<programName>.enable
-    ../../arrpc.nix
+    ../../common/packages.nix # home.packages and similar stuff
+    ../../common/programs.nix # programs.<programName>.enable
+    ../../common/arrpc.nix
   ];
 
   home = {

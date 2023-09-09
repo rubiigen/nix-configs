@@ -42,7 +42,6 @@ in {
     modules = [
       # this list defines which files will be imported to be used as "modules" in the system config
       ./Messier/configuration.nix
-
       # use the nixos-module for home-manager
       home-manager
       homeMessier
