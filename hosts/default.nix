@@ -12,7 +12,7 @@
   homeNebula = ../homes/Nebula;
   homePluto = ../homes/Pluto;
   homeDysnomia = ../homes/Dysnomia;
-  homeCygnus = ../homes/Cygnus
+  homeCygnus = ../homes/Cygnus;
 
 in {
   Dysnomia = nixpkgs.lib.nixosSystem {
