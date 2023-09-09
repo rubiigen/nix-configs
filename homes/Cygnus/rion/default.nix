@@ -29,6 +29,13 @@
     systemdIntegration = true;
     settings = import ./hyprland.nix;
   };
+
+  programs.waybar = {
+    enable = true;
+    settings = import ../../common/waybar.nix;
+    style = import ../../common/waybar-style.nix;
+  };
+
   # let HM manage itself when in standalone mode
   programs.home-manager.enable = true;
 

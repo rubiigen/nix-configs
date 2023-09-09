@@ -12,7 +12,7 @@
 
    monitor = [
     "eDP-1,1920x1080,0x0,1"
-    "HDMI-A-1,2160x1080,440x1080,1"
+    "HDMI-A-1,1080x2160,440x1080,auto,transform,3"
   ];
 
   "env" = "XCURSOR_SIZE,24";

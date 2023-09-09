@@ -3,7 +3,6 @@
     margin-top = 7;
     margin-left = 7;
     margin-right = 7;
-    mode = "dock";
     layer = "top";
     position = "top";
     fixed-center = true;
