@@ -12,6 +12,7 @@
   homeNebula = ../homes/Nebula;
   homePluto = ../homes/Pluto;
   homeDysnomia = ../homes/Dysnomia;
+  homeCygnus = ../homes/Cygnus
 
 in {
   Dysnomia = nixpkgs.lib.nixosSystem {
@@ -45,6 +46,17 @@ in {
       # use the nixos-module for home-manager
       home-manager
       homeMessier
+    ];
+  };
+
+  Cygnus = nixpkgs.lib.nixosSystem {
+    specialArgs = {inherit inputs outputs;};
+    modules = [
+      # this list defines which files will be imported to be used as "modules" in the system config
+      ./Cygnus/configuration.nix
+      # use the nixos-module for home-manager
+      home-manager
+      homeCygnus
     ];
   };
 
