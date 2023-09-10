@@ -24,10 +24,10 @@
     username = "rion";
     homeDirectory = "/home/rion";
     file.".config/hypr/hyprpaper.conf".text = ''
-      preload = ~/.config/wallpapers/mandelbrot_gap_magenta.png
-      wallpaper = DVI-D-1,~/.config/wallpapers/mandelbrot_gap_magenta.png
-      wallpaper = DP-3,~/.config/wallpapers/mandelbrot_gap_magenta.png
-      wallpaper = HDMI-A-1,~/.config/wallpapers/mandelbrot_gap_magenta.png
+      preload = ../../../wallpapers/mandelbrot_gap_magenta.png
+      wallpaper = DVI-D-1,../../../wallpapers/mandelbrot_gap_magenta.png
+      wallpaper = DP-3,../../../wallpapers/mandelbrot_gap_magenta.png
+      wallpaper = HDMI-A-1,../../../wallpapers/mandelbrot_gap_magenta.png
     '';
   };
 
