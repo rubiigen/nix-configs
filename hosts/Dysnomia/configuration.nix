@@ -114,7 +114,7 @@
   services.blueman.enable = true;
 
   # TODO: Set your hostname
-  networking.hostName = "Messier";
+  networking.hostName = "Dysnomia";
 
 
   virtualisation.vmware.host.enable = true;
