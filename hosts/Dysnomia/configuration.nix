@@ -149,9 +149,9 @@
   # Enable X11 Windowing system
   services.xserver.enable = true;
   # Enable display Manager
-  services.xserver.displayManager.sddm.enable = true;
-  #services.xserver.displayManager.gdm.enable = true;
-  #services.xserver.displayManager.gdm.wayland = true;
+  #services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;
   services.xserver.desktopManager.cde.enable = true;
   # configure keymap (x11)
   services.xserver = {
