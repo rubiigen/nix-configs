@@ -11,17 +11,19 @@
   ];
 
    monitor = [
-    "eDP-1,1920x1080,0x0,1"
+    "HDMI-A-1,1920x1080,2960x0,1"
+    "DP-3,1280x1024@75,1680x0,1"
+    "DVI-D-1,1680x1050,0x0,1"
   ];
 
   "env" = "XCURSOR_SIZE,24";
   "$mod" = "SUPER";
   input = {
-    kb_layout = "gb";
+    kb_layout = "us";
     kb_variant = "colemak";
     follow_mouse = 1;
     touchpad.natural_scroll = "no";
-    sensitivity = -0.5;
+    sensitivity = 0;
   };
 
   general = {
@@ -75,12 +77,23 @@
     misc = {
       disable_hyprland_logo = true;
     };
+
+    # workspace rules
+    workspace=DP-3,1;
+    workspace=DP-3,2;
+    workspace=DP-3,3;
+    workspace=DVI-D-1,4;
+    workspace=DVI-D-1,5;
+    workspace=DVI-D-1,6;
+    workspace=HDMI-A-1,7;
+    workspace=HDMI-A-1,8;
+    workspace=HDMI-A-1,9;
+
     binde = [
       # Volume stuffs
       ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
       ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
       ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-      ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_SOURCE@ toggle"
     ];
     bind = [
       # basic binds
@@ -99,9 +112,6 @@
       "$mod, right, movewindow, r"
       "$mod, up, movewindow, up"
       "$mod, down, movewindow, down"
-      # Brightness (I like my mostly non-functional eyes)
-      ", XF86MonBrightnessUp, exec, brightnessctl --device=amdgpu_bl0 s +10"
-      ", XF86MonBrightnessDown, exec, brightnessctl --device=amdgpu_bl0 s 10-"
       # Switch workspaces
       "$mod, 1, workspace, 1"
       "$mod, 2, workspace, 2"
@@ -112,7 +122,6 @@
       "$mod, 7, workspace, 7"
       "$mod, 8, workspace, 8"
       "$mod, 9, workspace, 9"
-      "$mod, 0, workspace, 10"
       # Move a window to a given workspace
       "$mod SHIFT, 1, movetoworkspace, 1"
       "$mod SHIFT, 2, movetoworkspace, 2"
@@ -123,7 +132,6 @@
       "$mod SHIFT, 7, movetoworkspace, 7"
       "$mod SHIFT, 8, movetoworkspace, 8"
       "$mod SHIFT, 9, movetoworkspace, 9"
-      "$mod SHIFT, 0, movetoworkspace, 10"
       # Use mouse to scroll through existing workspaces
       "$mod, mouse_down, workspace, e+1"
       "$mod, mouse_up, workspace, e-1"
@@ -132,8 +140,5 @@
       "$mod, mouse:272, movewindow"
       "$mod, mouse:273, resizewindow"
     ];
-    "device:etps/2-elantech-touchpad" = {
-      enabled = false;
-    };
 }
 
