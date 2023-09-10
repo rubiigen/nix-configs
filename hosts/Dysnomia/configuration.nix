@@ -73,6 +73,7 @@
 
   environment.systemPackages = with pkgs; [
     cdesktopenv
+    discord-canary
     swayidle
     gtklock
     (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
