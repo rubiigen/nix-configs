@@ -72,8 +72,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    cdesktopenv
-    discord-canary
     swayidle
     gtklock
     (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
@@ -153,7 +151,6 @@
   #services.xserver.displayManager.sddm.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
-  services.xserver.desktopManager.cde.enable = true;
   # configure keymap (x11)
   services.xserver = {
     layout = "gb";
