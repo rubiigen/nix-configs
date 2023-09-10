@@ -27,6 +27,11 @@
       preload = ~/.config/nixos/wallpapers/wallpaper1.jpg
       wallpaper = LVDS-1,~/.config/nixos/wallpapers/wallpaper1.jpg
     '';
+    file.".config/lockonsleep/config.sh".text = ''
+      exec swayidle -w \
+        timeout 240 'gtklock -d -b ~/.config/nixos/wallpapers/wallpaper1.jpg' \
+        before-sleep 'gtklock -d -b ~/.config/nixos/wallpapers/wallpaper1.jpg'
+    '';
   };
 
   wayland.windowManager.hyprland = {
