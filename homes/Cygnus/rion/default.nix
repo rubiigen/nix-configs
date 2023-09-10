@@ -23,9 +23,9 @@
     username = "rion";
     homeDirectory = "/home/rion";
     file.".config/hypr/hyprpaper.conf".text = ''
-      preload = ~/.config/wallpaper/wallpaper1.jpg
-      wallpaper = eDP-1,~/.config/wallpapers/wallpaper1.jpg
-      wallpaper = HDMI-A-1,~/.config/wallpapers/wallpaper1.jpg
+      preload = ~/.config/nixos/wallpapers/wallpaper1.jpg
+      wallpaper = eDP-1,~/.config/nixos/wallpapers/wallpaper1.jpg
+      wallpaper = HDMI-A-1,~/.config/nixos/wallpapers/wallpaper1.jpg
     '';
   };
 

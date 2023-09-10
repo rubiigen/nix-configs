@@ -209,6 +209,7 @@
     # Forbid root login through SSH.
     settings = {
       PermitRootLogin = "yes";
+      PasswordAuthentication = false;
     };
     # Use keys only. Remove if you want to SSH using password (not recommended)
   };
