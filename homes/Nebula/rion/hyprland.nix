@@ -79,17 +79,17 @@
     };
 
     # workspace rules
-    workspace = {
-      "DP-3,1";
-      "DP-3,2";
-      "DP-3,3";
-      "DVI-D-1,4";
-      "DVI-D-1,5";
-      "DVI-D-1,6";
-      "HDMI-A-1,7";
-      "HDMI-A-1,8";
-      "HDMI-A-1,9";
-    };
+    workspace = [
+      "DP-3,1"
+      "DP-3,2"
+      "DP-3,3"
+      "DVI-D-1,4"
+      "DVI-D-1,5"
+      "DVI-D-1,6"
+      "HDMI-A-1,7"
+      "HDMI-A-1,8"
+      "HDMI-A-1,9"
+    ];
 
     binde = [
       # Volume stuffs

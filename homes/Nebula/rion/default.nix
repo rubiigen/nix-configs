@@ -23,6 +23,12 @@
   home = {
     username = "rion";
     homeDirectory = "/home/rion";
+    file.".config/hypr/hyprpaper.conf".text = ''
+      preload = ~/.config/wallpaper/mandelbrot_gap_magenta.png
+      wallpaper = DVI-D-1,~/.config/wallpapers/mandelbrot_gap_magenta.png
+      wallpaper = DP-3,~/.config/wallpapers/mandelbrot_gap_magenta.png
+      wallpaper = HDMI-A-1,~/.config/wallpapers/mandelbrot_gap_magenta.png
+    '';
   };
 
   wayland.windowManager.hyprland = {
