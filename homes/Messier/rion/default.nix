@@ -23,6 +23,10 @@
   home = {
     username = "rion";
     homeDirectory = "/home/rion";
+    file.".config/hypr/hyprpaper.conf".text = ''
+      preload = ~/.config/nixos/wallpapers/wallpaper1.jpg
+      wallpaper = eDP-1,~/.config/nixos/wallpapers/wallpaper1.jpg
+    '';
   };
 
   wayland.windowManager.hyprland = {
