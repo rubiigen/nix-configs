@@ -73,6 +73,7 @@
 
   environment.systemPackages = with pkgs; [
     swayidle
+    exfat
     gtklock
     (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
     temurin-jre-bin-8
