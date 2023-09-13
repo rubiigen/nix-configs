@@ -63,7 +63,7 @@ in {
   Pluto = nixpkgs.lib.nixosSystem {
     specialArgs = {inherit inputs outputs;};
     modules = [
-      nixos-hardware.nixosModules.microsoft-surface-pro-intel
+      nixos-hardware.nixosModules.microsoft-surface-common
       ./Pluto/configuration.nix
       # use the nixos-module for home-manager
       home-manager

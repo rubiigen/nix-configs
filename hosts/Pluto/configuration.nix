@@ -16,7 +16,7 @@
 
     # Or modules from other flakes (such as nixos-hardware):
     # nixos-hardware.nixosModules.microsoft-surface-common
-    inputs.nixos-hardware.nixosModules.microsoft-surface-common
+    #inputs.nixos-hardware.nixosModules.microsoft-surface-common
 
     # You can also split up your configuration and import pieces of it here:
     # ./users.nix
@@ -26,12 +26,6 @@
   ];
 
   nixpkgs = {
-    overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
-    ];
     # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages
