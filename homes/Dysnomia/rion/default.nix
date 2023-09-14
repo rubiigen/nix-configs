@@ -17,6 +17,7 @@
     ../../common/packages.nix # home.packages and similar stuff
     ../../common/programs.nix # programs.<programName>.enable
     ../../common/arrpc.nix
+    ../../common/udiskie.nix
   ];
 
   # TODO: Set your username
@@ -41,11 +42,6 @@
   };
   # let HM manage itself when in standalone mode
   programs.home-manager.enable = true;
-
-  services.udiskie = {
-	enable = true;
-	notify = false;
-  };
 
   # Nicely reload system(d) units when changing configs
   systemd.user.startServices = lib.mkDefault "sd-switch";
