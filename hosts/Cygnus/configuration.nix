@@ -146,6 +146,8 @@
     xkbVariant = "colemak";
   };
 
+  # udisks
+  services.udisks2.enable = true;
   # Would you like to be able to fucking print?
   services.printing.enable = true;
 
