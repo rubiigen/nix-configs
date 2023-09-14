@@ -20,7 +20,7 @@
     transmission
     spotify
     vscodium
-    vivaldi
+    chromium
     fluffychat
     firefox-devedition
     stellarium
