@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
+    obs-studio
     kitty
     wofi
     tetrio-desktop
