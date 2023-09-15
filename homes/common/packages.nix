@@ -8,7 +8,7 @@
     swaylock
     grim
     slurp
-    #vmware-workstation
+    vmware-workstation
     prismlauncher
     brightnessctl
     jetbrains.pycharm-professional
