@@ -24,10 +24,10 @@
     username = "rion";
     homeDirectory = "/home/rion";
     file.".config/hypr/hyprpaper.conf".text = ''
-      preload = ~/.config/nixos/wallpapers/mandelbrot_gap_magenta.png
-      wallpaper = DVI-D-1,~/.config/nixos/wallpapers/mandelbrot_gap_magenta.png
-      wallpaper = DP-3,~/.config/nixos/wallpapers/mandelbrot_gap_magenta.png
-      wallpaper = HDMI-A-1,~/.config/nixos/wallpapers/mandelbrot_gap_magenta.png
+      preload = ~/.config/nixos/wallpapers/wallpaper1.jpg
+      wallpaper = DVI-D-1,~/.config/nixos/wallpapers/wallpaper1.jpg
+      wallpaper = DP-3,~/.config/nixos/wallpapers/wallpaper1.jpg
+      wallpaper = HDMI-A-1,~/.config/nixos/wallpapers/wallpaper1.jpg
     '';
     file.".config/lockonsleep/config.sh".text = ''
       exec swayidle -w \
