@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     obs-studio
+    signal-desktop
     scrcpy
     kitty
     wofi
