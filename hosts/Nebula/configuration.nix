@@ -76,6 +76,7 @@
     adwaita-qt
     adwaita-qt6
     cinnamon.nemo
+    udiskie
   ];
   
   xdg.portal = {
