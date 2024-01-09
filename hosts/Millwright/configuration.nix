@@ -218,7 +218,7 @@ let
   boot.kernelModules = [ "vfio_virqfd" ];
   boot.extraModprobeConfig = "options vfio-pci ids=10de:1c03,10de:10f1,1b21:2142";
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.blacklistedKernelModules = [ "amdgpu" ];
+  boot.blacklistedKernelModules = [ "nouveau" ];
 
   # enable networking
   networking.networkmanager.enable = true;
