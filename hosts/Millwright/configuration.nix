@@ -48,7 +48,6 @@ let
     extraPackages = with pkgs; [
       amdvlk
       vulkan-validation-layers
-      nvidia-vaapi-driver
       libvdpau-va-gl
       vaapiVdpau
     ];
@@ -63,20 +62,11 @@ let
       enable = true;
       mouse.accelProfile = "flat";
     };
-    videoDrivers = [ "nvidia" ];
+    videoDrivers = [ "amdgpu" ];
     layout = "us";
   };
   
   environment.pathsToLink = [ "/libexec" ];
-
-  hardware.nvidia = {
-    nvidiaSettings = true;
-    modesetting.enable = true;
-    open = false;
-    nvidiaPersistenced = true;
-    forceFullCompositionPipeline = true;
-    powerManagement.enable = true;
-  };
 
   hardware.enableAllFirmware = true;
 
@@ -106,9 +96,6 @@ let
     wayfire.enable = true;
     sway = {
       enable = true;
-      extraOptions = [
-        "--unsupported-gpu"
-      ];
       wrapperFeatures.gtk = true;
     };	
     };
@@ -146,26 +133,6 @@ let
     udiskie
     virt-manager
   ];
-  
-  environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
-    #XCURSOR_SIZE = "24";
-    WLR_RENDERER = "vulkan";
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    LIBVA_DRIVER_NAME = "nvidia";
-    GDK_BACKEND = "wayland,x11";
-    SDL_VIDEODRIVER = "wayland";
-    CLUTTER_BACKEND = "wayland";
-    MOZ_ENABLE_WAYLAND = "1";
-    WLR_RENDERER_ALLOW_SOFTWARE = "1";
-    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-    QT_QPA_PLATFORM = "wayland";
-    __GL_GSYNC_ALLOWED = "1";
-    __GL_VRR_ALLOWED = "1";    
-    WLR_USE_LIBINPUT = "1";
-    XWAYLAND_NO_GLAMOR = "1";
-  };
 
   fonts.packages = with pkgs; [
 	font-awesome
@@ -246,10 +213,10 @@ let
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices."luks-5534173a-6cfa-4d09-a21c-fb06afbf5481".device = "/dev/disk/by-uuid/5534173a-6cfa-4d09-a21c-fb06afbf5481";
   boot.supportedFilesystems = [ "exfat" "xfs" "ntfs" ];
-  boot.kernelParams = [ "module_blacklist=amdgpu" "intel_iommu=on" "pcie_acs_override=downstream,multifunction" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" "nvidia.NVreg_TemporaryFilePath=/var/tmp" "nvidia_drm.modeset=1" ];
+  boot.kernelParams = [ "module_blacklist=nouveau" "intel_iommu=on" "pcie_acs_override=downstream,multifunction" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" "nvidia.NVreg_TemporaryFilePath=/var/tmp" "nvidia_drm.modeset=1" ];
   boot.initrd.kernelModules = [ "vfio_pci" "vfio_iommu_type1" "vfio" "kvm-intel" ];
   boot.kernelModules = [ "vfio_virqfd" ];
-  boot.extraModprobeConfig = "options vfio-pci ids=1002:67df,1002:aaf0,1b21:2142";
+  boot.extraModprobeConfig = "options vfio-pci ids=10de:1c03,10de:10f1,1b21:2142";
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.blacklistedKernelModules = [ "amdgpu" ];
 

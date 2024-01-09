@@ -13,6 +13,7 @@
     firefox-devedition
     fluffychat
     hyfetch
+    fastfetch
     playerctl
     mumble
     networkmanagerapplet

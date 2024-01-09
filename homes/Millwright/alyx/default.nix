@@ -21,10 +21,6 @@
     '';
   };
 
-  wayland.windowManager.sway = {
-    extraOptions = [ "--unsupported-gpu" ];
-  };
-
   systemd.user.targets.tray = {
     Unit = {
       Description = "Home Manager System Tray";
