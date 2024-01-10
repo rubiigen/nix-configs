@@ -8,7 +8,6 @@
     ../../common/arrpc.nix
     ../../common/packages.nix # home.packages and similar stuff
     ../../common/programs.nix # programs.<programName>.enable
-    ../../common/udiskie.nix
   ];
 
   home = {
@@ -27,6 +26,8 @@
       Requires = [ "graphical-session-pre.target" ];
     };
   };
+
+  services.udiskie.enable = true;
 
   # let HM manage itself when in standalone mode
   programs.home-manager.enable = true;
