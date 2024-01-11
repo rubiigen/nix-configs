@@ -10,7 +10,6 @@
   home-manager = inputs.home-manager.nixosModules.home-manager;
   homeHyperion = ../homes/Hyperion;
   homeMillwright = ../homes/Millwright;
-
 in {
   Millwright = nixpkgs.lib.nixosSystem {
     specialArgs = {inherit inputs outputs;};
