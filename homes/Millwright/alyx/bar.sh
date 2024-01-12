@@ -1,7 +1,5 @@
-while true
-do
-    date=$(date "+%a %F %H:%M")
-    vol=$(pamixer --get-volume)
-    uptime=$(uptime | cut -d ',' -f1  | cut -d ' ' -f4,5)
-    echo "$date | $uptime | ♪ $vol | "
-done
+date=$(date +'%A, %b %d')
+time=$(date +'%I:%M %p')
+vol=$(pamixer --get-volume)
+echo "$date | $time | ♪ $vol |"
+

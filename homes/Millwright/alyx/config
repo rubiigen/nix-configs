@@ -101,7 +101,7 @@ output * bg ~/.config/nixos/wallpapers/front.png stretch
     exec waybar
 
     # monitor output switching
-    bindsym $mod+o exec ddcutil --bus=7 setvcp 60 11 &
+    bindsym $mod+o exec ddcutil --bus=8 setvcp 60 11 &
     bindsym $mod+Shift+o exec ddcutil --bus=4 setvcp 60 03 &
     # Volume control
     bindsym XF86AudioRaiseVolume exec swayosd --output-volume raise
@@ -235,7 +235,7 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command ~/.config/nixos/homes/Millwright/alyx/bar.sh; do sleep 1; done 
+    status_command while ~/.config/nixos/homes/Millwright/alyx/bar.sh; do sleep 1; done 
 
     colors {
         statusline #ffffff
