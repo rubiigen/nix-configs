@@ -25,9 +25,6 @@
     homeDirectory = "/home/alyx";
     file.".config/sway/config".source = ./config;
     file.".config/waybar/config".source = ./waybar;
-    file."/etc/modprobe.d/nvidia.conf".text = ''
-      options nvidia-drm modeset=1
-    '';
   };
 
   wayland.windowManager.sway = {
