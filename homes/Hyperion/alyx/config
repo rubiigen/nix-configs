@@ -111,6 +111,8 @@ output * bg ~/.config/nixos/wallpapers/front.png stretch
     bindsym XF86AudioRaiseVolume exec swayosd --output-volume raise
     bindsym XF86AudioLowerVolume exec  swayosd --output-volume lower
     bindsym XF86AudioMute exec swayosd --output-volume mute-toggle
+    bindsym XF86MonBrightnessUp exec brightnessctl --device=intel_backlight s 5%+
+    bindsym XF86MonBrightnessDown exec brightnessctl --device=intel_backlight s 5%-
     bindsym $mod+k exec wpctl set-default 43
     bindsym $mod+m exec wpctl set-default 44
 #
