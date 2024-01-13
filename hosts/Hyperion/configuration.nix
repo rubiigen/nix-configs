@@ -60,11 +60,13 @@ in
 
   services.xserver = {
     enable = true;
-    displayManager.gdm.enable = true;
-    displayManager.gdm.wayland = true;
     layout = "us";
     xkbVariant = "colemak";  
     videoDrivers = [ "nvidia" ];
+    libinput = {
+      enable = true;
+      mouse.accelProfile = "flat";
+    };
   };
 
   environment.pathsToLink = [ "/libexec" ];
@@ -145,6 +147,9 @@ in
     sway = {
       enable = true;
       wrapperFeatures.gtk = true;
+      extraOptions = [
+        "--unsupported-gpu"
+      ];
     };
   };
 
@@ -216,8 +221,31 @@ in
   services.lvm.enable = true;
   services.udisks2.enable = true;
   services.printing.enable = true;
+  services.dbus.enable = true;
 
   console.useXkbConfig = true;
+
+  # greetd
+  services.greetd = {
+    enable = true;
+      settings = {
+        default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+        sessions = "--sessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions";
+          user = "greeter";
+        };
+      };
+  };
+
+  systemd.services.greetd.serviceConfig = {
+    Type = "idle";
+    StandardInput = "tty";
+    StandardOutput = "tty";
+    StandardError = "journal";
+    TTYReset = "true";
+    TTYHangup = "true";
+    TTYVTDisallocate = true;
+  };
 
   xdg.portal = {
     enable = true;
@@ -244,7 +272,7 @@ in
   # TODO: This is just an example, be sure to use whatever bootloader you prefer
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices."luks-6c9d1257-c6e2-4adb-9ba9-b32849f18d3b".device = "/dev/disk/by-uuid/6c9d1257-c6e2-4adb-9ba9-b32849f18d3b";
+  boot.initrd.luks.devices."luks-03e8ddfe-60f5-4bce-9fed-0bdfed46a240".device = "/dev/disk/by-uuid/03e8ddfe-60f5-4bce-9fed-0bdfed46a240";
   boot.supportedFilesystems = [ "exfat" "ntfs" "xfs" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "kvm-intel" "vfio_pci" "vfio_virqfd" "vfio_iommu_type1" "vfio" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
@@ -317,7 +345,7 @@ in
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.
   services.openssh.settings = {
-    enable = true;
+    enable = false;
     # Forbid root login through SSH.
     permitRootLogin = "yes";
     # Use keys only. Remove if you want to SSH using password (not recommended)
@@ -325,5 +353,5 @@ in
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "22.11";
+  system.stateVersion = "24.05";
 }
