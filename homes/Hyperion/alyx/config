@@ -99,7 +99,7 @@ output * bg ~/.config/nixos/wallpapers/front.png stretch
     bindsym $mod+Shift+S exec grim -g \"$(slurp)\" - | wl-copy
 
     # SwayOSD
-    exec swayosd-server
+    exec swayosd-server &
 
     # Waybar
     exec waybar
@@ -108,9 +108,9 @@ output * bg ~/.config/nixos/wallpapers/front.png stretch
     bindsym $mod+o exec ddcutil --bus=8 setvcp 60 11 &
     bindsym $mod+Shift+o exec ddcutil --bus=4 setvcp 60 03 &
     # Volume control
-    bindsym XF86AudioRaiseVolume exec swayosd --output-volume raise
-    bindsym XF86AudioLowerVolume exec  swayosd --output-volume lower
-    bindsym XF86AudioMute exec swayosd --output-volume mute-toggle
+    bindsym XF86AudioRaiseVolume exec swayosd-client --output-volume raise
+    bindsym XF86AudioLowerVolume exec  swayosd-client --output-volume lower
+    bindsym XF86AudioMute exec swayosd-client --output-volume mute-toggle
     bindsym XF86MonBrightnessUp exec brightnessctl --device=intel_backlight s 5%+
     bindsym XF86MonBrightnessDown exec brightnessctl --device=intel_backlight s 5%-
     bindsym $mod+k exec wpctl set-default 43
