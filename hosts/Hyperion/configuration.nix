@@ -124,6 +124,7 @@ in
     dconf.enable = true;
     nm-applet.enable = true;
     steam.enable = true;
+    wayfire.enable = true;
     sway = {
       enable = true;
       wrapperFeatures.gtk = true;
