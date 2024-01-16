@@ -203,7 +203,7 @@ in
   services.udisks2.enable = true;
   services.printing.enable = true;
   services.dbus.enable = true;
-  services.waydroid.enable = true;
+  virtualisation.waydroid.enable = true;
 
   console.useXkbConfig = true;
 
