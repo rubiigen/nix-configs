@@ -25,10 +25,10 @@
       fsType = "vfat";
     };
   
-  #filesystems."/mnt/internalData" = 
-   # { device = "/dev/disk/by-uuid/uuid_here";
-    #  fsType = "xfs";
-    #};
+  filesystems."/mnt/internalData" = 
+    { device = "/dev/disk/by-uuid/701d0b93-031e-431d-aef4-cfd792f520f0";
+      fsType = "xfs";
+    };
 
   swapDevices =
     [ { device = "/dev/disk/by-uuid/22e1c420-d981-4771-a714-0f8f22b786ef"; }

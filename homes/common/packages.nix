@@ -32,5 +32,6 @@
     spotify
     stellarium
     vscodium
+    input-leap
   ];
 }

@@ -213,7 +213,7 @@ let
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices."luks-5534173a-6cfa-4d09-a21c-fb06afbf5481".device = "/dev/disk/by-uuid/5534173a-6cfa-4d09-a21c-fb06afbf5481";
   boot.supportedFilesystems = [ "exfat" "xfs" "ntfs" ];
-  boot.kernelParams = [ "module_blacklist=nouveau" "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" "nvidia.NVreg_TemporaryFilePath=/var/tmp" "nvidia_drm.modeset=1" ];
+  boot.kernelParams = [ "module_blacklist=nouveau" "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction" ];
   boot.initrd.kernelModules = [ "vfio_pci" "vfio_iommu_type1" "vfio" "kvm-intel" ];
   boot.kernelModules = [ "vfio_virqfd" ];
   boot.extraModprobeConfig = "options vfio-pci ids=10de:1c03,10de:10f1,1b21:2142";
