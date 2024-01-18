@@ -25,7 +25,7 @@
       fsType = "vfat";
     };
   
-  filesystems."/mnt/internalData" = 
+  fileSystems."/mnt/internalData" = 
     { device = "/dev/disk/by-uuid/701d0b93-031e-431d-aef4-cfd792f520f0";
       fsType = "xfs";
     };
