@@ -3,6 +3,7 @@
     obs-studio
     pamixer
     wob
+    jitsi
     vlc
     wget
     dnsmasq

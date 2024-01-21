@@ -90,6 +90,11 @@ output * bg ~/.config/nixos/wallpapers/front.png stretch
     # Fixes stuff
     exec dbus-sway-environment
     exec configure-gtk
+    exec systemctl --user start udiskie.service
+
+    # wifi + bt
+    exec nm-applet
+    exec blueman-applet
 
     # Screenshotting
     bindsym $mod+Shift+S exec grim -g \"$(slurp)\" - | wl-copy
