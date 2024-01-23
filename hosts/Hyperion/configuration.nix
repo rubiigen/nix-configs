@@ -170,6 +170,7 @@ in
     temurin-jre-bin-8
     udiskie
     virt-manager
+    tpm2-tss
   ];
 
   environment.variables = {
