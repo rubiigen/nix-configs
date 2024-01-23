@@ -252,7 +252,12 @@ in
  
 
   # TODO: This is just an example, be sure to use whatever bootloader you prefer
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/etc/secureboot";
+  };
+  boot.bootspec.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices."luks-03e8ddfe-60f5-4bce-9fed-0bdfed46a240".device = "/dev/disk/by-uuid/03e8ddfe-60f5-4bce-9fed-0bdfed46a240";
   boot.supportedFilesystems = [ "exfat" "ntfs" "xfs" ];
