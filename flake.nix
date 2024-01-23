@@ -17,6 +17,9 @@
 	
     # nixos-hardware
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";  
+    
+    lanzaboote.url = "github:nix-community/lanzaboote";
+    
   };
 
   outputs = {
@@ -24,6 +27,7 @@
     nixpkgs,
     home-manager,
     nixos-hardware,
+    lanzaboote,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -49,6 +53,6 @@
     );
     nixosModules = import ./modules/shared/nixos;
     homeManagerModules = import ./modules/shared/home-manager;
-    nixosConfigurations = import ./hosts {inherit nixpkgs self outputs nixos-hardware;};   
+    nixosConfigurations = import ./hosts {inherit nixpkgs self outputs nixos-hardware lanzaboote;};   
     };
 }

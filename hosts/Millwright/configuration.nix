@@ -132,6 +132,7 @@ let
     temurin-jre-bin-8
     udiskie
     virt-manager
+    tpm2-tss
   ];
 
   fonts.packages = with pkgs; [
@@ -209,13 +210,19 @@ let
 
   virtualisation.spiceUSBRedirection.enable = true;
 
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/etc/secureboot";
+  };
+  boot.bootspec.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices."luks-18d0700e-1d6a-4526-83f6-4b0053b1a935".device = "/dev/disk/by-uuid/18d0700e-1d6a-4526-83f6-4b0053b1a935";
+  boot.initrd.systemd.enable = true;
   boot.supportedFilesystems = [ "exfat" "xfs" "ntfs" ];
-  boot.kernelParams = [ "module_blacklist=nouveau" "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction" ];
+  boot.kernelParams = [ "preempt=voluntary" "module_blacklist=nouveau" "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction" ];
   boot.initrd.kernelModules = [ "vfio_pci" "vfio_iommu_type1" "vfio" "kvm-intel" ];
-  boot.kernelModules = [ "vfio_virqfd" ];
+  boot.kernelModules = [ "vfio_virqfd" "vhost-net" ];
   boot.extraModprobeConfig = "options vfio-pci ids=10de:1c03,10de:10f1,1b21:2142";
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.blacklistedKernelModules = [ "nouveau" ];
