@@ -2,6 +2,7 @@
   home.packages = with pkgs; [
     obs-studio
     pamixer
+    vesktop
     wob
     jitsi
     vlc
