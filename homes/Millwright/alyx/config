@@ -91,6 +91,7 @@ output * bg ~/.config/nixos/wallpapers/front.png stretch
     exec dbus-sway-environment
     exec configure-gtk
     exec systemctl --user start udiskie.service
+    exec systemctl --user start arRPC.service
 
     # wifi + bt
     exec nm-applet
