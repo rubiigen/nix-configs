@@ -261,9 +261,10 @@ in
   boot.bootspec.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices."luks-03e8ddfe-60f5-4bce-9fed-0bdfed46a240".device = "/dev/disk/by-uuid/03e8ddfe-60f5-4bce-9fed-0bdfed46a240";
+  boot.initrd.systemd.enable = true;
   boot.supportedFilesystems = [ "exfat" "ntfs" "xfs" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = [ "kvm-intel" "vfio_pci" "vfio_virqfd" "vfio_iommu_type1" "vfio" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+  boot.kernelModules = [ "kvm-intel" "vfio" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
   boot.kernelParams = [ "intel_iommu=on" "iommu=pt" ];
 
   # enable networking
