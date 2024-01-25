@@ -3,37 +3,26 @@
     obs-studio
     pamixer
     vesktop
-    wob
-    jitsi
     vlc
     wget
-    dnsmasq
-    nbd
     alacritty
     beeper
     brightnessctl
     firefox-devedition
-    fluffychat
     hyfetch
     fastfetch
-    playerctl
     mumble
     networkmanagerapplet
     prismlauncher
     waybar
-    ripcord
     rnote
     wofi
     scrcpy
     signal-desktop
     tetrio-desktop
-    tidal-hifi
-    tidal-dl
     timidity
     transmission-qt
-    spotify
     stellarium
     vscodium
-    input-leap
   ];
 }

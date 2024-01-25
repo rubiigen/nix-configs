@@ -14,16 +14,16 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-    ../../common/arrpc.nix
     ../../common/packages.nix
     ../../common/programs.nix
-    ../../common/gita.nix
+    ../../common/udiskie.nix
+    ../../common/gitm.nix
   ];
 
   # TODO: Set your username
   home = {
-    username = "alyx";
-    homeDirectory = "/home/alyx";
+    username = "maya";
+    homeDirectory = "/home/maya";
     file.".config/sway/config".source = ./config;
     file.".config/waybar/config".source = ./waybar;
   };
@@ -42,25 +42,12 @@
     };
   };
 
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Catppuccin-Mocha-Standard-Mauve-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        accents = [ "mauve" ];
-        variant = "mocha";
-      };
-    };
-  };
-
   systemd.user.targets.tray = {
 	  Unit = {
 		  Description = "Home Manager System Tray";
 		  Requires = [ "graphical-session-pre.target" ];
 		};
 	};
-
-  services.udiskie.enable = true;
 
   # let HM manage itself when in standalone mode
   programs.home-manager.enable = true;

@@ -43,6 +43,11 @@ in
   imports = [
     ./hardware-configuration.nix
   ];
+  
+  microsoft-surface = {
+    surface-control.enable = true;
+    ipts.enable = true;
+  };
 
   hardware.opengl = {
     enable = true;
@@ -60,16 +65,12 @@ in
 
   services.xserver = {
     enable = true;
-    layout = "us";
-    xkbVariant = "colemak";  
+    layout = "us";  
     videoDrivers = [ "nvidia" ];
-    libinput = {
-      enable = true;
-      mouse.accelProfile = "flat";
-    };
   };
 
   environment.pathsToLink = [ "/libexec" ];
+  environment.localBinInPath = true;
 
   hardware.nvidia = {
     powerManagement.enable = true;
@@ -83,7 +84,7 @@ in
 
   hardware.nvidia.prime = {
     intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:1:0:0";
+    nvidiaBusId = "PCI:2:0:0";
     offload = {
       enable = true;
       enableOffloadCmd = true;
@@ -121,18 +122,14 @@ in
   # the configuration (pain)
   programs = {
     adb.enable = true;
-    fish.enable = true;
     dconf.enable = true;
     nm-applet.enable = true;
     steam.enable = true;
-    wayfire.enable = true;
     sway = {
       enable = true;
       package = pkgs.swayfx;
       wrapperFeatures.gtk = true;
-      extraOptions = [
-        "--unsupported-gpu"
-      ];
+      extraOptions =[ "--unsupported-gpu" ];
     };
   };
 
@@ -144,7 +141,7 @@ in
     wayland
     xdg-utils
     glib
-    (pkgs.catppuccin-gtk.override {
+    (pkgs.catppuccin-gtk-override {
        accents = [ "mauve" ];
        variant = "mocha";
     })
@@ -175,7 +172,6 @@ in
     temurin-jre-bin-8
     udiskie
     virt-manager
-    tpm2-tss
     krita
     easyeffects
   ];
@@ -210,20 +206,19 @@ in
   services.lvm.enable = true;
   services.udisks2.enable = true;
   services.printing.enable = true;
-  services.dbus.enable = true;
-  virtualisation.waydroid.enable = true;
+  services.localtimed.enable = true;
 
   console.useXkbConfig = true;
-
+  
   # greetd
   services.greetd = {
     enable = true;
       settings = {
         default_session = {
         command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-        sessions = "--sessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions";
-          user = "greeter";
-        };
+	sessions = "--sessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions";
+	  user = "greeter";
+	};
       };
   };
 
@@ -234,7 +229,7 @@ in
     StandardError = "journal";
     TTYReset = "true";
     TTYHangup = "true";
-    TTYVTDisallocate = true;
+    TTYVTDisallocate = "true";
   };
 
   xdg.portal = {
@@ -244,14 +239,14 @@ in
   };
 
   # TODO: Set your hostname
-  networking.hostName = "Hyperion";
+  networking.hostName = "Venus";
 
   virtualisation.spiceUSBRedirection.enable = true; 
 
   virtualisation.libvirtd = {
     enable = true;
     extraConfig = ''
-      user="alyx"
+      user="maya"
     '';
     qemu.ovmf.enable = true;
     qemu.package = pkgs.qemu_kvm;
@@ -261,38 +256,46 @@ in
 
   # TODO: This is just an example, be sure to use whatever bootloader you prefer
   boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.initrd.luks.devices."luks-855a3cef-4299-45cc-9c95-f4a5865f1464".device = "/dev/disk/by-uuid/855a3cef-4299-45cc-9c95-f4a5865f1464";
+  boot.supportedFilesystems = [ "exfat" "ntfs" "xfs" ];
+  boot.kernelModules = [ "kvm-intel" "vfio_pci" "vfio_virqfd" "vfio_iommu_type1" "vfio" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+  boot.kernelParams = [ "intel_iommu=on" "iommu=pt" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" "nvidia_drm.modeset=1" ];
+  # secure boot shit
   boot.lanzaboote = {
     enable = true;
     pkiBundle = "/etc/secureboot";
   };
   boot.bootspec.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices."luks-03e8ddfe-60f5-4bce-9fed-0bdfed46a240".device = "/dev/disk/by-uuid/03e8ddfe-60f5-4bce-9fed-0bdfed46a240";
-  boot.initrd.systemd.enable = true;
-  boot.supportedFilesystems = [ "exfat" "ntfs" "xfs" ];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = [ "kvm-intel" "vfio" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
-  boot.kernelParams = [ "intel_iommu=on" "iommu=pt" ];
 
   # enable networking
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    wifi.backend = "iwd";
+  };
 
   # Set a time zone, idiot
-  time.timeZone = "Europe/London";
+  time.timeZone = "Australia/Perth";
 
   # Fun internationalisation stuffs (AAAAAAAA)
-  i18n.defaultLocale = "it_IT.UTF-8";
+
+  i18n.supportedLocales = [
+       "en_AU.UTF-8/UTF-8"
+       "ja_JP.UTF-8/UTF-8"
+  ];
+
+  i18n.defaultLocale = "en_AU.UTF-8";
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_GB.UTF-8";
-    LC_IDENTIFICATION = "en_GB.UTF-8";
-    LC_MEASUREMENT = "en_GB.UTF-8";
-    LC_MONETARY = "en_GB.UTF-8";
-    LC_NAME = "en_GB.UTF-8";
-    LC_NUMERIC = "en_GB.UTF-8";
-    LC_PAPER = "en_GB.UTF-8";
-    LC_TELEPHONE = "en_GB.UTF-8";
-    LC_TIME = "en_GB.UTF-8";
+    LC_ADDRESS = "en_AU.UTF-8";
+    LC_IDENTIFICATION = "en_AU.UTF-8";
+    LC_MEASUREMENT = "en_AU.UTF-8";
+    LC_MONETARY = "en_AU.UTF-8";
+    LC_NAME = "en_AU.UTF-8";
+    LC_NUMERIC = "en_AU.UTF-8";
+    LC_PAPER = "en_AU.UTF-8";
+    LC_TELEPHONE = "en_AU.UTF-8";
+    LC_TIME = "en_AU.UTF-8";
   };
 
   nix.gc = {
@@ -329,13 +332,10 @@ in
 };
 
   # define user acc
-
-  users.defaultUserShell = pkgs.fish;
-
-  users.users.alyx = {
+  users.users.maya = {
     isNormalUser = true;
-    description = "alyx";
-    extraGroups = ["networkmanager" "wheel" "adbusers" "libvirtd"];
+    description = "maya";
+    extraGroups = ["networkmanager" "wheel" "adbusers" "libvirtd" "surface-control"];
     openssh.authorizedKeys.keys = [
       # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
     ];
@@ -343,13 +343,12 @@ in
 
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.
-
-  services.openssh.enable = false;
   services.openssh.settings = {
+    enable = false;
     # Forbid root login through SSH.
-    PermitRootLogin = "no";
+    permitRootLogin = "yes";
     # Use keys only. Remove if you want to SSH using password (not recommended)
-    PasswordAuthentication = false;
+    passwordAuthentication = false;
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

@@ -11,6 +11,9 @@
   home-manager = inputs.home-manager.nixosModules.home-manager;
   homeHyperion = ../homes/Hyperion;
   homeMillwright = ../homes/Millwright;
+  homeVenus = ../homes/Venus;
+  homeAlyssum = ../homes/Alyssum;
+
 in {
   Millwright = nixpkgs.lib.nixosSystem {
     specialArgs = {inherit inputs outputs;};
@@ -33,6 +36,26 @@ in {
       home-manager
       homeHyperion
       lanzaboote.nixosModules.lanzaboote
+    ];
+  };
+
+  Venus = nixpkgs.lib.nixosSystem {
+    specialArgs = {inherit inputs outputs;};
+    modules = [
+      nixos-hardware.nixosModules.microsoft.surface-common
+      lanzaboote.nixosModules.lanzaboote
+      ./Venus/configuration.nix
+      home-manager
+      homeVenus
+    ];
+  };
+
+  Alyssum = nixpkgs.lib.nixosSystem {
+    specialArgs = {inherit inputs outputs;};
+    modules = [
+      ./Alyssum/configuration.nix
+      home-manager
+      homeAlyssum
     ];
   };
 }
