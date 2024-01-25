@@ -169,7 +169,7 @@ let
   services.logind = {
     suspendKey = "ignore";
     suspendKeyLongPress = "suspend";
-    extraconfig = "HandlePowerKey=suspend";
+    extraConfig = "HandlePowerKey=suspend";
       
   };
 
