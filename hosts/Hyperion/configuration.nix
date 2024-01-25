@@ -121,6 +121,7 @@ in
   # the configuration (pain)
   programs = {
     adb.enable = true;
+    fish.enable = true;
     dconf.enable = true;
     nm-applet.enable = true;
     steam.enable = true;
@@ -326,6 +327,9 @@ in
 };
 
   # define user acc
+
+  users.defaultUserShell = pkgs.fish;
+
   users.users.alyx = {
     isNormalUser = true;
     description = "alyx";
