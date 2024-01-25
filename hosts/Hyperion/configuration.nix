@@ -32,7 +32,7 @@ let
     in ''
       export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
       gnome_schema=org.gnome.desktop.interface
-      gsettings set $gnome_schema gtk-theme 'Dracula'
+      gsettings set $gnome_schema gtk-theme 'Catppuccin-Mocha-Standard-Mauve-Dark'
     '';
   };
 
@@ -127,6 +127,7 @@ in
     wayfire.enable = true;
     sway = {
       enable = true;
+      package = pkgs.swayfx;
       wrapperFeatures.gtk = true;
       extraOptions = [
         "--unsupported-gpu"
@@ -142,7 +143,10 @@ in
     wayland
     xdg-utils
     glib
-    dracula-theme
+    (pkgs.catppuccin-gtk.override {
+       accents = [ "mauve" ];
+       variant = "mocha";
+    })
     gnome3.adwaita-icon-theme
     swaylock
     swayidle
