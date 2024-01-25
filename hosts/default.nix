@@ -42,7 +42,7 @@ in {
   Venus = nixpkgs.lib.nixosSystem {
     specialArgs = {inherit inputs outputs;};
     modules = [
-      nixos-hardware.nixosModules.microsoft.surface-common
+      nixos-hardware.nixosModules.microsoft-surface-common
       lanzaboote.nixosModules.lanzaboote
       ./Venus/configuration.nix
       home-manager
