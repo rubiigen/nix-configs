@@ -167,8 +167,7 @@ let
   services.blueman.enable = true;
   services.ddccontrol.enable = true;
   services.logind = {
-    suspendKey = "ignore";
-    suspendKeyLongPress = "suspend";
+    suspendKey = "suspend";
     extraConfig = "HandlePowerKey=suspend";
       
   };
