@@ -142,7 +142,7 @@ in
     wayland
     xdg-utils
     glib
-    (pkgs.catppuccin-gtk-override {
+    (pkgs.catppuccin-gtk.override {
        accents = [ "mauve" ];
        variant = "mocha";
     })
