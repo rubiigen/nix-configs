@@ -15,9 +15,17 @@
     homeDirectory = "/home/alyx";
     file.".config/sway/config".source = ./config;
     file.".config/waybar/config".source = ./waybar;
-    file."/etc/modprobe.d/nvidia.conf".text = ''
-      options nvidia-drm modeset=1
-    '';
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Catppuccin-Mocha-Standard-Mauve-Dark";
+      package = pkgs.catppucin-gtk.override {
+        accents = [ "mauve" ];
+        variant = "mocha";
+      };
+    };
   };
 
   systemd.user.targets.tray = {
