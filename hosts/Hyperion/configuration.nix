@@ -122,7 +122,6 @@ in
   programs = {
     adb.enable = true;
     fish.enable = true;
-    sqlite.enable = true;
     dconf.enable = true;
     nm-applet.enable = true;
     steam.enable = true;
