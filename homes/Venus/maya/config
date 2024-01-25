@@ -222,23 +222,18 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    position bottom
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    # status_command ~/.config/nixos/homes/Venus/maya/bar.sh
-    # bar.sh on its way to consume 20% of an 8 thread i7 when idle
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
+    default_border pixel 3
+    default_floating_border pixel 3
+    font pango:monospace 0
+    titlebar_padding 1
+    titlebar_border_thickness 0
+    gaps inner 7
+    gaps outer 5
+    corner_radius 13
+ 
+# border colors
+    client.focused 000000 cba6f7 000000 cba6f7
+    client.focused_inactive 000000 440C88 000000 440C88
+    client.unfocused 000000 440C88 000000 440C88
 
 include /etc/sway/config.d/*
