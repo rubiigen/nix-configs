@@ -1,3 +1,10 @@
 # funny nixos configs
-+ Venus - Surface Book 2
-+ Alyssum - maya's goofy 7th gen intel rig
+
+# So, what is everything?
++ Venus - maya's Surface Book 2
++ Alyssum - maya's goofy Kaby Lake rig
++ Millwright - alyx's Coffee Lake Rig
++ Hyperion - alyx's Acer ConceptD (CC715)
+
+# But, why?
+
