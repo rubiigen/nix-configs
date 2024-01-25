@@ -99,7 +99,6 @@ let
   };
 
   programs = {
-    sway.package = pkgs.swayfx;
     steam.enable = true;
     nm-applet.enable = true;
     adb.enable = true;
@@ -107,6 +106,7 @@ let
     sway = {
       enable = true;
       wrapperFeatures.gtk = true;
+      package = pkgs.swayfx
     };	
   };
 
@@ -285,6 +285,8 @@ let
       };
   };
 };
+
+  users.defaultUserShell = pkgs.fish;
 
   users.users.maya = {
     isNormalUser = true;

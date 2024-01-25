@@ -122,6 +122,7 @@ in
   # the configuration (pain)
   programs = {
     adb.enable = true;
+    fish.enable = true;
     dconf.enable = true;
     nm-applet.enable = true;
     steam.enable = true;
@@ -330,6 +331,8 @@ in
       };
   };
 };
+
+  users.defaultUserShell = pkgs.fish;
 
   # define user acc
   users.users.maya = {

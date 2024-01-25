@@ -90,6 +90,7 @@ let
 
   programs = {
     steam.enable = true;
+    fish.enable = true;
     nm-applet.enable = true;
     adb.enable = true;
     dconf.enable = true;
@@ -285,6 +286,8 @@ let
       };
   };
 };
+
+  users.defaultUserShell = pkgs.fish;
 
   users.users.alyx = {
     isNormalUser = true;
