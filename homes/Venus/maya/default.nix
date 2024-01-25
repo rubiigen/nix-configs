@@ -16,7 +16,6 @@
     # ./nvim.nix
     ../../common/packages.nix
     ../../common/programs.nix
-    ../../common/udiskie.nix
     ../../common/gitm.nix
   ];
 
@@ -48,6 +47,8 @@
 		  Requires = [ "graphical-session-pre.target" ];
 		};
 	};
+
+  services.udiskie.enable = true;
 
   # let HM manage itself when in standalone mode
   programs.home-manager.enable = true;

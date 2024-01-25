@@ -7,7 +7,6 @@
   imports = [
     ../../common/packages.nix # home.packages and similar stuff
     ../../common/programs.nix # programs.<programName>.enable
-    ../../common/udiskie.nix
     ../../common/gitm.nix
   ];
 
@@ -41,7 +40,9 @@
       };
     };
   };
-
+  
+  services.udiskie.enable = true;
+  
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "22.11";
 }
