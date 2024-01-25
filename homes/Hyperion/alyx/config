@@ -53,10 +53,18 @@ output * bg ~/.config/nixos/wallpapers/front.png stretch
 
    input type:pointer {
        accel_profile "flat"
+       natural_scroll disabled
+       dwt disabled
+       tap_button_map "lrm"
+       tap disabled
    }
 
    input type:touchpad {
        accel_profile "flat"
+       natural_scroll disable
+       dwt disabled
+       tap_button_map "lrm"
+       tap disabled
    }
 
 #
