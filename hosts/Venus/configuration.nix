@@ -175,6 +175,7 @@ in
     virt-manager
     krita
     easyeffects
+    prusa-slicer
   ];
 
   environment.variables = {
