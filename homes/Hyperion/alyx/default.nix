@@ -17,7 +17,7 @@
     ../../common/arrpc.nix
     ../../common/packages.nix
     ../../common/programs.nix
-    ../../../.gitignore/gita.nix
+    ../../common/gita.nix
   ];
 
   # TODO: Set your username
