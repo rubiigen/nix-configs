@@ -8,7 +8,7 @@
     ../../common/arrpc.nix
     ../../common/packages.nix # home.packages and similar stuff
     ../../common/programs.nix # programs.<programName>.enable
-    ../../../.gitignore/gita.nix
+    ../../common/gita.nix
   ];
 
   home = {

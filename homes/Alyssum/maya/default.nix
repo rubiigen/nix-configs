@@ -7,7 +7,7 @@
   imports = [
     ../../common/packages.nix # home.packages and similar stuff
     ../../common/programs.nix # programs.<programName>.enable
-    ../../../.gitignore/gitm.nix
+    ../../../../gitinfo/gitm.nix
   ];
 
   home = {

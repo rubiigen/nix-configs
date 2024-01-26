@@ -16,7 +16,7 @@
     # ./nvim.nix
     ../../common/packages.nix
     ../../common/programs.nix
-    ../../../.gitignore/gitm.nix
+    ../../../../gitinfo/gitm.nix
   ];
 
   # TODO: Set your username
