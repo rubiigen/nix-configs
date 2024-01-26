@@ -3,8 +3,8 @@ _: {
   programs = {
     git = {
 	enable = true;
-	userName = "rubiigen";
-	userEmail = "***REMOVED***";
+	userName = "beanigen";
+	userEmail = "bigyeetusthefirst@protonmail.com";
 	extraConfig = {
 		commit.gpgsign = true;
 		gpg.format = "ssh";
@@ -12,7 +12,6 @@ _: {
 		init.defaultBranch = "master";
         };
     };
-    neovim.enable = true;
     # ... add more programs as you see fit
   };
 }
