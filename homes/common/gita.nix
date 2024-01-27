@@ -3,8 +3,8 @@ _: {
   programs = {
     git = {
 	enable = true;
-	userName = "MadamBwabbington";
-        userEmail = "beansoup112@protonmail.com";
+	userName = "rubiigen";
+        userEmail = "alyxwren@proton.me";
 	extraConfig = {
 		commit.gpgsign = true;
 		gpg.format = "ssh";
