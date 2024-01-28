@@ -19,6 +19,8 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";  
     
     lanzaboote.url = "github:nix-community/lanzaboote";
+
+    hyprland.url = "github:hyprwm/Hyprland";
     
   };
 
@@ -28,6 +30,7 @@
     home-manager,
     nixos-hardware,
     lanzaboote,
+    hyprland,
     ...
   } @ inputs: let
     inherit (self) outputs;

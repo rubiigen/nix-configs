@@ -16,6 +16,7 @@
     homeDirectory = "/home/alyx";
     file.".config/sway/config".source = ./config;
     file.".config/waybar/config".source = ./waybar;
+    file.".config/lockonsleep/config.sh".source = ./lock;
   };
 
   gtk = {
@@ -35,6 +36,18 @@
       Requires = [ "graphical-session-pre.target" ];
     };
   };
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+    systemd.enable = true;
+    settings = import ./hyprland.nix;
+  };
+
+#  programs.waybar = {
+#    enable = true;
+#    settings = import ../../common/waybar.nix;
+#    style = import ../../common/waybar-style.nix;
+#  };
 
   services.udiskie.enable = true;
 

@@ -99,6 +99,10 @@ let
       enable = true;
       package = pkgs.swayfx;
       wrapperFeatures.gtk = true;
+    };
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
     };	
     };
 
@@ -106,6 +110,7 @@ let
     dbus-sway-environment
     swayosd
     i2c-tools
+    swaybg
     ddcutil
     dbus
     pavucontrol
@@ -127,6 +132,7 @@ let
     wdisplays
     cinnamon.nemo
     swaynotificationcenter
+    gtklock
     font-awesome
     jetbrains-mono
     libsForQt5.ark
@@ -197,8 +203,10 @@ let
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland ];
   }; 
+
+  security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
 
   console.useXkbConfig = true;
 
