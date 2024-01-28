@@ -93,7 +93,7 @@
       "$mod, E, exec, nemo"
       "$mod, P, pseudo,"
       "$mod, J, togglesplit,"
-      "$mod, K, exec, hyprctl dispatch exit"
+      "$mod SHIFT, F, exec, hyprctl dispatch exit"
       "$mod SHIFT, S, exec, grim -g \"$(slurp)\" - | wl-copy"
       "$mod, left, movewindow, l"
       "$mod, right, movewindow, r"
