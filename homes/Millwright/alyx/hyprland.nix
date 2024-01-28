@@ -99,6 +99,7 @@
       "$mod, right, movewindow, r"
       "$mod, up, movewindow, up"
       "$mod, down, movewindow, down"
+      "$mod, T, fullscreen"
       # Switch workspaces
       "$mod, 1, workspace, 1"
       "$mod, 2, workspace, 2"
