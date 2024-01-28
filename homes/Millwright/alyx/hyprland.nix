@@ -41,12 +41,20 @@
       enabled = true;
       size = 3;
       passes = 1;
+      new_optimizations = 1;
     };
     drop_shadow = "yes";
     shadow_range = 4;
     shadow_render_power = 3;
     "col.shadow" = "rgba(1a1a1aee)";
   };
+
+  windowrulev2 = [
+    "float, title:^(Picture-in-Picture)$"
+    "pin, title:^(Picture-in-Picture)$"
+    "move 67% 72%, title:^(Picture-in-Picture)$"
+    "size 33% 28%, title:^(Picture-in-Picture)$"
+  ];
 
   animations = {
     enabled = true;

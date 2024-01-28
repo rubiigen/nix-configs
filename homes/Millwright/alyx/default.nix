@@ -16,6 +16,7 @@
     homeDirectory = "/home/alyx";
     file.".config/sway/config".source = ./config;
     file.".config/lockonsleep/config.sh".source = ./lock;
+    file.".config/alacritty/alacritty.toml".source = ../../common/alacritty.toml;
   };
 
   gtk = {

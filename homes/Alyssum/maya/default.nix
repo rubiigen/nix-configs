@@ -15,6 +15,7 @@
     username = "maya";
     homeDirectory = "/home/maya";
     file.".config/sway/config".source = ./config;
+    file.".config/alacritty/alacritty.toml".source = ../../common/alacritty.toml;
     file.".config/lockonsleep/config.sh".source = ./lock;
   };
 
