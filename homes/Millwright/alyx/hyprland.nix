@@ -39,7 +39,7 @@
     rounding = 10;
     blur = {
       enabled = true;
-      size = 3;
+      size = 7;
       passes = 1;
       new_optimizations = 1;
     };
@@ -55,6 +55,8 @@
     "move 67% 72%, title:^(Picture-in-Picture)$"
     "size 33% 28%, title:^(Picture-in-Picture)$"
   ];
+
+  layerrule = "blur,alacritty";
 
   animations = {
     enabled = true;

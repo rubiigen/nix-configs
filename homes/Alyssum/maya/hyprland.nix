@@ -38,7 +38,7 @@
     rounding = 10;
     blur = {
       enabled = true;
-      size = 3;
+      size = 7;
       passes = 1;
     };
     drop_shadow = "yes";
@@ -46,6 +46,15 @@
     shadow_render_power = 3;
     "col.shadow" = "rgba(1a1a1aee)";
   };
+
+  windowrulev2 = [
+    "float, title:^(Picture-in-Picture)$"
+    "pin, title:^(Picture-in-Picture)$"
+    "move 67% 72%, title:^(Picture-in-Picture)$"
+    "size 33% 28%, title:^(Picture-in-Picture)$"
+  ];
+
+  layerrule = "blur,alacritty";
 
   animations = {
     enabled = true;
