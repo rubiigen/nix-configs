@@ -5,6 +5,7 @@
   ...
 }: {
   imports = [
+    ../../common/arrpc.nix
     ../../common/packages.nix # home.packages and similar stuff
     ../../common/programs.nix # programs.<programName>.enable
     ../../common/gitm.nix
@@ -14,7 +15,18 @@
     username = "maya";
     homeDirectory = "/home/maya";
     file.".config/sway/config".source = ./config;
-    file.".config/waybar/config".source = ./waybar;
+    file.".config/lockonsleep/config.sh".source = ./lock;
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Catppuccin-Mocha-Standard-Mauve-Dark";
+      package = pkgs.catppuccin-gtk.override {
+        accents = [ "mauve" ];
+        variant = "mocha";
+      };
+    };
   };
 
   systemd.user.targets.tray = {
@@ -24,25 +36,35 @@
     };
   };
 
+  systemd.user.targets.sway-session = {
+    Unit = {
+      Description = "Sway compositor session";
+      BindsTo = [ "graphical-session.target" ];
+      Wants = [ "graphical-session-pre.target" ];
+      After = [ "graphical-session-pre.target" ];
+    };
+  };    
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+    systemd.enable = true;
+    settings = import ./hyprland.nix;
+  };
+
+  programs.waybar = {
+    enable = true;
+    settings = import ../../common/waybar.nix;
+    style = import ../../common/waybar-style.nix;
+  };
+
+  services.udiskie.enable = true;
+
   # let HM manage itself when in standalone mode
   programs.home-manager.enable = true;
 
   # Nicely reload system(d) units when changing configs
   systemd.user.startServices = lib.mkDefault "sd-switch";
-  
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Catppuccin-Mocha-Standard-Mauve-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        accents = [ "mauve" ];
-	variant = "mocha";
-      };
-    };
-  };
-  
-  services.udiskie.enable = true;
-  
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "22.11";
+  home.stateVersion = "24.05";
 }

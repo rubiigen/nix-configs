@@ -14,7 +14,6 @@
     mumble
     networkmanagerapplet
     prismlauncher
-    waybar
     rnote
     wofi
     scrcpy

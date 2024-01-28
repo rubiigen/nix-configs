@@ -106,13 +106,19 @@ let
     sway = {
       enable = true;
       wrapperFeatures.gtk = true;
-      package = pkgs.swayfx
-    };	
+      package = pkgs.swayfx;
+    };
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
+    fish.enable = true;	
   };
 
   environment.systemPackages = with pkgs; [
     dbus-sway-environment
     swayosd
+    swaybg
     pavucontrol
     configure-gtk
     wayland
@@ -124,6 +130,7 @@ let
     })
     gnome3.adwaita-icon-theme
     swaylock
+    gtklock
     swayidle
     grim
     slurp
@@ -181,7 +188,7 @@ let
     enable = true;
       settings = {
         default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
 	sessions = "--sessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions";
 	  user = "greeter";
 	};
@@ -201,8 +208,10 @@ let
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland ];
   }; 
+
+  security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
 
   console.useXkbConfig = true;
 

@@ -20,7 +20,7 @@ set $term alacritty
 # on the original workspace that the command was run on.
 set $menu dmenu_path | wofi --show drun | xargs swaymsg exec --
 
-exec systemctl --user start graphical-session.target
+exec systemctl --user start sway-session.target
 
 ### Output configuration
 #

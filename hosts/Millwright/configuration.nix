@@ -183,7 +183,7 @@ let
     enable = true;
       settings = {
         default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
         sessions = "--sessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions";
           user = "greeter";
         };
