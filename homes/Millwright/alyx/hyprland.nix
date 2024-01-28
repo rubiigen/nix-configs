@@ -8,6 +8,7 @@
     "udiskie &"
     "dbus-update-activation-environmnt --systemd DISPLAY WAYLAND-DISPLAY"
     "bash ~/.config/lockonsleep/config.sh"
+    "swayosd-server"
   ];
 
    monitor = [
@@ -29,8 +30,8 @@
     gaps_in = 5;
     gaps_out = 20;
     border_size = 2;
-    "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-    "col.inactive_border" = "rgba(595959aa)";
+    "col.active_border" = "rgba(cba6f7ff) rgba(cba6f7ff) 45deg";
+    "col.inactive_border" = "rgba(440C88FF)";
     layout = "dwindle";
   };
 
@@ -79,9 +80,9 @@
 
     binde = [
       # Volume stuffs
-      ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
-      ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-      ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+      ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise"
+      ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower"
+      ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
     ];
     bind = [
       # basic binds

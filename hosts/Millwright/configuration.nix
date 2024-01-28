@@ -109,6 +109,7 @@ let
   environment.systemPackages = with pkgs; [
     dbus-sway-environment
     swayosd
+    wget
     i2c-tools
     swaybg
     ddcutil

@@ -119,6 +119,7 @@ let
     dbus-sway-environment
     swayosd
     swaybg
+    swaynotificationcenter
     pavucontrol
     configure-gtk
     wayland
