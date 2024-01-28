@@ -16,7 +16,6 @@ args                  = [ "--login", ]
 #ipc_socket            = true
 
 [env]
-#TERM                  = "xterm-256color"
 
 [window]
 #dimensions            = { columns = 0, lines = 0 }
