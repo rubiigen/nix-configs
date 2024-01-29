@@ -4,42 +4,19 @@
   lib,
   ...
 }: {
-  # You can import other home-manager modules here
   imports = [
-    # If you want to use modules your own flake exports (from modules/home-manager):
-    # outputs.homeManagerModules.example
-
-    # Or modules exported from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModules.default
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
     ../../common/arrpc.nix
-    ../../common/packages.nix
-    ../../common/programs.nix
+    ../../common/packages.nix # home.packages and similar stuff
+    ../../common/programs.nix # programs.<programName>.enable
     ../../common/gita.nix
   ];
 
-  # TODO: Set your username
   home = {
     username = "alyx";
     homeDirectory = "/home/alyx";
     file.".config/sway/config".source = ./config;
-    file.".config/waybar/config".source = ./waybar;
-  };
-
-  wayland.windowManager.sway = {
-    extraOptions = [ "--unsupported-gpu" ];
-  };
-  
-  home.pointerCursor = {
-    name = "Adwaita";
-    package = pkgs.gnome.adwaita-icon-theme;
-    size = 24;
-    x11 = {
-      enable = true;
-      defaultCursor = "Adwaita";
-    };
+    file.".config/lockonsleep/config.sh".source = ../../common/lock.sh;
+    file.".config/alacritty/alacritty.toml".source = ../../common/alacritty.toml;
   };
 
   gtk = {
@@ -54,11 +31,42 @@
   };
 
   systemd.user.targets.tray = {
-	  Unit = {
-		  Description = "Home Manager System Tray";
-		  Requires = [ "graphical-session-pre.target" ];
-		};
-	};
+    Unit = {
+      Description = "Home Manager System Tray";
+      Requires = [ "graphical-session-pre.target" ];
+    };
+  };
+
+  systemd.user.targets.sway-session = {
+    Unit = {
+      Description = "Sway compositor session";
+      BindsTo = [ "graphical-session.target" ];
+      Wants = [ "graphical-session-pre.target" ];
+      After = [ "graphical-session-pre.target" ];
+    };
+  };    
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+    systemd.enable = true;
+    settings = import ./hyprland.nix;
+  };
+
+  programs.waybar = {
+    enable = true;
+    settings = import ../../common/waybar.nix;
+    style = import ../../common/waybar-style.nix;
+  };
+
+  home.pointerCursor = {
+    name = "Adwaita";
+    package = pkgs.gnome.adwaita-icon-theme;
+    size = 24;
+    x11 = {
+      enable = true;
+      defaultCursor = "Adwaita";
+    };
+  };
 
   services.udiskie.enable = true;
 

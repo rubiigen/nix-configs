@@ -130,7 +130,7 @@ draw_bold_text_with_bright_colors = true
 animation             = "EaseOutExpo"
 duration              = 0
 color                 = "#C0C5CE"
-command               = { program = "notify-send", args = ["alacritty", "bell",] }
+#command               = { program = "notify-send", args = ["alacritty", "bell",] }
 
 [selection]
 #semantic_escape_chars = ",│‘|:"' ()[]{}<>t"

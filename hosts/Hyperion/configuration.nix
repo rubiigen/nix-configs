@@ -98,7 +98,6 @@ in
       };
       # Disable if you don't want unfree packages
       allowUnfree = true;
-      nvidia.acceptLicense = true;
 
     };
   };
@@ -136,11 +135,16 @@ in
         "--unsupported-gpu"
       ];
     };
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
   };
 
   environment.systemPackages = with pkgs; [
     dbus-sway-environment
     swayosd
+    swaybg
     pavucontrol
     configure-gtk
     wayland
@@ -180,6 +184,7 @@ in
     tpm2-tss
     krita
     easyeffects
+    gtklock
   ];
 
   environment.variables = {
@@ -222,7 +227,7 @@ in
     enable = true;
       settings = {
         default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
         sessions = "--sessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions";
           user = "greeter";
         };
@@ -242,8 +247,10 @@ in
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland ];
   };
+
+  security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
 
   # TODO: Set your hostname
   networking.hostName = "Hyperion";

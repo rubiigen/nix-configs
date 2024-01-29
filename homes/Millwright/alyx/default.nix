@@ -15,7 +15,7 @@
     username = "alyx";
     homeDirectory = "/home/alyx";
     file.".config/sway/config".source = ./config;
-    file.".config/lockonsleep/config.sh".source = ./lock;
+    file.".config/lockonsleep/config.sh".source = ../../common/lock.sh;
     file.".config/alacritty/alacritty.toml".source = ../../common/alacritty.toml;
   };
 

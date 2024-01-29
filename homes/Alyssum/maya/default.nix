@@ -16,7 +16,7 @@
     homeDirectory = "/home/maya";
     file.".config/sway/config".source = ./config;
     file.".config/alacritty/alacritty.toml".source = ../../common/alacritty.toml;
-    file.".config/lockonsleep/config.sh".source = ./lock;
+    file.".config/lockonsleep/config.sh".source = ../../common/lock.sh;
   };
 
   gtk = {
