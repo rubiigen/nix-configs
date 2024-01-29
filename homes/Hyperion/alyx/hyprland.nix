@@ -21,7 +21,13 @@
     kb_layout = "us";
     kb_variant = "colemak";
     follow_mouse = 1;
-    touchpad.natural_scroll = "no";
+    touchpad = {
+      disable_while_typing = false;
+      natural_scroll = true;
+      tap-to-click = false;
+      clickfinger_behavior = true;
+      middle_button_emulation = false;
+    };
     sensitivity = 0;
     accel_profile = "flat";
   };
@@ -81,7 +87,7 @@
     };
 
     gestures = {
-      workspace_swipe = false;
+      workspace_swipe = true;
     };
 
     misc = {
