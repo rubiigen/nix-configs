@@ -39,7 +39,7 @@
     rounding = 10;
     blur = {
       enabled = true;
-      size = 7;
+      size = 8;
       passes = 1;
       new_optimizations = 1;
     };
