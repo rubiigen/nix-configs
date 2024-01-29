@@ -132,6 +132,10 @@ in
       wrapperFeatures.gtk = true;
       extraOptions =[ "--unsupported-gpu" ];
     };
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -217,7 +221,7 @@ in
     enable = true;
       settings = {
         default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
 	sessions = "--sessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions";
 	  user = "greeter";
 	};

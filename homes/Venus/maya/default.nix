@@ -4,31 +4,40 @@
   lib,
   ...
 }: {
-  # You can import other home-manager modules here
   imports = [
-    # If you want to use modules your own flake exports (from modules/home-manager):
-    # outputs.homeManagerModules.example
-
-    # Or modules exported from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModules.default
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
+    ../../common/arrpc.nix
     ../../common/packages.nix
     ../../common/programs.nix
     ../../common/gitm.nix
   ];
 
-  # TODO: Set your username
   home = {
     username = "maya";
     homeDirectory = "/home/maya";
     file.".config/sway/config".source = ./config;
-    file.".config/waybar/config".source = ./waybar;
+    file.".config/alacritty/alacritty.toml".source = ../../common/alacritty.toml;
+    file.".config/lockonsleep/config.sh".source = ./lock;
+  };
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Catppuccin-Mocha-Standard-Mauve-Dark";
+      package = pkgs.catppuccin-gtk.override {
+        accents = [ "mauve" ];
+	variant = "mocha";
+      };
+    };
+  };
+  wayland.windowManager.hyprland = {
+    enable = true;
+    systemd.enable = true;
+    settings = import ./hyprland.nix;
   };
 
-  wayland.windowManager.sway = {
-    extraOptions = [ "--unsupported-gpu" ];
+  programs.waybar = {
+    enable = true;
+    settings = import ./waybar.nix;
+    style = import ../../common/waybar-style.nix;
   };
   
   home.pointerCursor = {
