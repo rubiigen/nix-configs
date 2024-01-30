@@ -98,15 +98,6 @@
     dconf.enable = true;
     nm-applet.enable = true;
     steam.enable = true;
-    wayfire.enable = true;
-    sway = {
-      enable = true;
-      package = pkgs.swayfx;
-      wrapperFeatures.gtk = true;
-      extraOptions = [
-        "--unsupported-gpu"
-      ];
-    };
     hyprland = {
       enable = true;
       xwayland.enable = true;
@@ -145,7 +136,6 @@
     jetbrains-mono
     libsForQt5.ark
     libsForQt5.qt5ct
-    libva
     (pkgs.python3.withPackages(ps: with ps; [ tkinter ]))
     polkit_gnome
     pulseaudio

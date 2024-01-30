@@ -14,7 +14,6 @@
   home = {
     username = "alyx";
     homeDirectory = "/home/alyx";
-    file.".config/sway/config".source = ./config;
     file.".config/lockonsleep/config.sh".source = ../../common/lock.sh;
     file.".config/foot/foot.ini".source = ../../common/foot.ini;
   };
@@ -36,15 +35,6 @@
       Requires = [ "graphical-session-pre.target" ];
     };
   };
-
-  systemd.user.targets.sway-session = {
-    Unit = {
-      Description = "Sway compositor session";
-      BindsTo = [ "graphical-session.target" ];
-      Wants = [ "graphical-session-pre.target" ];
-      After = [ "graphical-session-pre.target" ];
-    };
-  };    
 
   wayland.windowManager.hyprland = {
     enable = true;

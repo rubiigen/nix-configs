@@ -7,36 +7,7 @@
   config,
   pkgs,
   ...
-}:
-
-let
-  dbus-sway-environment = pkgs.writeTextFile {
-    name = "dbus-sway-environment";
-    destination = "/bin/dbus-sway-environment";
-    executable = true;
-
-    text = ''
-      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-      systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
-      systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
-    '';
-  };
-
-  configure-gtk = pkgs.writeTextFile {
-    name = "configure-gtk";
-    destination = "/bin/configure-gtk";
-    executable = true;
-    text = let
-      schema = pkgs.gsettings-desktop-schemas;
-      datadir = "${schema}/share/gsettings-schemas/${schema.name}";
-    in ''
-      export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
-      gnome_schema=org.gnome.desktop.interface
-      gsettings set $gnome_schema gtk-theme 'Catppuccin-Mocha-Standard-Mauve-Dark'
-    '';
-  };
-
-in
+};
 
  {
   # You can import other NixOS modules here
@@ -80,6 +51,7 @@ in
     nvidiaSettings = true;
     modesetting.enable = true;
     forceFullCompositionPipeline = true;
+    nvidiaPersistenced = true;
   };
 
   hardware.nvidia.prime = {
@@ -126,12 +98,6 @@ in
     dconf.enable = true;
     nm-applet.enable = true;
     steam.enable = true;
-    sway = {
-      enable = true;
-      package = pkgs.swayfx;
-      wrapperFeatures.gtk = true;
-      extraOptions =[ "--unsupported-gpu" ];
-    };
     hyprland = {
       enable = true;
       xwayland.enable = true;
@@ -146,6 +112,13 @@ in
     wayland
     xdg-utils
     glib
+    mesa
+    vulkan-tools
+    vulkan-loader
+    vulkan-validation-layers
+    vulkan-extension-layer
+    libva
+    libva-utils
     (pkgs.catppuccin-gtk.override {
        accents = [ "mauve" ];
        variant = "mocha";
@@ -167,7 +140,6 @@ in
     jetbrains-mono
     libsForQt5.ark
     libsForQt5.qt5ct
-    libva
     (pkgs.python3.withPackages(ps: with ps; [ tkinter ]))
     polkit_gnome
     pulseaudio
@@ -181,13 +153,9 @@ in
     prusa-slicer
   ];
 
-  environment.variables = {
-    XCURSOR_SIZE = "24";
-    WLR_RENDERER = "vulkan sway";
-  };
-
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
+    LIBVA_DRIVER_NAME = "nvidia";
   };
 
   fonts.packages = with pkgs; [
