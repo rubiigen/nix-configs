@@ -5,7 +5,6 @@
     vesktop
     vlc
     wget
-    alacritty
     beeper
     brightnessctl
     firefox-devedition

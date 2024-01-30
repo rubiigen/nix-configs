@@ -9,35 +9,6 @@
   ...
 }:
 
-let
-  dbus-sway-environment = pkgs.writeTextFile {
-    name = "dbus-sway-environment";
-    destination = "/bin/dbus-sway-environment";
-    executable = true;
-
-    text = ''
-      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-      systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
-      systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
-    '';
-  };
-
-  configure-gtk = pkgs.writeTextFile {
-    name = "configure-gtk";
-    destination = "/bin/configure-gtk";
-    executable = true;
-    text = let
-      schema = pkgs.gsettings-desktop-schemas;
-      datadir = "${schema}/share/gsettings-schemas/${schema.name}";
-    in ''
-      export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
-      gnome_schema=org.gnome.desktop.interface
-      gsettings set $gnome_schema gtk-theme 'Catppuccin-Mocha-Standard-Mauve-Dark'
-    '';
-  };
-
-in
-
  {
   # You can import other NixOS modules here
   imports = [
@@ -79,6 +50,7 @@ in
     nvidiaSettings = true;
     modesetting.enable = true;
     forceFullCompositionPipeline = true;
+    nvidiaPersistenced = true;
   };
 
   hardware.nvidia.prime = {
@@ -142,20 +114,22 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    dbus-sway-environment
     swayosd
+    mesa
+    vulkan-tools
+    vulkan-loader
+    vulkan-validation-layers
+    vulkan-extension-layer
+    libva
+    libva-utils
     swaybg
     pavucontrol
-    configure-gtk
-    wayland
     xdg-utils
-    glib
     (pkgs.catppuccin-gtk.override {
        accents = [ "mauve" ];
        variant = "mocha";
     })
     gnome3.adwaita-icon-theme
-    swaylock
     swayidle
     grim
     slurp
@@ -172,11 +146,9 @@ in
     libsForQt5.ark
     libsForQt5.qt5ct
     libva
-    nvidia-vaapi-driver
     (pkgs.python3.withPackages(ps: with ps; [ tkinter ]))
     polkit_gnome
     pulseaudio
-    solaar
     temurin-bin-18
     temurin-jre-bin-8
     udiskie
@@ -187,13 +159,9 @@ in
     gtklock
   ];
 
-  environment.variables = {
-    XCURSOR_SIZE = "24";
-    WLR_RENDERER = "vulkan sway";
-  };
-
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
+    LIBVA_DRIVER_NAME = "nvidia";
   };
 
   fonts.packages = with pkgs; [
@@ -282,6 +250,7 @@ in
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "kvm-intel" "vfio" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
   boot.kernelParams = [ "intel_iommu=on" "iommu=pt" ];
+  boot.blacklistedKernelModules = [ "nouveau" ];
 
   # enable networking
   networking.networkmanager.enable = true;

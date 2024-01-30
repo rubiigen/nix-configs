@@ -54,8 +54,6 @@
     "size 33% 28%, title:^(Picture-in-Picture)$"
   ];
 
-  layerrule = "blur,alacritty";
-
   animations = {
     enabled = true;
     bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
@@ -94,7 +92,7 @@
     ];
     bind = [
       # basic binds
-      "$mod, Return, exec, alacritty"
+      "$mod, Return, exec, foot"
       "$mod SHIFT, Q, killactive, "
       "$mod, M, exit, "
       "$mod SHIFT, space, togglefloating, "

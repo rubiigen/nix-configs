@@ -168,7 +168,6 @@ in
     libsForQt5.ark
     libsForQt5.qt5ct
     libva
-    nvidia-vaapi-driver
     (pkgs.python3.withPackages(ps: with ps; [ tkinter ]))
     polkit_gnome
     pulseaudio
