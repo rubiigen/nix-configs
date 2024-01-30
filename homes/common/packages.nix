@@ -17,6 +17,7 @@
     rnote
     scrcpy
     signal-desktop
+    steam
     stellarium
     tetrio-desktop
     timidity
