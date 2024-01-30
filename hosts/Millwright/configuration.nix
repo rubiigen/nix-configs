@@ -70,7 +70,7 @@
     };
 
   environment.systemPackages = with pkgs; [
-    cinammon.nemo
+    cinnamon.nemo
     dbus
     ddcutil
     gnome3.adwaita-icon-theme

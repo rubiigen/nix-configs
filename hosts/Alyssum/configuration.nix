@@ -116,7 +116,7 @@ let
   };
 
   environment.systemPackages = with pkgs; [
-    cinammon.nemo
+    cinnamon.nemo
     blueman
     bluez-alsa
     bluez
