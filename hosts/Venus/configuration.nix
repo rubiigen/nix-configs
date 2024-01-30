@@ -103,10 +103,9 @@
   };
 
   environment.systemPackages = with pkgs; [
-    cinnamon.nemo
-    blueman
     bluez-alsa
     bluez
+    cinnamon.nemo
     dbus
     gnome3.adwaita-icon-theme
     grim
@@ -119,6 +118,7 @@
     pulseaudio
     slurp
     swaybg
+    swayidle
     swaynotificationcenter
     swayosd
     temurin-bin-18
@@ -130,6 +130,7 @@
     vulkan-tools
     vulkan-validation-layers
     wget
+    wl-clipboard
     xdg-utils
   ];
 

@@ -70,6 +70,8 @@
     };
 
   environment.systemPackages = with pkgs; [
+    bluez-alsa
+    bluez
     cinnamon.nemo
     dbus
     ddcutil
@@ -84,6 +86,7 @@
     pulseaudio
     slurp
     swaybg
+    swayidle
     swaynotificationcenter
     swayosd
     temurin-bin-18
@@ -92,6 +95,7 @@
     udiskie
     virt-manager
     wget
+    wl-clipboard
     xdg-utils
   ];
 

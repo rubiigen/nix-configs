@@ -104,10 +104,9 @@
   };
 
   environment.systemPackages = with pkgs; [
-    cinnamon.nemo
-    blueman
     bluez
     bluez-alsa
+    cinnamon.nemo
     dbus
     ddcutil
     easyeffects
@@ -125,6 +124,7 @@
     pulseaudio
     slurp
     swaybg
+    swayidle
     swaynotificationcenter
     swayosd
     temurin-bin-18
