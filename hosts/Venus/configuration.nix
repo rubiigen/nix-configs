@@ -94,10 +94,8 @@
   # the configuration (pain)
   programs = {
     adb.enable = true;
-    fish.enable = true;
     dconf.enable = true;
-    nm-applet.enable = true;
-    steam.enable = true;
+    fish.enable = true;
     hyprland = {
       enable = true;
       xwayland.enable = true;
@@ -105,52 +103,34 @@
   };
 
   environment.systemPackages = with pkgs; [
-    dbus-sway-environment
-    swayosd
-    pavucontrol
-    configure-gtk
-    wayland
-    xdg-utils
-    glib
-    mesa
-    vulkan-tools
-    vulkan-loader
-    vulkan-validation-layers
-    vulkan-extension-layer
-    libva
-    libva-utils
-    (pkgs.catppuccin-gtk.override {
-       accents = [ "mauve" ];
-       variant = "mocha";
-    })
-    gnome3.adwaita-icon-theme
-    swaylock
-    swayidle
-    grim
-    slurp
-    wl-clipboard
-    bemenu
-    wdisplays
+    cinammon.nemo
     blueman
-    bluez
     bluez-alsa
-    cinnamon.nemo
-    swaynotificationcenter
-    font-awesome
-    jetbrains-mono
-    libsForQt5.ark
+    bluez
+    dbus
+    gnome3.adwaita-icon-theme
+    grim
+    gtklock
     libsForQt5.qt5ct
-    (pkgs.python3.withPackages(ps: with ps; [ tkinter ]))
-    polkit_gnome
+    mesa
+    pavucontrol
+    (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
+    polkit-gnome
     pulseaudio
-    solaar
+    slurp
+    swaybg
+    swaynotificationcenter
+    swayosd
     temurin-bin-18
     temurin-jre-bin-8
     udiskie
     virt-manager
-    krita
-    easyeffects
-    prusa-slicer
+    vulkan-extension-layer
+    vulkan-loader
+    vulkan-tools
+    vulkan-validation-layers
+    wget
+    xdg-utils
   ];
 
   environment.sessionVariables = {
@@ -176,10 +156,12 @@
   hardware.bluetooth.enable = true;
 
   services.blueman.enable = true;
+  services.dbus.enable = true;
+  services.localtimed.enable = true;
   services.lvm.enable = true;
+  services.printing.enable = true;
   services.udisks2.enable = true;
   services.printing.enable = true;
-  services.localtimed.enable = true;
 
   console.useXkbConfig = true;
   
@@ -207,8 +189,7 @@
 
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   };
 
   # TODO: Set your hostname

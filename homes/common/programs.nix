@@ -1,8 +1,9 @@
 _: {
   # enable programs
   programs = {
-    neovim.enable = true;
-    foot.enable = true; 
+    foot.enable = true;
+    steam.enable = true;
+    neovim.enable = true; 
     # ... add more programs as you see fit
   };
 }

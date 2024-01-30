@@ -7,35 +7,6 @@
   ...
 }:
 
-let
-   dbus-sway-environment = pkgs.writeTextFile {
-      name = "dbus-sway-environment";
-      destination = "/bin/dbus-sway-environment";
-      executable = true;
-
-      text = ''
-         dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-         systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
-          systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
-      '';
-   };
-
-   configure-gtk = pkgs.writeTextFile {
-     name = "configure-gtk";
-     destination = "/bin/configure-gtk";
-     executable = true;
-     text = let
-       schema = pkgs.gsettings-desktop-schemas;
-       datadir = "${schema}/share/gsettings-schemas/${schema.name}";
-     in ''
-       export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
-       gnome_schema=org.gnome.desktop.interface
-       gsettings set $gnome_schema gtk-theme 'Catppuccin-Mocha-Standard-Mauve-Dark'
-     '';
-   };
-
- in
-
  {
   imports = [
     ./hardware-configuration.nix
@@ -89,17 +60,9 @@ let
   };
 
   programs = {
-    steam.enable = true;
-    fish.enable = true;
-    nm-applet.enable = true;
     adb.enable = true;
     dconf.enable = true;
-    wayfire.enable = true;
-    sway = {
-      enable = true;
-      package = pkgs.swayfx;
-      wrapperFeatures.gtk = true;
-    };
+    fish.enable = true;
     hyprland = {
       enable = true;
       xwayland.enable = true;
@@ -107,44 +70,29 @@ let
     };
 
   environment.systemPackages = with pkgs; [
-    dbus-sway-environment
-    swayosd
-    wget
-    i2c-tools
-    swaybg
-    ddcutil
+    cinammon.nemo
     dbus
-    pavucontrol
-    configure-gtk
-    wayland
-    xdg-utils
-    glib
-    (pkgs.catppuccin-gtk.override {
-       accents = [ "mauve" ];
-       variant = "mocha";
-    })
+    ddcutil
     gnome3.adwaita-icon-theme
-    swaylock
-    swayidle
     grim
-    slurp
-    wl-clipboard
-    bemenu
-    wdisplays
-    cinnamon.nemo
-    swaynotificationcenter
     gtklock
-    font-awesome
-    jetbrains-mono
-    libsForQt5.ark
+    i2c-tools
+    libsForQt5.qt5ct
+    pavucontrol
     (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
     polkit_gnome
     pulseaudio
+    slurp
+    swaybg
+    swaynotificationcenter
+    swayosd
     temurin-bin-18
     temurin-jre-bin-8
+    tpm2-tss
     udiskie
     virt-manager
-    tpm2-tss
+    wget
+    xdg-utils
   ];
 
   fonts.packages = with pkgs; [
@@ -167,25 +115,23 @@ let
   hardware.i2c.enable = true;
 
   # services
-  services.printing.enable = true;
-  services.dbus.enable = true;
-  services.udisks2.enable = true;
-  services.lvm.enable = true;
   services.blueman.enable = true;
+  services.dbus.enable = true;
   services.ddccontrol.enable = true;
   services.logind = {
-    suspendKey = "suspend";
     extraConfig = "HandlePowerKey=suspend";
-      
   };
+  services.lvm.enable = true;
+  services.printing.enable = true;
+  services.udisks2.enable = true;
 
   # greetd
   services.greetd = {
     enable = true;
       settings = {
         default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-        sessions = "--sessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions";
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+          sessions = "--sessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions";
           user = "greeter";
         };
       };
@@ -203,8 +149,7 @@ let
 
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland ];
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   }; 
 
   security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";

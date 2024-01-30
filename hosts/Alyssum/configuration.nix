@@ -116,41 +116,32 @@ let
   };
 
   environment.systemPackages = with pkgs; [
-    dbus-sway-environment
-    swayosd
+    cinammon.nemo
+    blueman
+    bluez-alsa
+    bluez
+    dbus
+    ddcutil
+    gnome3.adwaita-icon-theme
+    grim
+    gtklock
+    i2c-tools
+    libsForQt5.qt5ct
+    mesa
+    pavucontrol
+    (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
+    polkit-gnome
+    pulseaudio
+    slurp
     swaybg
     swaynotificationcenter
-    pavucontrol
-    configure-gtk
-    wayland
-    xdg-utils
-    glib
-    (pkgs.catppuccin-gtk.override {
-       accents = [ "mauve" ];
-       variant = "mocha";
-    })
-    gnome3.adwaita-icon-theme
-    swaylock
-    gtklock
-    swayidle
-    grim
-    slurp
-    wl-clipboard
-    bemenu
-    wdisplays
-    cinnamon.nemo
-    font-awesome
-    jetbrains-mono
-    libsForQt5.ark
-    libsForQt5.qt5ct
-    polkit_gnome
-    pulseaudio
+    swayosd
     temurin-bin-18
     temurin-jre-bin-8
     udiskie
     virt-manager
-    libva
-    libinput
+    wget
+    xdg-utils
   ];
   
   environment.sessionVariables = {
@@ -176,14 +167,15 @@ let
   hardware.bluetooth.enable = true;
 
   # services
-  services.printing.enable = true;
-  services.dbus.enable = true;
-  services.udisks2.enable = true;
-  services.lvm.enable = true;
   services.blueman.enable = true;
+  services.dbus.enable = true;
+  services.lvm.enable = true;
+  services.printing.enable = true;
+  services.udisks2.enable = true;
   services.logind = {
     extraConfig = "HandlePowerKey=suspend";
   };
+
   # greetd
   services.greetd = {
     enable = true;
@@ -208,8 +200,7 @@ let
 
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland ];
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   }; 
 
   security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";

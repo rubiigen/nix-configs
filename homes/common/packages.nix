@@ -1,26 +1,31 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    obs-studio
-    pamixer
-    vesktop
-    vlc
-    wget
     beeper
     brightnessctl
+    easyeffects
+    fastfetch
     firefox-devedition
     hyfetch
-    fastfetch
+    krita
+    libsForQt5.ark
     mumble
     networkmanagerapplet
+    obs-studio
+    pamixer
     prismlauncher
+    prusa-slicer
     rnote
-    wofi
     scrcpy
     signal-desktop
+    stellarium
     tetrio-desktop
     timidity
     transmission-qt
-    stellarium
+    vesktop
+    vlc
     vscodium
+    wdisplays
+    wl-clipboard
+    wofi
   ];
 }

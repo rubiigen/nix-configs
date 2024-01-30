@@ -94,10 +94,9 @@
   # the configuration (pain)
   programs = {
     adb.enable = true;
+    dconf.enable = true;
     fish.enable = true;
     dconf.enable = true;
-    nm-applet.enable = true;
-    steam.enable = true;
     hyprland = {
       enable = true;
       xwayland.enable = true;
@@ -105,48 +104,41 @@
   };
 
   environment.systemPackages = with pkgs; [
-    swayosd
-    mesa
-    vulkan-tools
-    vulkan-loader
-    vulkan-validation-layers
-    vulkan-extension-layer
-    libva
-    libva-utils
-    swaybg
-    pavucontrol
-    xdg-utils
-    (pkgs.catppuccin-gtk.override {
-       accents = [ "mauve" ];
-       variant = "mocha";
-    })
-    gnome3.adwaita-icon-theme
-    swayidle
-    grim
-    slurp
-    wl-clipboard
-    bemenu
-    wdisplays
+    cinammon.nemo
     blueman
     bluez
     bluez-alsa
-    cinnamon.nemo
-    swaynotificationcenter
-    font-awesome
-    jetbrains-mono
-    libsForQt5.ark
+    dbus
+    ddcutil
+    easyeffects
+    glib
+    gnome3.adwaita-icon-theme
+    grim
+    gtklock
+    i2c-tools
+    krita
     libsForQt5.qt5ct
-    (pkgs.python3.withPackages(ps: with ps; [ tkinter ]))
-    polkit_gnome
+    mesa
+    pavucontrol
+    (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
+    polkit-gnome
     pulseaudio
+    slurp
+    swaybg
+    swaynotificationcenter
+    swayosd
     temurin-bin-18
     temurin-jre-bin-8
+    tpm2-tss
     udiskie
     virt-manager
-    tpm2-tss
-    krita
-    easyeffects
-    gtklock
+    vulkan-extension-layer
+    vulkan-loader
+    vulkan-tools
+    vulkan-validation-layers
+    wget
+    wl-clipboard
+    xdg-utils
   ];
 
   environment.sessionVariables = {
@@ -172,12 +164,11 @@
   hardware.bluetooth.enable = true;
 
   services.blueman.enable = true;
-  services.lvm.enable = true;
-  services.udisks2.enable = true;
-  services.printing.enable = true;
   services.dbus.enable = true;
-  virtualisation.waydroid.enable = true;
-
+  services.lvm.enable = true;
+  services.printing.enable = true;
+  services.udisks2.enable = true;
+  
   console.useXkbConfig = true;
 
   # greetd
@@ -204,7 +195,6 @@
 
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland ];
   };
 
