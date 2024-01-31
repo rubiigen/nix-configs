@@ -173,13 +173,13 @@
   # greetd
   services.greetd = {
     enable = true;
-      settings = {
-        default_session = {
+    restart = true;
+    settings = {
+      default_session = {
         command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-        sessions = "--sessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions";
-          user = "greeter";
-        };
+        user = "greeter";
       };
+    };
   };
 
   systemd.services.greetd.serviceConfig = {

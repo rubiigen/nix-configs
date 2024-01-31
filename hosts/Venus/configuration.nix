@@ -168,6 +168,7 @@
   
   # greetd
   services.greetd = {
+    restart = true;
     enable = true;
       settings = {
         default_session = {
