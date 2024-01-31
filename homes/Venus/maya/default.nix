@@ -14,9 +14,7 @@
   home = {
     username = "maya";
     homeDirectory = "/home/maya";
-    file.".config/sway/config".source = ./config;
     file.".config/foot/foot.ini".source = ../../common/foot.ini;
-    file.".config/lockonsleep/config.sh".source = ./lock;
   };
   gtk = {
     enable = true;
