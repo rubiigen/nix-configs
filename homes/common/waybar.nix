@@ -52,10 +52,10 @@
       tooltip = true;
       format = "{icon}";
       format-icons = {
-        "notification" = "<span foreground='white'><sup></sup></span>";
-        "none" = " ";
-        "dnd-notification" = "<span foreground='white'><sup></sup></span>";
-        "dnd-none" = " ";
+        "notification" = "  <span foreground='white'><sup> </sup></span>";
+        "none" = "  ";
+        "dnd-notification" = "  <span foreground='white'><sup> </sup></span>";
+        "dnd-none" = "  ";
       };
       return-type = "json";
       exec-if = "which swaync-client";

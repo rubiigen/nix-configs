@@ -29,13 +29,6 @@
     };
   };
 
-  systemd.user.targets.tray = {
-    Unit = {
-      Description = "Home Manager System Tray";
-      Requires = [ "graphical-session-pre.target" ];
-    };
-  };
-
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
@@ -44,7 +37,7 @@
 
   programs.waybar = {
     enable = true;
-    settings = import ../../common/waybar.nix;
+    settings = import ../../common/waybarAU.nix;
     style = import ../../common/waybar-style.nix;
   };
 

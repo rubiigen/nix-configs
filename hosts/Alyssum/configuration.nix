@@ -116,6 +116,7 @@
   fonts.packages = with pkgs; [
 	font-awesome
 	jetbrains-mono
+        nerdfonts
         noto-fonts
         noto-fonts-cjk
         noto-fonts-emoji
