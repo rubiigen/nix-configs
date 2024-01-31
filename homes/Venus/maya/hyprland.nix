@@ -97,6 +97,8 @@
       ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
     ];
     bind = [
+      ", XF86MonBrightnessUp, exec, brightnessctl --device=intel_backlight s 5%+"
+      ", XF86MonBrightnessDown, exec, brightnessctl --device=intel_backlight s 5%-"
       # basic binds
       "$mod, Return, exec, foot"
       "$mod SHIFT, Q, killactive, "

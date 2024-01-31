@@ -96,7 +96,6 @@
     adb.enable = true;
     dconf.enable = true;
     fish.enable = true;
-    dconf.enable = true;
     hyprland = {
       enable = true;
       xwayland.enable = true;
@@ -107,7 +106,6 @@
     bluez
     bluez-alsa
     cinnamon.nemo
-    dbus
     ddcutil
     easyeffects
     glib
@@ -120,7 +118,7 @@
     mesa
     pavucontrol
     (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
-    polkit-gnome
+    lxqt.lxqt-policykit
     pulseaudio
     slurp
     swaybg
@@ -271,14 +269,14 @@
   security.polkit.enable = true;
 
  systemd = {
-  user.services.polkit-gnome-authentication-agent-1 = {
-    description = "polkit-gnome-authentication-agent-1";
+  user.services.polkit-lxqt = {
+    description = "polkit-lxqt";
     wantedBy = [ "graphical-session.target" ];
     wants = [ "graphical-session.target" ];
     after = [ "graphical-session.target" ];
     serviceConfig = {
         Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        ExecStart = "${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent";
         Restart = "on-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;

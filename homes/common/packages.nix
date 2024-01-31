@@ -5,6 +5,7 @@
     easyeffects
     fastfetch
     firefox-devedition
+    gparted
     hyfetch
     krita
     libsForQt5.ark
