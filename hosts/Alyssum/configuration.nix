@@ -90,10 +90,10 @@
     gtklock
     i2c-tools
     libsForQt5.qt5ct
+    lxqt.lxqt-policykit
     mesa
     pavucontrol
     (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
-    polkit-gnome
     pulseaudio
     slurp
     swaybg
@@ -237,14 +237,14 @@
   security.pam.services.swaylock = {};
 
  systemd = {
-  user.services.polkit-gnome-authentication-agent-1 = {
-    description = "polkit-gnome-authentication-agent-1";
+  user.services.polkit-lxqt = {
+    description = "polkit-lxqt";
     wantedBy = [ "graphical-session.target" ];
     wants = [ "graphical-session.target" ];
     after = [ "graphical-session.target" ];
     serviceConfig = {
         Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        ExecStart = "${pkgs.lxqt.lxqt-polkit}/bin/lxqt-policykit-agent";
         Restart = "on-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;

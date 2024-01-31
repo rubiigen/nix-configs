@@ -115,10 +115,10 @@
     i2c-tools
     krita
     libsForQt5.qt5ct
+    lxqt.lxqt-policykit
     mesa
     pavucontrol
     (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
-    lxqt.lxqt-policykit
     pulseaudio
     slurp
     swaybg
