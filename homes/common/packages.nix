@@ -8,9 +8,9 @@
     hyfetch
     krita
     libsForQt5.ark
+    libsForQt5.neochat
     mumble
     networkmanagerapplet
-    nheko
     obs-studio
     pamixer
     prismlauncher

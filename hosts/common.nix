@@ -33,8 +33,6 @@
     gnome3.adwaita-icon-theme
     grim
     gtklock
-    libsForQt5.kwallet
-    libsForQt5.kwalletmanager
     libsForQt5.qt5ct
     lxqt.lxqt-policykit
     mesa
@@ -102,10 +100,6 @@
   };
 
   security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
-  security.pam.services.kwallet = {
-    name = "kwallet";
-    enableKwallet = true;
-  };
 
   networking.networkmanager.enable = true;
 
