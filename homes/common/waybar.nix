@@ -18,7 +18,7 @@
       "sep"
       "custom/notification"
     ];
-    
+
     modules-right = [
       "battery"
       "cpu"
@@ -199,4 +199,3 @@
     };
   };
 }
-

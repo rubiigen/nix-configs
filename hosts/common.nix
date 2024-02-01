@@ -1,14 +1,10 @@
 {
-   inputs,
-   outputs,
-   lib,
-   config,
-   pkgs,
-   ...
-}:
-  
-  {
-
+  inputs,
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   services.xserver = {
     enable = true;
     layout = "us";
@@ -21,7 +17,7 @@
   };
 
   programs.dconf.enable = true;
-  
+
   programs.fish.enable = true;
 
   programs.hyprland = {
@@ -54,7 +50,7 @@
     wl-clipboard
     xdg-utils
   ];
-  
+
   fonts.packages = with pkgs; [
     font-awesome
     jetbrains-mono
@@ -66,10 +62,10 @@
     source-han-sans-japanese
     source-han-serif-japanese
   ];
-  
+
   fonts.fontconfig.defaultFonts = {
-    serif = [ "Noto Serif" "Source Han Serif" ];
-    sansSerif = [ "Noto Sans" "Source Han Sans" ];
+    serif = ["Noto Serif" "Source Han Serif"];
+    sansSerif = ["Noto Sans" "Source Han Sans"];
   };
 
   hardware.bluetooth.enable = true;
@@ -105,15 +101,15 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    extraPortals = [pkgs.xdg-desktop-portal-hyprland];
   };
 
   security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
 
   networking.networkmanager.enable = true;
 
-  boot.supportedFilesystems = [ "exfat" "ntfs" "xfs" ];
-  boot.blacklistedKernelModules = [ "nouveau" ];
+  boot.supportedFilesystems = ["exfat" "ntfs" "xfs"];
+  boot.blacklistedKernelModules = ["nouveau"];
 
   nix.gc = {
     automatic = true;
@@ -128,15 +124,15 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-  
+
   security.polkit.enable = true;
 
   systemd = {
     user.services.polkit-lxqt = {
       description = "polkit-lxqt";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
       serviceConfig = {
         Type = "simple";
         ExecStart = "${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent";
@@ -150,7 +146,4 @@
   users.defaultUserShell = pkgs.fish;
 
   system.stateVersion = "24.05";
-
 }
-
-

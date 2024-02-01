@@ -21,8 +21,8 @@
     theme = {
       name = "Catppuccin-Mocha-Standard-Mauve-Dark";
       package = pkgs.catppuccin-gtk.override {
-        accents = [ "mauve" ];
-	variant = "mocha";
+        accents = ["mauve"];
+        variant = "mocha";
       };
     };
   };
@@ -37,7 +37,7 @@
     settings = import ../../common/waybarAU.nix;
     style = import ../../common/waybar-style.nix;
   };
-  
+
   home.pointerCursor = {
     name = "Adwaita";
     package = pkgs.gnome.adwaita-icon-theme;
@@ -49,11 +49,11 @@
   };
 
   systemd.user.targets.tray = {
-	  Unit = {
-		  Description = "Home Manager System Tray";
-		  Requires = [ "graphical-session-pre.target" ];
-		};
-	};
+    Unit = {
+      Description = "Home Manager System Tray";
+      Requires = ["graphical-session-pre.target"];
+    };
+  };
 
   services.udiskie.enable = true;
 
