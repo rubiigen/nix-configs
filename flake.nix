@@ -23,7 +23,7 @@
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
       in {
-        devsShels.default = pkgs.mkShell {
+        default = pkgs.mkShell {
           buildInputs = with pkgs; [
             alejandra # opionated Nix formatter
 
@@ -41,6 +41,8 @@
         };
       }
     );
+
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
   };
 
   inputs = {
