@@ -10,12 +10,10 @@
  {
   imports = [
     ./hardware-configuration.nix
+    ../common.nix
   ];
 
   hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
     extraPackages = with pkgs; [
       amdvlk
       vulkan-validation-layers
@@ -28,17 +26,9 @@
   };
 
   services.xserver = {
-    enable = true;
-    libinput = {
-      enable = true;
-      mouse.accelProfile = "flat";
-    };
     videoDrivers = [ "amdgpu" ];
-    layout = "us";
   };
   
-  environment.pathsToLink = [ "/libexec" ];
-
   hardware.enableAllFirmware = true;
 
   nixpkgs = {
@@ -61,104 +51,23 @@
 
   programs = {
     adb.enable = true;
-    dconf.enable = true;
-    fish.enable = true;
-    hyprland = {
-      enable = true;
-      xwayland.enable = true;
-    };	
+    dconf.enable = true;	
     };
 
   environment.systemPackages = with pkgs; [
-    bluez-alsa
-    bluez
-    cinnamon.nemo
-    dbus
     ddcutil
-    gnome3.adwaita-icon-theme
-    grim
-    gtklock
     i2c-tools
-    libsForQt5.qt5ct
-    lxqt.lxqt-policykit
-    pavucontrol
     (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
-    pulseaudio
-    slurp
-    swaybg
-    swayidle
-    swaynotificationcenter
-    swayosd
-    temurin-bin-18
-    temurin-jre-bin-8
     tpm2-tss
-    udiskie
     virt-manager
-    wget
-    wl-clipboard
-    xdg-utils
   ];
 
-  fonts.packages = with pkgs; [
-	font-awesome
-	jetbrains-mono
-        nerdfonts
-        noto-fonts
-        noto-fonts-cjk
-        noto-fonts-emoji
-        source-han-sans
-        source-han-sans-japanese
-        source-han-serif-japanese
-  ];
-  fonts.fontconfig.defaultFonts = {
-    serif = [ "Noto Serif" "Source Han Serif" ];
-    sansSerif = [ "Noto Sans" "Source Han Sans" ];
-  };
-
-  # bluetooth
-  hardware.bluetooth.enable = true;
   hardware.i2c.enable = true;
 
-  # services
-  services.blueman.enable = true;
-  services.dbus.enable = true;
   services.ddccontrol.enable = true;
   services.logind = {
     extraConfig = "HandlePowerKey=suspend";
   };
-  services.lvm.enable = true;
-  services.printing.enable = true;
-  services.udisks2.enable = true;
-
-  # greetd
-  services.greetd = {
-    enable = true;
-    restart = true;
-      settings = {
-        default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-          sessions = "--sessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions";
-          user = "greeter";
-        };
-      };
-  };
-
-  systemd.services.greetd.serviceConfig = {
-    Type = "idle";
-    StandardInput = "tty";
-    StandardOutput = "tty";
-    StandardError = "journal";
-    TTYReset = "true";
-    TTYHangup = "true";
-    TTYVTDisallocate = true;
-  };
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
-  }; 
-
-  security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
 
   console.useXkbConfig = true;
 
@@ -195,7 +104,6 @@
   boot.blacklistedKernelModules = [ "nouveau" ];
 
   # enable networking
-  networking.networkmanager.enable = true;
   networking.networkmanager.wifi.backend = "iwd";
 
   # Set a time zone
@@ -214,40 +122,6 @@
     LC_TELEPHONE = "en_GB.UTF-8";
     LC_TIME = "en_GB.UTF-8";
   };
-
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
-  };
-  
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-  security.polkit.enable = true;
-
- systemd = {
-  user.services.polkit-lxqt = {
-    description = "polkit-lxqt";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
-    serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-  };
-};
-
-  users.defaultUserShell = pkgs.fish;
 
   users.users.alyx = {
     isNormalUser = true;

@@ -13,6 +13,7 @@
   # You can import other NixOS modules here
   imports = [
     ./hardware-configuration.nix
+    ../common.nix
   ];
   
   microsoft-surface = {
@@ -21,9 +22,6 @@
   };
 
   hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
     extraPackages = with pkgs; [
       vulkan-validation-layers
       intel-media-driver
@@ -35,12 +33,9 @@
   };
 
   services.xserver = {
-    enable = true;
-    layout = "us";  
     videoDrivers = [ "nvidia" ];
   };
 
-  environment.pathsToLink = [ "/libexec" ];
   environment.localBinInPath = true;
 
   hardware.nvidia = {

@@ -10,6 +10,7 @@
  {
   imports = [
     ./hardware-configuration.nix
+    ../common.nix
   ];
 
   hardware.opengl = {

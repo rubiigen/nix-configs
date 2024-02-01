@@ -13,34 +13,22 @@
   # You can import other NixOS modules here
   imports = [
     ./hardware-configuration.nix
+    ../common.nix
   ];
 
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-    extraPackages = with pkgs; [
+  hardware.opengl.extraPackages = with pkgs; [
       vulkan-validation-layers
       intel-media-driver
       vaapiIntel
       vaapiVdpau
       libvdpau-va-gl
       nvidia-vaapi-driver
-    ];
-  };
+  ];
 
   services.xserver = {
-    enable = true;
-    layout = "us";
     xkbVariant = "colemak";  
     videoDrivers = [ "nvidia" ];
-    libinput = {
-      enable = true;
-      mouse.accelProfile = "flat";
-    };
   };
-
-  environment.pathsToLink = [ "/libexec" ];
 
   hardware.nvidia = {
     powerManagement.enable = true;
@@ -95,48 +83,19 @@
   programs = {
     adb.enable = true;
     dconf.enable = true;
-    fish.enable = true;
-    hyprland = {
-      enable = true;
-      xwayland.enable = true;
-    };
   };
 
   environment.systemPackages = with pkgs; [
-    bluez
-    bluez-alsa
-    cinnamon.nemo
-    ddcutil
     easyeffects
-    glib
-    gnome3.adwaita-icon-theme
-    grim
-    gtklock
     i2c-tools
     krita
-    libsForQt5.qt5ct
-    lxqt.lxqt-policykit
-    mesa
-    pavucontrol
     (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
-    pulseaudio
-    slurp
-    swaybg
-    swayidle
-    swaynotificationcenter
-    swayosd
-    temurin-bin-18
-    temurin-jre-bin-8
     tpm2-tss
-    udiskie
     virt-manager
     vulkan-extension-layer
     vulkan-loader
     vulkan-tools
     vulkan-validation-layers
-    wget
-    wl-clipboard
-    xdg-utils
   ];
 
   environment.sessionVariables = {
@@ -144,62 +103,6 @@
     LIBVA_DRIVER_NAME = "nvidia";
   };
 
-  fonts.packages = with pkgs; [
-	font-awesome
-	jetbrains-mono
-        nerdfonts
-        noto-fonts
-        noto-fonts-cjk
-        noto-fonts-emoji
-        source-han-sans
-        source-han-sans-japanese
-        source-han-serif-japanese
-  ];
-  fonts.fontconfig.defaultFonts = {
-    serif = [ "Noto Serif" "Source Han Serif" ];
-    sansSerif = [ "Noto Sans" "Source Han Sans" ];
-  };
-
-  hardware.bluetooth.enable = true;
-
-  services.blueman.enable = true;
-  services.dbus.enable = true;
-  services.lvm.enable = true;
-  services.printing.enable = true;
-  services.udisks2.enable = true;
-  
-  console.useXkbConfig = true;
-
-  # greetd
-  services.greetd = {
-    enable = true;
-    restart = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-        user = "greeter";
-      };
-    };
-  };
-
-  systemd.services.greetd.serviceConfig = {
-    Type = "idle";
-    StandardInput = "tty";
-    StandardOutput = "tty";
-    StandardError = "journal";
-    TTYReset = "true";
-    TTYHangup = "true";
-    TTYVTDisallocate = true;
-  };
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland ];
-  };
-
-  security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
-
-  # TODO: Set your hostname
   networking.hostName = "Hyperion";
 
   virtualisation.spiceUSBRedirection.enable = true; 
@@ -214,8 +117,6 @@
     qemu.runAsRoot = true;
   };
  
-
-  # TODO: This is just an example, be sure to use whatever bootloader you prefer
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.lanzaboote = {
     enable = true;
@@ -225,15 +126,9 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices."luks-03e8ddfe-60f5-4bce-9fed-0bdfed46a240".device = "/dev/disk/by-uuid/03e8ddfe-60f5-4bce-9fed-0bdfed46a240";
   boot.initrd.systemd.enable = true;
-  boot.supportedFilesystems = [ "exfat" "ntfs" "xfs" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = [ "kvm-intel" "vfio" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
-  boot.kernelParams = [ "intel_iommu=on" "iommu=pt" ];
-  boot.blacklistedKernelModules = [ "nouveau" ];
-
-  # enable networking
-  networking.networkmanager.enable = true;
-
+  boot.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+ 
   # Set a time zone, idiot
   time.timeZone = "Europe/London";
 
@@ -252,43 +147,7 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
-  };
-
-  # Sound (kill me now)
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-  security.polkit.enable = true;
-
- systemd = {
-  user.services.polkit-lxqt = {
-    description = "polkit-lxqt";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
-    serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-  };
-};
-
   # define user acc
-
-  users.defaultUserShell = pkgs.fish;
-
   users.users.alyx = {
     isNormalUser = true;
     description = "alyx";
@@ -308,7 +167,4 @@
     # Use keys only. Remove if you want to SSH using password (not recommended)
     PasswordAuthentication = false;
   };
-
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "24.05";
 }
