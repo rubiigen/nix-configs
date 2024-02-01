@@ -14,6 +14,7 @@
   homeMillwright = ../homes/Millwright;
   homeVenus = ../homes/Venus;
   homeAlyssum = ../homes/Alyssum;
+  homeNomad = ../homes/Nomad;
 
   # define a sharedArgs variable that we can simply inherit
   # across all hosts to avoid traversing the file whenever
@@ -57,6 +58,17 @@ in {
       home-manager
       homeVenus
     ];
+  };
+
+  "Nomad" = mkSystem {
+     specialArgs = commonArgs;
+     modules = [
+       nixos-hardware.nixosModules.microsoft-surface-common
+       lanzaboote.nixosModules.lanzaboote
+       ./Nomad/configuration.nix
+       home-manager
+       homeNomad
+     ];
   };
 
   "Alyssum" = mkSystem {
