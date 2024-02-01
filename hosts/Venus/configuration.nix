@@ -90,43 +90,15 @@
   programs = {
     adb.enable = true;
     dconf.enable = true;
-    fish.enable = true;
-    hyprland = {
-      enable = true;
-      xwayland.enable = true;
-    };
   };
 
   environment.systemPackages = with pkgs; [
-    bluez-alsa
-    bluez
-    cinnamon.nemo
-    dbus
-    gnome3.adwaita-icon-theme
-    grim
-    gtklock
-    libsForQt5.qt5ct
-    mesa
-    lxqt.lxqt-policykit
-    pavucontrol
     (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
-    pulseaudio
-    slurp
-    swaybg
-    swayidle
-    swaynotificationcenter
-    swayosd
-    temurin-bin-18
-    temurin-jre-bin-8
-    udiskie
     virt-manager
     vulkan-extension-layer
     vulkan-loader
     vulkan-tools
     vulkan-validation-layers
-    wget
-    wl-clipboard
-    xdg-utils
   ];
 
   environment.sessionVariables = {
@@ -134,61 +106,10 @@
     LIBVA_DRIVER_NAME = "nvidia";
   };
 
-  fonts.packages = with pkgs; [
-	font-awesome
-	jetbrains-mono
-        nerdfonts
-        noto-fonts
-        noto-fonts-cjk
-        noto-fonts-emoji
-        source-han-sans
-        source-han-sans-japanese
-        source-han-serif-japanese
-  ];
-  fonts.fontconfig.defaultFonts = {
-    serif = [ "Noto Serif" "Source Han Serif" ];
-    sansSerif = [ "Noto Sans" "Source Han Sans" ];
-  };
-
-  hardware.bluetooth.enable = true;
-
-  services.blueman.enable = true;
-  services.dbus.enable = true;
   services.localtimed.enable = true;
-  services.lvm.enable = true;
-  services.printing.enable = true;
-  services.udisks2.enable = true;
 
   console.useXkbConfig = true;
   
-  # greetd
-  services.greetd = {
-    restart = true;
-    enable = true;
-      settings = {
-        default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-	sessions = "--sessions ${config.services.xserver.displayManager.sessionData.desktops}/share/xsessions";
-	  user = "greeter";
-	};
-      };
-  };
-
-  systemd.services.greetd.serviceConfig = {
-    Type = "idle";
-    StandardInput = "tty";
-    StandardOutput = "tty";
-    StandardError = "journal";
-    TTYReset = "true";
-    TTYHangup = "true";
-    TTYVTDisallocate = "true";
-  };
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
-  };
-
   # TODO: Set your hostname
   networking.hostName = "Venus";
 
@@ -204,14 +125,11 @@
     qemu.runAsRoot = true;
   };
  
-
   # TODO: This is just an example, be sure to use whatever bootloader you prefer
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices."luks-855a3cef-4299-45cc-9c95-f4a5865f1464".device = "/dev/disk/by-uuid/855a3cef-4299-45cc-9c95-f4a5865f1464";
-  boot.supportedFilesystems = [ "exfat" "ntfs" "xfs" ];
-  boot.kernelModules = [ "kvm-intel" "vfio_pci" "vfio_virqfd" "vfio_iommu_type1" "vfio" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
-  boot.kernelParams = [ "intel_iommu=on" "iommu=pt" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" "nvidia_drm.modeset=1" ];
+  boot.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
   # secure boot shit
   boot.lanzaboote = {
     enable = true;
@@ -221,7 +139,6 @@
 
   # enable networking
   networking.networkmanager = {
-    enable = true;
     wifi.backend = "iwd";
   };
 
@@ -249,41 +166,6 @@
     LC_TIME = "en_AU.UTF-8";
   };
 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
-  };
-
-  # Sound (kill me now)
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-  security.polkit.enable = true;
-
- systemd = {
-  user.services.polkit-lxqt = {
-    description = "polkit-lxqt";
-    wantedBy = [ "graphical-session.target" ];
-    wants = [ "graphical-session.target" ];
-    after = [ "graphical-session.target" ];
-    serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policy-agent";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-  };
-};
-
-  users.defaultUserShell = pkgs.fish;
-
   # define user acc
   users.users.maya = {
     isNormalUser = true;
@@ -303,7 +185,4 @@
     # Use keys only. Remove if you want to SSH using password (not recommended)
     passwordAuthentication = false;
   };
-
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "24.05";
 }

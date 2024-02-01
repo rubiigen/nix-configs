@@ -139,6 +139,4 @@ services.openssh = {
       PasswordAuthentication = true;
     };
   };
-
-  system.stateVersion = "24.05";
 }
