@@ -65,5 +65,10 @@
     lanzaboote.url = "github:nix-community/lanzaboote";
 
     hyprland.url = "github:hyprwm/Hyprland";
+
+    neovim-flake = {
+      url = "github:notashelf/neovim-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

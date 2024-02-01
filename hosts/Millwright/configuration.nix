@@ -11,6 +11,7 @@
   ];
 
   hardware.opengl = {
+    driSupport32Bit = true;
     extraPackages = with pkgs; [
       amdvlk
       vulkan-validation-layers

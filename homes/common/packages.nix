@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    beeper
     brightnessctl
     easyeffects
     fastfetch
@@ -11,6 +10,7 @@
     libsForQt5.ark
     mumble
     networkmanagerapplet
+    nheko
     obs-studio
     pamixer
     prismlauncher
