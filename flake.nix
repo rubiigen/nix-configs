@@ -1,5 +1,49 @@
 {
   description = "Your new nix config";
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  }: let
+    forAllSystems = nixpkgs.lib.genAttrs [
+      "aarch64-linux"
+      "x86_64-linux"
+      #"i686-linux"
+      #"aarch64-darwin"
+      #"x86_64-darwin"
+    ];
+  in {
+    # Entrypoint for NixOS configurations
+    nixosConfigurations = import ./hosts {inherit self;};
+
+    # devshells that are provided by this flake
+    # adding more packages to buildInputs makes them available
+    # while inside the devshell - enetered via `nix develop`
+    devShells = forAllSystems (
+      system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in {
+        default = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            alejandra # opionated Nix formatter
+
+            # example of bootstrapping self-contained shell
+            # applications for your flake
+            # this adds an `update` command to your shell
+            # which'll update all inputs and commit
+            (writeShellApplication {
+              name = "update";
+              text = ''
+                nix flake update && git commit flake.lock -m "flake: bump inputs"
+              '';
+            })
+          ];
+        };
+      }
+    );
+
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+  };
 
   inputs = {
     # Nixpkgs (unstable)
@@ -11,51 +55,15 @@
 
     # arrpc
     arrpc = {
-	url = "github:notashelf/arrpc-flake";
-	inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:notashelf/arrpc-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-	
+
     # nixos-hardware
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";  
-    
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
     lanzaboote.url = "github:nix-community/lanzaboote";
 
     hyprland.url = "github:hyprwm/Hyprland";
-    
   };
-
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    nixos-hardware,
-    lanzaboote,
-    hyprland,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    forAllSystems = nixpkgs.lib.genAttrs [
-      "aarch64-linux"
-      #"i686-linux"
-      "x86_64-linux"
-      #"aarch64-darwin"
-      #"x86_64-darwin"
-    ];
-  in rec {
-    packages = forAllSystems (
-      system: let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-        import ./pkgs {inherit pkgs;}
-    );
-    devShells = forAllSystems (
-      system: let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-        import ./shell.nix {inherit pkgs;}
-    );
-    nixosModules = import ./modules/shared/nixos;
-    homeManagerModules = import ./modules/shared/home-manager;
-    nixosConfigurations = import ./hosts {inherit nixpkgs self outputs nixos-hardware lanzaboote;};   
-    };
 }

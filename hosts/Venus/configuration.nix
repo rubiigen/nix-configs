@@ -2,20 +2,17 @@
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
   inputs,
-  outputs,
   lib,
   config,
   pkgs,
   ...
-}:
-
- {
+}: {
   # You can import other NixOS modules here
   imports = [
     ./hardware-configuration.nix
     ../common.nix
   ];
-  
+
   microsoft-surface = {
     surface-control.enable = true;
     ipts.enable = true;
@@ -33,7 +30,7 @@
   };
 
   services.xserver = {
-    videoDrivers = [ "nvidia" ];
+    videoDrivers = ["nvidia"];
   };
 
   environment.localBinInPath = true;
@@ -62,7 +59,7 @@
     # Configure your nixpkgs instance
     config = {
       packageOverrides = pkgs: {
-        vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+        vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
       };
       # Disable if you don't want unfree packages
       allowUnfree = true;
@@ -93,7 +90,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
+    (pkgs.python3.withPackages (ps: with ps; [tkinter]))
     virt-manager
     vulkan-extension-layer
     vulkan-loader
@@ -109,11 +106,11 @@
   services.localtimed.enable = true;
 
   console.useXkbConfig = true;
-  
+
   # TODO: Set your hostname
   networking.hostName = "Venus";
 
-  virtualisation.spiceUSBRedirection.enable = true; 
+  virtualisation.spiceUSBRedirection.enable = true;
 
   virtualisation.libvirtd = {
     enable = true;
@@ -124,12 +121,12 @@
     qemu.package = pkgs.qemu_kvm;
     qemu.runAsRoot = true;
   };
- 
+
   # TODO: This is just an example, be sure to use whatever bootloader you prefer
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices."luks-855a3cef-4299-45cc-9c95-f4a5865f1464".device = "/dev/disk/by-uuid/855a3cef-4299-45cc-9c95-f4a5865f1464";
-  boot.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+  boot.kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
   # secure boot shit
   boot.lanzaboote = {
     enable = true;
@@ -148,8 +145,8 @@
   # Fun internationalisation stuffs (AAAAAAAA)
 
   i18n.supportedLocales = [
-       "en_AU.UTF-8/UTF-8"
-       "ja_JP.UTF-8/UTF-8"
+    "en_AU.UTF-8/UTF-8"
+    "ja_JP.UTF-8/UTF-8"
   ];
 
   i18n.defaultLocale = "en_AU.UTF-8";

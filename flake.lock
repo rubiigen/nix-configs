@@ -263,22 +263,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-master": {
-      "locked": {
-        "lastModified": 1706781817,
-        "narHash": "sha256-OggAXLVwImzxQ2Dqdy9ZGiYsTsGO+N5+CmFDKCftmw8=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "629ff6a9549971b47a02f0be15ce79b5477772c7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "master",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1704874635,
@@ -365,8 +349,7 @@
         "hyprland": "hyprland",
         "lanzaboote": "lanzaboote",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_3",
-        "nixpkgs-master": "nixpkgs-master"
+        "nixpkgs": "nixpkgs_3"
       }
     },
     "rust-overlay": {
