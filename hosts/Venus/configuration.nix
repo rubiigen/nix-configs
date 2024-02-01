@@ -125,7 +125,7 @@
   # TODO: This is just an example, be sure to use whatever bootloader you prefer
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices."luks-855a3cef-4299-45cc-9c95-f4a5865f1464".device = "/dev/disk/by-uuid/855a3cef-4299-45cc-9c95-f4a5865f1464";
+  boot.initrd.luks.devices."luks-9e671905-ffa2-4533-b57d-3c7563bd48c9".device = "/dev/disk/by-uuid/9e671905-ffa2-4533-b57d-3c7563bd48c9";
   boot.kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
   # secure boot shit
   boot.lanzaboote = {

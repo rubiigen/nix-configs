@@ -1,7 +1,7 @@
 {
   exec-once = [
     "waybar"
-    "swaybg --image ~/.config/nixos/wallpapers/front.png"
+    "swaybg --image ~/.config/nixos/wallpapers/front.png --mode fill"
     "nm-applet"
     "blueman-applet"
     "swaync"
@@ -34,8 +34,8 @@
     gaps_in = 5;
     gaps_out = 20;
     border_size = 2;
-    "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-    "col.inactive_border" = "rgba(595959aa)";
+    "col.active_border" = "rgba(cba6f7ff)";
+    "col.inactive_border" = "rgba(440c88ff)";
     layout = "dwindle";
   };
 
@@ -113,6 +113,7 @@
     "$mod, right, movewindow, r"
     "$mod, up, movewindow, up"
     "$mod, down, movewindow, down"
+    "$mod, F, fullscreen"
     # Switch workspaces
     "$mod, 1, workspace, 1"
     "$mod, 2, workspace, 2"
