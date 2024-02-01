@@ -2,14 +2,11 @@
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
   inputs,
-  outputs,
   lib,
   config,
   pkgs,
   ...
-}:
-
- {
+}: {
   # You can import other NixOS modules here
   imports = [
     ./hardware-configuration.nix
@@ -17,17 +14,17 @@
   ];
 
   hardware.opengl.extraPackages = with pkgs; [
-      vulkan-validation-layers
-      intel-media-driver
-      vaapiIntel
-      vaapiVdpau
-      libvdpau-va-gl
-      nvidia-vaapi-driver
+    vulkan-validation-layers
+    intel-media-driver
+    vaapiIntel
+    vaapiVdpau
+    libvdpau-va-gl
+    nvidia-vaapi-driver
   ];
 
   services.xserver = {
-    xkbVariant = "colemak";  
-    videoDrivers = [ "nvidia" ];
+    xkbVariant = "colemak";
+    videoDrivers = ["nvidia"];
   };
 
   hardware.nvidia = {
@@ -54,11 +51,10 @@
     # Configure your nixpkgs instance
     config = {
       packageOverrides = pkgs: {
-        vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+        vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
       };
       # Disable if you don't want unfree packages
       allowUnfree = true;
-
     };
   };
 
@@ -89,7 +85,7 @@
     easyeffects
     i2c-tools
     krita
-    (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
+    (pkgs.python3.withPackages (ps: with ps; [tkinter]))
     tpm2-tss
     virt-manager
     vulkan-extension-layer
@@ -105,7 +101,7 @@
 
   networking.hostName = "Hyperion";
 
-  virtualisation.spiceUSBRedirection.enable = true; 
+  virtualisation.spiceUSBRedirection.enable = true;
 
   virtualisation.libvirtd = {
     enable = true;
@@ -116,7 +112,7 @@
     qemu.package = pkgs.qemu_kvm;
     qemu.runAsRoot = true;
   };
- 
+
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.lanzaboote = {
     enable = true;
@@ -127,8 +123,8 @@
   boot.initrd.luks.devices."luks-03e8ddfe-60f5-4bce-9fed-0bdfed46a240".device = "/dev/disk/by-uuid/03e8ddfe-60f5-4bce-9fed-0bdfed46a240";
   boot.initrd.systemd.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
- 
+  boot.kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
+
   # Set a time zone, idiot
   time.timeZone = "Europe/London";
 

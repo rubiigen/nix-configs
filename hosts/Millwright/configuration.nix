@@ -1,13 +1,10 @@
 {
   inputs,
-  outputs,
   lib,
   config,
   pkgs,
   ...
-}:
-
- {
+}: {
   imports = [
     ./hardware-configuration.nix
     ../common.nix
@@ -26,9 +23,9 @@
   };
 
   services.xserver = {
-    videoDrivers = [ "amdgpu" ];
+    videoDrivers = ["amdgpu"];
   };
-  
+
   hardware.enableAllFirmware = true;
 
   nixpkgs = {
@@ -51,13 +48,13 @@
 
   programs = {
     adb.enable = true;
-    dconf.enable = true;	
-    };
+    dconf.enable = true;
+  };
 
   environment.systemPackages = with pkgs; [
     ddcutil
     i2c-tools
-    (pkgs.python3.withPackages(ps: with ps; [ tkinter]))
+    (pkgs.python3.withPackages (ps: with ps; [tkinter]))
     tpm2-tss
     virt-manager
   ];
@@ -74,14 +71,14 @@
   networking.hostName = "Millwright";
 
   virtualisation.libvirtd = {
-	enable = true;
-        extraConfig = ''
-          user="alyx"
-        '';
-	qemu.ovmf.enable = true;
-        qemu.package = pkgs.qemu_kvm;
-	qemu.runAsRoot = true;
-        qemu.swtpm.enable = true;  
+    enable = true;
+    extraConfig = ''
+      user="alyx"
+    '';
+    qemu.ovmf.enable = true;
+    qemu.package = pkgs.qemu_kvm;
+    qemu.runAsRoot = true;
+    qemu.swtpm.enable = true;
   };
 
   virtualisation.spiceUSBRedirection.enable = true;
@@ -95,13 +92,13 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices."luks-18d0700e-1d6a-4526-83f6-4b0053b1a935".device = "/dev/disk/by-uuid/18d0700e-1d6a-4526-83f6-4b0053b1a935";
   boot.initrd.systemd.enable = true;
-  boot.supportedFilesystems = [ "exfat" "xfs" "ntfs" ];
-  boot.kernelParams = [ "preempt=voluntary" "module_blacklist=nouveau" "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction" ];
-  boot.initrd.kernelModules = [ "vfio_pci" "vfio_iommu_type1" "vfio" "kvm-intel" ];
-  boot.kernelModules = [ "vfio_virqfd" "vhost-net" ];
+  boot.supportedFilesystems = ["exfat" "xfs" "ntfs"];
+  boot.kernelParams = ["preempt=voluntary" "module_blacklist=nouveau" "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction"];
+  boot.initrd.kernelModules = ["vfio_pci" "vfio_iommu_type1" "vfio" "kvm-intel"];
+  boot.kernelModules = ["vfio_virqfd" "vhost-net"];
   boot.extraModprobeConfig = "options vfio-pci ids=10de:1c03,10de:10f1,1b21:2142";
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.blacklistedKernelModules = [ "nouveau" ];
+  boot.blacklistedKernelModules = ["nouveau"];
 
   # enable networking
   networking.networkmanager.wifi.backend = "iwd";
@@ -126,13 +123,13 @@
   users.users.alyx = {
     isNormalUser = true;
     description = "alyx";
-    extraGroups = ["networkmanager" "wheel" "adbusers" "libvirtd" "kvm" ];
+    extraGroups = ["networkmanager" "wheel" "adbusers" "libvirtd" "kvm"];
     openssh.authorizedKeys.keys = [
       # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
     ];
   };
-  
-services.openssh = {
+
+  services.openssh = {
     enable = false;
     settings = {
       PermitRootLogin = "yes";
