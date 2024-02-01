@@ -8,11 +8,19 @@
     hyfetch
     krita
     libsForQt5.ark
-    libsForQt5.neochat
     mumble
     networkmanagerapplet
     obs-studio
     pamixer
+    (pkgs.makeDesktopItem {
+       name = "beeper";
+       exec = "beeper";
+       desktopName = "Beeper";
+    })
+    (pkgs.writeShellApplication {
+       name = "beeper";
+       text = "${pkgs.beeper}/bin/beeper --ozone-platform=wayland";
+    })
     prismlauncher
     prusa-slicer
     rnote
