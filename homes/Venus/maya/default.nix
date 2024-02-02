@@ -2,6 +2,7 @@
   pkgs,
   outputs,
   lib,
+  inputs,
   ...
 }: {
   imports = [
@@ -31,6 +32,9 @@
     enable = true;
     systemd.enable = true;
     settings = import ./hyprland.nix;
+    plugins = [
+      inputs.hyprgrass.packages.${pkgs.system}.default
+    ];
   };
 
   programs.waybar = {

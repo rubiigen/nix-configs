@@ -29,7 +29,12 @@
       middle_button_emulation = false;
     };
   };
-
+  
+  plugin.touch_gestures = {
+    sensitivity = 5;
+    workspace_swipe_fingers = 3;
+    workspace_swipe_edge = "g";
+  };
   general = {
     gaps_in = 5;
     gaps_out = 20;
@@ -114,6 +119,10 @@
     "$mod, up, movewindow, up"
     "$mod, down, movewindow, down"
     "$mod, F, fullscreen"
+    # Touch binds
+    " , edge:r:l, workspace, +1"
+    " , edge:l:r, workspace, -1"
+    " , edge:u:d, exec, foot"
     # Switch workspaces
     "$mod, 1, workspace, 1"
     "$mod, 2, workspace, 2"
@@ -141,5 +150,8 @@
   bindm = [
     "$mod, mouse:272, movewindow"
     "$mod, mouse:273, resizewindow"
+    # touch
+    " , longpress:2, movewindow"
+    " , longpress:3, resizewindow"
   ];
 }

@@ -37,5 +37,6 @@
     wdisplays
     wl-clipboard
     wofi
+    libreoffice
   ];
 }

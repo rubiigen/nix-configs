@@ -719,6 +719,26 @@
         "type": "github"
       }
     },
+    "hyprgrass": {
+      "inputs": {
+        "hyprland": [
+          "hyprland"
+        ]
+      },
+      "locked": {
+        "lastModified": 1706014834,
+        "narHash": "sha256-LjS70aH4NH0WRGTlzY94pJM6aQj84DBbKk+rg/X21JI=",
+        "owner": "horriblename",
+        "repo": "hyprgrass",
+        "rev": "1397ae8dad74474f5e967d53c26f981af0bb862d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "horriblename",
+        "repo": "hyprgrass",
+        "type": "github"
+      }
+    },
     "hyprland": {
       "inputs": {
         "hyprland-protocols": "hyprland-protocols",
@@ -1936,6 +1956,7 @@
       "inputs": {
         "arrpc": "arrpc",
         "home-manager": "home-manager",
+        "hyprgrass": "hyprgrass",
         "hyprland": "hyprland",
         "lanzaboote": "lanzaboote",
         "neovim-flake": "neovim-flake",
