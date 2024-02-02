@@ -9,6 +9,7 @@
     ../../common/packages.nix
     ../../common/programs.nix
     ../../common/gitm.nix
+    ../../common/nvim-flake.nix
   ];
 
   home = {
