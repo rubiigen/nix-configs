@@ -123,8 +123,8 @@
     "$mod, up, movewindow, up"
     "$mod, down, movewindow, down"
     "$mod, T, fullscreen"
-    " , edge:r:l, workspace +1"
-    " , edge:l:r, workspace -1"
+    " , edge:r:l, workspace, +1"
+    " , edge:l:r, workspace, -1"
     " , edge:u:d, exec, foot"
     " , edge:d:u, fullscreen"
     # Switch workspaces
