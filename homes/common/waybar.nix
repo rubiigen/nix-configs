@@ -48,6 +48,11 @@
       on-click = "~/.config/nixos/homes/common/toggle-keyboard.sh";
     };
 
+    "custom/nwggrid" = {
+      format = " 󰕰 ";
+      on-click = "nwggrid";
+    };
+
     "backlight" = {
       device = "acpi_video1";
       format = "{icon}{percent}%";

@@ -38,5 +38,6 @@
     wl-clipboard
     wofi
     libreoffice
+    nwg-launchers
   ];
 }
