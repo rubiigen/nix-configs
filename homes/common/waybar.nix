@@ -45,12 +45,12 @@
     };
 
     "custom/wvkbd" = {
-      format = " 󰌌  ";
+      format = "  󰌌  ";
       on-click = "~/.config/nixos/homes/common/toggle-keyboard.sh";
     };
 
     "custom/nwggrid" = {
-      format = " 󰕰 ";
+      format = "  󰕰  ";
       on-click = "nwggrid";
     };
 
