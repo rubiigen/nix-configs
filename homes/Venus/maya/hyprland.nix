@@ -124,6 +124,7 @@
     " , edge:r:l, workspace, +1"
     " , edge:l:r, workspace, -1"
     " , edge:u:d, exec, foot"
+    " , edge:d:u, fullscreen"
     # Switch workspaces
     "$mod, 1, workspace, 1"
     "$mod, 2, workspace, 2"
