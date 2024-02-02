@@ -10,7 +10,6 @@
     ../../common/programs.nix # programs.<programName>.enable
     ../../common/gita.nix
     ../../common/nvim-flake.nix
-    inputs.hyprland.homeManagerModules.default
   ];
 
   home = {
