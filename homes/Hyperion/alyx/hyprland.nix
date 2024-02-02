@@ -123,6 +123,10 @@
     "$mod, up, movewindow, up"
     "$mod, down, movewindow, down"
     "$mod, T, fullscreen"
+    " , edge:r:l, workspace +1"
+    " , edge:l:r, workspace -1"
+    " , edge:u:d, exec, foot"
+    " , edge:d:u, fullscreen"
     # Switch workspaces
     "$mod, 1, workspace, 1"
     "$mod, 2, workspace, 2"
@@ -150,5 +154,7 @@
   bindm = [
     "$mod, mouse:272, movewindow"
     "$mod, mouse:273, resizewindow"
+    " , longpress:2, movewindow"
+    " , longpress:3, resizewindow"
   ];
 }
