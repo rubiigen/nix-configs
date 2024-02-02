@@ -12,7 +12,7 @@
 	  python.enable = true;
 	  html.enable = true;
         };
-      
+      };
       };
     # ... add more programs as you see fit
   };
