@@ -9,6 +9,7 @@
 
     modules-left = [
       "custom/wvkbd"
+      "custom/nwggrid"
       "hyprland/workspaces"
       "tray"
       "custom/power"
@@ -44,7 +45,7 @@
     };
 
     "custom/wvkbd" = {
-      format = " 󰌌 ";
+      format = " 󰌌  ";
       on-click = "~/.config/nixos/homes/common/toggle-keyboard.sh";
     };
 
