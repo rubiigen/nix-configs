@@ -32,6 +32,12 @@
     accel_profile = "flat";
   };
 
+  plugin.touch_gestures = {
+    sensitivity = 5;
+    workspace_swipe_fingers = 3;
+    workspace_swipe_edge = "g";
+  ];
+
   general = {
     gaps_in = 5;
     gaps_out = 20;
