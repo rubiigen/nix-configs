@@ -105,6 +105,13 @@
 
   services.localtimed.enable = true;
 
+  services.syncthing = {
+    enable = true;
+    user = "maya";
+    dataDir = "/home/maya/Documents/Sync";
+    configDir = "/home/maya/.config/syncthing";
+  };
+
   console.useXkbConfig = true;
 
   # TODO: Set your hostname
