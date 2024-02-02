@@ -49,6 +49,7 @@
     wget
     wl-clipboard
     xdg-utils
+    wvkbd
   ];
 
   fonts.packages = with pkgs; [

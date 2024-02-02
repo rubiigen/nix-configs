@@ -8,6 +8,7 @@
     fixed-center = true;
 
     modules-left = [
+      "custom/wvkbd"
       "hyprland/workspaces"
       "tray"
       "custom/power"
@@ -41,6 +42,11 @@
 
     "custom/sep_l" = {
       format = " ";
+    };
+
+    "custom/wvkbd" = {
+      format = " 󰌌 ";
+      on-click = "~/.config/nixos/homes/common/toggle-keyboard.sh";
     };
 
     "backlight" = {

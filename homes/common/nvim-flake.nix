@@ -7,13 +7,17 @@
       enable = true;
       settings = {
         vim.languages = {
-	  nix.enable = true;
-	  ts.enable = true;
-	  python.enable = true;
-	  html.enable = true;
+	        nix.enable = true;
+          nix.lsp.enable = true;
+	        ts.enable = true;
+	        python.enable = true;
+	        html.enable = true;
+        };
+        vim.lsp = {
+          enable = true;
         };
       };
-      };
+    };
     # ... add more programs as you see fit
   };
 }
