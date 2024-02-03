@@ -127,6 +127,26 @@
       # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
     ];
   };
+  
+  services.pipewire = {
+    extraConfig = {
+      pipewire = {
+        "10-clock-rate" = {
+          "context.properties" = {
+            "default.clock.rate" = 96000;
+          };
+        };
+      };
+      pipewire-pulse = {
+        "11-pulse-clock-rate" = {
+          "pulse.properties" = {
+            "pulse.default.req" = "128/96000";
+          };
+        };
+      };
+    };
+  };
+
 
   services.openssh = {
     enable = true;
