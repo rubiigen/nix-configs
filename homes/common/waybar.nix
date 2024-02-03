@@ -23,6 +23,7 @@
 
     modules-right = [
       "battery"
+      "battery#bat2"
       "cpu"
       "temperature"
       "backlight"
@@ -144,7 +145,6 @@
     };
 
     "clock" = {
-      timezone = "Europe/London";
       format = "{:  %H:%M}";
       format-alt = "{:  %H:%M    %d/%m/%Y}";
       tooltip-format = "{:  %H:%M    %d/%m/%Y}";
@@ -177,6 +177,21 @@
       format-plugged = " {capacity}%  ";
       format-alt = "{icon}{time}";
       format-icons = ["  " "  " "  " "  " "  "];
+    };
+
+     "battery#bat2" = {
+      states = {
+        "good" = 80;
+        "warning" = 30;
+        "critical" = 5;
+      };
+      format = "{icon}{capacity}% ";
+      format-charging = " {capacity}% ";
+      format-plugged = " {capacity}% ";
+      format-alt = "{icon}{time}";
+      format-icons = ["  " "  " "  " "  " "  "];
+      interval = 3;
+      bat = "BAT2";
     };
 
     "network" = {

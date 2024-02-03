@@ -9,6 +9,7 @@
     ../../common/packages.nix # home.packages and similar stuff
     ../../common/programs.nix # programs.<programName>.enable
     ../../common/gitm.nix
+    ../../common/nvim-flake.nix
   ];
 
   home = {
@@ -37,7 +38,7 @@
 
   programs.waybar = {
     enable = true;
-    settings = import ../../common/waybarAU.nix;
+    settings = import ../../common/waybar.nix;
     style = import ../../common/waybar-style.nix;
   };
 

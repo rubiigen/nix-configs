@@ -39,7 +39,7 @@
 
   programs.waybar = {
     enable = true;
-    settings = import ../../common/waybarAU.nix;
+    settings = import ../../common/waybar.nix;
     style = import ../../common/waybar-style.nix;
   };
 

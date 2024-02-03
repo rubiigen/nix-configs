@@ -10,9 +10,9 @@
     "bash ~/.config/lockonsleep/config.sh"
   ];
 
-  monitor = [
-    "DP-3,1920x1080@239.760,0x0,1"
-    "DVI-D-1,1600x1200,1920x0,1"
+   monitor = [
+    "HDMI-A-1,1920x1080,0x0,1,transform,1"
+    "HDMI-A-3,1920x1080,1080x200,1"
   ];
 
   "env" = "XCURSOR_SIZE,24";
