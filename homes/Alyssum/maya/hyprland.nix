@@ -99,6 +99,7 @@
     "$mod, S, exec, wofi --show drun"
     "$mod, E, exec, nemo"
     "$mod, P, pseudo,"
+    "$mod, T, fullscreen,"
     "$mod, J, togglesplit,"
     "$mod SHIFT, F, exec, hyprctl dispatch exit"
     "$mod SHIFT, S, exec, grim -g \"$(slurp)\" - | wl-copy"
