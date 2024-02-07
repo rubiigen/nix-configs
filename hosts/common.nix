@@ -7,7 +7,7 @@
 }: {
   services.xserver = {
     enable = true;
-    layout = "us";
+    xkb.layout = "us";
   };
 
   hardware.opengl = {
@@ -76,6 +76,14 @@
   services.lvm.enable = true;
   services.printing.enable = true;
   services.udisks2.enable = true;
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+  services.printing.drivers = [ pkgs.gutenprint ];
 
   console.useXkbConfig = true;
 

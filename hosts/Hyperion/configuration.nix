@@ -23,7 +23,7 @@
   ];
 
   services.xserver = {
-    xkbVariant = "colemak";
+    xkb.variant = "colemak";
     videoDrivers = ["nvidia"];
   };
 
@@ -31,10 +31,8 @@
     powerManagement.enable = true;
     powerManagement.finegrained = true;
     open = false;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
     nvidiaSettings = true;
     modesetting.enable = true;
-    forceFullCompositionPipeline = true;
     nvidiaPersistenced = true;
   };
 
