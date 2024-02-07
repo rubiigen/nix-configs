@@ -112,6 +112,25 @@
     configDir = "/home/maya/.config/syncthing";
   };
 
+  
+  services.thermald.enable = true;
+
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+
+      CPU_MIN_PERF_ON_AC = 0;
+      CPU_MAX_PERF_ON_AC = 100;
+      CPU_MIN_PERF_ON_BAT = 0;
+      CPU_MAX_PERF_ON_BAT = 40;
+    };
+  };
+
   console.useXkbConfig = true;
 
   # TODO: Set your hostname
@@ -132,8 +151,14 @@
   # TODO: This is just an example, be sure to use whatever bootloader you prefer
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices."luks-9e671905-ffa2-4533-b57d-3c7563bd48c9".device = "/dev/disk/by-uuid/9e671905-ffa2-4533-b57d-3c7563bd48c9";
+  boot.initrd.luks.devices."luks-9e671905-ffa2-4533-b57d-3c7563bd48c9" = {
+    device = "/dev/disk/by-uuid/9e671905-ffa2-4533-b57d-3c7563bd48c9";
+    keyFile = "/key/key/venus";
+    preLVM = false;
+  };
+  boot.initrd.kernelModules = [ "uas" "usbcore" "usb_storage" "vfat" "nls_cp437" "nls_iso8859_1" ];
   boot.kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
+
   # secure boot shit
   boot.lanzaboote = {
     enable = true;
