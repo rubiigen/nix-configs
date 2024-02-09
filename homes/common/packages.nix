@@ -43,5 +43,7 @@
     wofi
     libreoffice
     nwg-launchers
+    blender
+    amberol
   ];
 }

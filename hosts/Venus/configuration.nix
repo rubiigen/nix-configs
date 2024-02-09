@@ -83,6 +83,7 @@
     };
   };
 
+
   # the configuration (pain)
   programs = {
     adb.enable = true;

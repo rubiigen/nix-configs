@@ -12,6 +12,9 @@
 	        ts.enable = true;
 	        python.enable = true;
 	        html.enable = true;
+          enableFormat = true;
+          enableLSP = true;
+          enableTreesitter = true;
         };
         vim.lsp = {
           enable = true;
