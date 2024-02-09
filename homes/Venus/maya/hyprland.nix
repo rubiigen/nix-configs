@@ -38,8 +38,8 @@
   };
   general = {
     gaps_in = 5;
-    gaps_out = 20;
-    border_size = 2;
+    gaps_out = 15;
+    border_size = 3;
     "col.active_border" = "rgba(cba6f7ff)";
     "col.inactive_border" = "rgba(440c88ff)";
     layout = "dwindle";
