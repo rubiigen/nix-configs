@@ -52,7 +52,7 @@
       size = 7;
       passes = 1;
     };
-    drop_shadow = "yes";
+    drop_shadow = "no";
     shadow_range = 4;
     shadow_render_power = 3;
     "col.shadow" = "rgba(1a1a1aee)";
