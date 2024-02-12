@@ -17,12 +17,22 @@
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
+  boot.initrd.postDeviceCommands = pkgs.lib.mkBefore ''
+    mkdir -m 0755 -p /key
+    sleep 4
+    mount -n -t vfat -o ro `findfs UUID=C811-2B6A` /key
+  '';
+
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/ddef3772-2d25-462a-bf4e-5fe4612b1299";
     fsType = "xfs";
   };
 
-  boot.initrd.luks.devices."luks-a357230a-c779-464f-ae20-74a9640d441e".device = "/dev/disk/by-uuid/a357230a-c779-464f-ae20-74a9640d441e";
+  boot.initrd.luks.devices."luks-a357230a-c779-464f-ae20-74a9640d441e" = {
+    device = "/dev/disk/by-uuid/a357230a-c779-464f-ae20-74a9640d441e";
+    keyFile = "/key/desktop.key";
+    preLVM = false;
+  };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/7ADC-AAF5";

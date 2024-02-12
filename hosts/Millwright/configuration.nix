@@ -91,11 +91,14 @@
   };
   boot.bootspec.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices."luks-18d0700e-1d6a-4526-83f6-4b0053b1a935".device = "/dev/disk/by-uuid/18d0700e-1d6a-4526-83f6-4b0053b1a935";
-  boot.initrd.systemd.enable = true;
+  boot.initrd.luks.devices."luks-18d0700e-1d6a-4526-83f6-4b0053b1a935" = {
+    device = "/dev/disk/by-uuid/18d0700e-1d6a-4526-83f6-4b0053b1a935";
+    keyFile = "/key/desktop.key";
+    preLVM = false;
+  };
   boot.supportedFilesystems = ["exfat" "xfs" "ntfs"];
   boot.kernelParams = ["preempt=voluntary" "module_blacklist=nouveau" "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction"];
-  boot.initrd.kernelModules = ["vfio_pci" "vfio_iommu_type1" "vfio" "kvm-intel"];
+  boot.initrd.kernelModules = ["vfio_pci" "vfio_iommu_type1" "vfio" "kvm-intel" "uas" "usbcore" "usb_storage" "vfat" "nls_cp437" "nls_iso8859_1"];
   boot.kernelModules = ["vfio_virqfd" "vhost-net"];
   boot.extraModprobeConfig = "options vfio-pci ids=10de:1c03,10de:10f1,1b21:2142";
   boot.kernelPackages = pkgs.linuxPackages_zen;
