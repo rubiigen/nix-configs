@@ -49,7 +49,7 @@
 
   programs = {
     adb.enable = true;
-    dconf.enable = true;
+    virt-manager.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -57,7 +57,6 @@
     i2c-tools
     (pkgs.python3.withPackages (ps: with ps; [tkinter]))
     tpm2-tss
-    virt-manager
   ];
 
   hardware.i2c.enable = true;
@@ -84,23 +83,22 @@
 
   virtualisation.spiceUSBRedirection.enable = true;
 
-  boot.loader.systemd-boot.enable = lib.mkForce false;
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/etc/secureboot";
-  };
-  boot.bootspec.enable = true;
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices."luks-18d0700e-1d6a-4526-83f6-4b0053b1a935" = {
-    device = "/dev/disk/by-uuid/18d0700e-1d6a-4526-83f6-4b0053b1a935";
-    keyFile = "/key/desktop.key";
-    preLVM = false;
+  boot.initrd.luks.devices = {
+    crypted = {
+      device = "/dev/disk/by-partuuid/f1afe0b2-9f0b-4f4d-8eab-9c1bea57c705";
+      header = "/dev/disk/by-partuuid/08f5286a-64f5-49b3-bde7-ec6180ee9f84";
+      allowDiscards = true;
+      preLVM = true;
+    };
   };
+  boot.loader.efi.efiSysMountPoint = "/boot/";
   boot.supportedFilesystems = ["exfat" "xfs" "ntfs"];
   boot.kernelParams = ["preempt=voluntary" "module_blacklist=nouveau" "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction"];
-  boot.initrd.kernelModules = ["vfio_pci" "vfio_iommu_type1" "vfio" "kvm-intel" "uas" "usbcore" "usb_storage" "vfat" "nls_cp437" "nls_iso8859_1"];
+  boot.initrd.kernelModules = ["vfio_pci" "vfio_iommu_type1" "vfio" "kvm-intel"];
   boot.kernelModules = ["vfio_virqfd" "vhost-net"];
-  boot.extraModprobeConfig = "options vfio-pci ids=10de:1c03,10de:10f1,1b21:2142";
+  boot.extraModprobeConfig = "options vfio-pci ids=1b21:2142";
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.blacklistedKernelModules = ["nouveau"];
 
