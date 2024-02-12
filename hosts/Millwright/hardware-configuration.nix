@@ -29,10 +29,10 @@
     fsType = "vfat";
   };
 
-  fileSystems."/Data" = {
-    device = "/dev/disk/by-uuid/701d0b93-031e-431d-aef4-cfd792f520f0";
-    fsType = "xfs";
-  };
+#  fileSystems."/Data" = {
+#    device = "/dev/disk/by-uuid/701d0b93-031e-431d-aef4-cfd792f520f0";
+#    fsType = "xfs";
+#  };
 
   swapDevices = [
     {device = "/dev/disk/by-uuid/a37605d1-196b-4dcc-bd98-4ec789d87cf1";}
