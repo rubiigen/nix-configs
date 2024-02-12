@@ -90,13 +90,18 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.initrd.luks.devices."luks-62c4e746-ff0e-4fce-ae90-c144bd565e0b" = {
+    device = "/dev/disk/by-uuid/62c4e746-ff0e-4fce-ae90-c144bd565e0b";
+    keyFile = "/key/key/alyssum";
+    preLVM = false;
+  };
   boot.loader.efi.efiSysMountPoint = "/boot/";
   boot.kernelParams = ["intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction" "preempt=voluntary"];
   boot.blacklistedKernelModules = ["nouveau"];
   boot.kernelModules = ["vfio_virqfd" "vhost-net"];
   boot.extraModprobeConfig = "options vfio-pci ids=10DE:1AED,10DE:1AEB,1B21:1242,10DE:1AEC,10DE:1AED";
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.initrd.kernelModules = ["vfio_pci" "vfio" "vfio_iommu_type1"];
+  boot.initrd.kernelModules = ["vfio_pci" "vfio" "vfio_iommu_type1" "uas" "usbcore" "usb_storage" "vfat" "nls_cp437" "nls_iso8859_1" ];
 
   networking = {
     networkmanager.wifi.backend = "iwd";
