@@ -13,12 +13,33 @@
     ../common.nix
   ];
 
+  hardware.nvidiaOptimus.disable = true;
+  
+  hardware.nvidia = {
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
+    open = false;
+    nvidiaSettings = true;
+    modesetting.enable = true;
+    nvidiaPersistenced = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    prime = {
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+    };
+  };
+
   hardware.opengl.extraPackages = with pkgs; [
     vulkan-validation-layers
     intel-media-driver
     vaapiIntel
     vaapiVdpau
     libvdpau-va-gl
+    nvidia-vaapi-driver
   ];
 
   services.xserver = {
@@ -33,6 +54,7 @@
       };
       # Disable if you don't want unfree packages
       allowUnfree = true;
+      nvidia.acceptLicense = true;
     };
   };
 
@@ -72,6 +94,38 @@
     vulkan-validation-layers
   ];
 
+  powerManagement.powertop.enable = true;
+  services.thermald.enable = true;
+
+  services.tlp = {
+    enable = true;
+    settings = {
+
+
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+      PLATFORM_PROFILE_ON_BAT = "low-power";
+      PLATFORM_PROFILE_ON_AC = "performance";
+
+      CPU_BOOST_ON_AC = 1;
+      CPU_BOOST_ON_BAT = 0;
+
+      CPU_HWP_DYN_BOOST_ON_AC = 1;
+      CPU_HWP_DYN_BOOST_ON_BAT = 0;
+
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_performance";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+
+      RUNTIME_PM_DRIVER_DENYLIST = "mei_me";
+
+      CPU_MIN_PERF_ON_AC = 0;
+      CPU_MAX_PERF_ON_AC = 100;
+      CPU_MIN_PERF_ON_BAT = 0;
+      CPU_MAX_PERF_ON_BAT = 40;
+    };
+  };
+
   networking.hostName = "Hyperion";
 
   virtualisation.spiceUSBRedirection.enable = true;
@@ -96,24 +150,7 @@
   boot.initrd.luks.devices."luks-03e8ddfe-60f5-4bce-9fed-0bdfed46a240".device = "/dev/disk/by-uuid/03e8ddfe-60f5-4bce-9fed-0bdfed46a240";
   boot.initrd.systemd.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.extraModprobeConfig = ''
-    blacklist nouveau
-    options nouveau modeset=0
-  '';
-  boot.blacklistedKernelModules = [ "nvidia" "nvidia_drm" "nvidia_uvm" "nouveau" "nvidia_modeset" ];
-    
-
-  services.udev.extraRules = ''
-    # Remove NVIDIA USB xHCI Host Controller devices, if present
-    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330",>
-    # Remove NVIDIA USB Type-C UCSI devices, if present
-    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000",>
-    # Remove NVIDIA Audio devices, if present
-    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300",>
-    # Remove NVIDIA VGA/3D controller devices
-    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*>
-  '';
-
+ 
   # Set a time zone, idiot
   time.timeZone = "Europe/London";
 
