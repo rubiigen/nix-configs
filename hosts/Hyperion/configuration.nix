@@ -12,8 +12,6 @@
     ./hardware-configuration.nix
     ../common.nix
   ];
-
-  hardware.nvidiaOptimus.disable = true;
   
   hardware.nvidia = {
     powerManagement.enable = true;
