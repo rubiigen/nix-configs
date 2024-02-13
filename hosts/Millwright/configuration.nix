@@ -83,7 +83,13 @@
 
   virtualisation.spiceUSBRedirection.enable = true;
 
-  boot.loader.systemd-boot.enable = true;
+  boot.bootspec.enable = true;
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/etc/secureboot";
+  };
+  boot.initrd.systemd.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices = {
     crypted = {
@@ -93,6 +99,7 @@
       preLVM = true;
     };
   };
+
   boot.loader.efi.efiSysMountPoint = "/boot/";
   boot.supportedFilesystems = ["exfat" "xfs" "ntfs"];
   boot.kernelParams = ["preempt=voluntary" "module_blacklist=nouveau" "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction"];

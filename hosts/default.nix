@@ -32,6 +32,7 @@ in {
       # use the nixos-module for home-manager
       home-manager
       homeMillwright
+      lanzaboote.nixosModules.lanzaboote
     ];
   };
 
