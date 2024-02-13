@@ -19,30 +19,10 @@
     vaapiIntel
     vaapiVdpau
     libvdpau-va-gl
-    nvidia-vaapi-driver
   ];
 
   services.xserver = {
     xkb.variant = "colemak";
-    videoDrivers = ["nvidia"];
-  };
-
-  hardware.nvidia = {
-    powerManagement.enable = true;
-    powerManagement.finegrained = true;
-    open = false;
-    nvidiaSettings = true;
-    modesetting.enable = true;
-    nvidiaPersistenced = true;
-  };
-
-  hardware.nvidia.prime = {
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:1:0:0";
-    offload = {
-      enable = true;
-      enableOffloadCmd = true;
-    };
   };
 
   nixpkgs = {
@@ -92,11 +72,6 @@
     vulkan-validation-layers
   ];
 
-  environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
-    LIBVA_DRIVER_NAME = "nvidia";
-  };
-
   networking.hostName = "Hyperion";
 
   virtualisation.spiceUSBRedirection.enable = true;
@@ -121,7 +96,23 @@
   boot.initrd.luks.devices."luks-03e8ddfe-60f5-4bce-9fed-0bdfed46a240".device = "/dev/disk/by-uuid/03e8ddfe-60f5-4bce-9fed-0bdfed46a240";
   boot.initrd.systemd.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
+  boot.extraModprobeConfig = ''
+    blacklist nouveau
+    options nouveau modeset=0
+  '';
+  boot.blacklistedKernelModules = [ "nvidia" "nvidia_drm" "nvidia_uvm" "nouveau" "nvidia_modeset" ];
+    
+
+  services.udev.extraRules = ''
+    # Remove NVIDIA USB xHCI Host Controller devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330",>
+    # Remove NVIDIA USB Type-C UCSI devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000",>
+    # Remove NVIDIA Audio devices, if present
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300",>
+    # Remove NVIDIA VGA/3D controller devices
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*>
+  '';
 
   # Set a time zone, idiot
   time.timeZone = "Europe/London";
