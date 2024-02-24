@@ -96,10 +96,10 @@
     preLVM = false;
   };
   boot.loader.efi.efiSysMountPoint = "/boot/";
-  boot.kernelParams = ["intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction" "preempt=voluntary"];
+  boot.kernelParams = ["intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction" "preempt=voluntary module_blacklist=nouveau"];
   boot.blacklistedKernelModules = ["nouveau"];
   boot.kernelModules = ["vfio_virqfd" "vhost-net"];
-  boot.extraModprobeConfig = "options vfio-pci ids=10DE:2184,10DE:1AEB,10DE:1AEC,10DE:1AED,10EC:818B,1B21:1242";
+  boot.extraModprobeConfig = "options vfio-pci ids=10de:2184,10de:1aeb,10de:1aec,10de:1aed,10ec:818b,1b21:1242";
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.initrd.kernelModules = ["vfio_pci" "vfio" "vfio_iommu_type1" "uas" "usbcore" "usb_storage" "vfat" "nls_cp437" "nls_iso8859_1" ];
 

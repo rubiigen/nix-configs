@@ -105,7 +105,7 @@
   boot.kernelParams = ["preempt=voluntary" "module_blacklist=nouveau" "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction"];
   boot.initrd.kernelModules = ["vfio_pci" "vfio_iommu_type1" "vfio" "kvm-intel"];
   boot.kernelModules = ["vfio_virqfd" "vhost-net"];
-  boot.extraModprobeConfig = "options vfio-pci ids=1b21:2142";
+  boot.extraModprobeConfig = "options vfio-pci ids=1b21:2142,10de:1c03,10de:10f1";
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.blacklistedKernelModules = ["nouveau"];
 

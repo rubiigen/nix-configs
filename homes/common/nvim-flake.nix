@@ -8,7 +8,7 @@
       settings = {
         vim = {
 
-
+          useSystemClipboard = true;
           theme = {
             enable = true;
             name = "catppuccin";
