@@ -45,5 +45,6 @@
     nwg-launchers
     blender
     amberol
+    openrct2
   ];
 }

@@ -20,6 +20,7 @@
             nix.lsp.enable = true;
 	          ts.enable = true;
 	          python.enable = true;
+            python.lsp.enable = true;
 	          html.enable = true;
             enableFormat = true;
             enableLSP = true;
@@ -31,7 +32,7 @@
           statusline.lualine = {
             enable = true;
           };
-          dashboard.alpha = {
+          dashboard.startify = {
             enable = true;
             # idk need to configure this -maya
           };

@@ -143,8 +143,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices."luks-9e671905-ffa2-4533-b57d-3c7563bd48c9" = {
     device = "/dev/disk/by-uuid/9e671905-ffa2-4533-b57d-3c7563bd48c9";
-    keyFile = "/key/key/venus";
-    preLVM = false;
+#    keyFile = "/key/key/venus";
+#    preLVM = false;
   };
   boot.initrd.kernelModules = [ "uas" "usbcore" "usb_storage" "vfat" "nls_cp437" "nls_iso8859_1" ];
   boot.blacklistedKernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" "nouveau"];

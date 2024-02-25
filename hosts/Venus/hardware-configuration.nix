@@ -20,15 +20,15 @@
 
   boot.initrd.luks.devices."luks-a0f55117-91fc-4252-863a-bff6fd102414" = {
     device = "/dev/disk/by-uuid/a0f55117-91fc-4252-863a-bff6fd102414";
-    keyFile = "/key/key/venus";
-    preLVM = false;
+    #keyFile = "/key/key/venus";
+    #preLVM = false;
   };
 
-  boot.initrd.postDeviceCommands = pkgs.lib.mkBefore ''
-    mkdir -m 0755 -p /key
-    sleep 3
-    mount -n -t vfat -o ro `findfs UUID=0709-7A73` /key
-    '';
+  #boot.initrd.postDeviceCommands = pkgs.lib.mkBefore ''
+   # mkdir -m 0755 -p /key
+   # sleep 3
+   # mount -n -t vfat -o ro `findfs UUID=0709-7A73` /key
+   # '';
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/C611-8DBC";
