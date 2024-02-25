@@ -1,7 +1,7 @@
 {
   exec-once = [
     "waybar"
-    "swaybg --image ~/.config/nixos/wallpapers/wawa.png"
+    "swaybg --image ~/.config/nixos/wallpapers/gooba_laptop.png"
     "nm-applet"
     "blueman-applet"
     "swaync"
