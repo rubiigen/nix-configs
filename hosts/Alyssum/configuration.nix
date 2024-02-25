@@ -100,7 +100,7 @@
   boot.blacklistedKernelModules = ["nouveau"];
   boot.kernelModules = ["vfio_virqfd" "vhost-net"];
   boot.extraModprobeConfig = "options vfio-pci ids=10de:2184,10de:1aeb,10de:1aec,10de:1aed,10ec:818b,1b21:1242";
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   boot.initrd.kernelModules = ["vfio_pci" "vfio" "vfio_iommu_type1" "uas" "usbcore" "usb_storage" "vfat" "nls_cp437" "nls_iso8859_1" ];
 
   networking = {

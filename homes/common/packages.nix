@@ -46,7 +46,4 @@
     blender
     amberol
   ];
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
 }

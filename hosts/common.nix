@@ -52,6 +52,10 @@
     wvkbd
   ];
 
+  environment.sessionVariables = {
+    EDITOR = "nvim";
+  };
+
   fonts.packages = with pkgs; [
     font-awesome
     jetbrains-mono
