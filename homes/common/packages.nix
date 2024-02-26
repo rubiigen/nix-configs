@@ -46,5 +46,6 @@
     blender
     amberol
     openrct2
+    gomuks
   ];
 }
