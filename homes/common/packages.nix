@@ -47,5 +47,7 @@
     amberol
     openrct2
     gomuks
+    distrobox
+    podman
   ];
 }
