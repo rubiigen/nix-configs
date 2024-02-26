@@ -7,6 +7,7 @@
     amberol
     blender
     brightnessctl
+    distrobox
     easyeffects
     element-desktop
     fastfetch
@@ -23,6 +24,7 @@
     obs-studio
     openrct2
     pamixer
+    podman
     prismlauncher
     prusa-slicer
     rnote
@@ -39,16 +41,5 @@
     wdisplays
     wl-clipboard
     wofi
-<<<<<<< HEAD
-    libreoffice
-    nwg-launchers
-    blender
-    amberol
-    openrct2
-    gomuks
-    distrobox
-    podman
-=======
->>>>>>> fea4cdc (gomuks, bye beeper, hello official element client that isnt a shit fork)
   ];
 }
