@@ -52,7 +52,7 @@
     wvkbd
   ];
 
-  environment.sessionVariables = {
+  environment.variables = {
     EDITOR = "nvim";
   };
 
