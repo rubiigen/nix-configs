@@ -1,6 +1,8 @@
 # funny nixos configs
 
 # So, what is everything?
++ Venus - maya's Surface Book 2
++ Alyssum - maya's goofy Kaby Lake rig
 + Millwright - alyx's Coffee Lake Rig
 + Hyperion - alyx's Acer ConceptD (CC715)
 
@@ -20,6 +22,7 @@ There was a couple motivators that moved me personally to nix, here are a couple
 + flake.lock - this locks our config to a certain point in time (and is updated by running `nix flake update` - very helpful for keeping a system as is
 + flake.nix - this is the main flake file! basically everything branches off this
 + shell.nix - special shell file to use with `nix-shell`
++ tape.nix - something maya conjured up for DTS tape archival :3
 
 # Can I do anything?
 Yes! contributions are very warmly welcomed! Noticed something that can be done better? make a pull request!
@@ -35,4 +38,4 @@ No. God no. While I kid, the documentation is a bit lacklustre so do go in with 
 
 # Thanks for taking the time to read this dumpster fire!
 
--alyx
+-alyx + maya
