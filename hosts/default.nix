@@ -11,8 +11,6 @@
 
   homeHyperion = ../homes/Hyperion;
   homeMillwright = ../homes/Millwright;
-  homeVenus = ../homes/Venus;
-  homeAlyssum = ../homes/Alyssum;
   homeNomad = ../homes/Nomad;
 
   # define a sharedArgs variable that we can simply inherit
@@ -48,16 +46,6 @@ in {
     ];
   };
 
-  "Venus" = mkSystem {
-    specialArgs = commonArgs;
-    modules = [
-      nixos-hardware.nixosModules.microsoft-surface-common
-      lanzaboote.nixosModules.lanzaboote
-      ./Venus/configuration.nix
-      home-manager
-      homeVenus
-    ];
-  };
 
   "Nomad" = mkSystem {
      specialArgs = commonArgs;
@@ -70,12 +58,4 @@ in {
      ];
   };
 
-  "Alyssum" = mkSystem {
-    specialArgs = commonArgs;
-    modules = [
-      ./Alyssum/configuration.nix
-      home-manager
-      homeAlyssum
-    ];
-  };
 }
