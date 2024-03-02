@@ -42,6 +42,7 @@
 
   services.xserver = {
     xkb.variant = "colemak";
+    videoDriver = [ "nvidia" ];
   };
 
   nixpkgs = {
