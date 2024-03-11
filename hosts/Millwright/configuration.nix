@@ -90,21 +90,21 @@
     qemu.swtpm.enable = true;
   };
 
-  networking.wireguard.interfaces = {
-    wg0 = {
-      ips = [ "10.104.105.2/24" ];
-      privateKeyFile = "/home/alyx/.config/wireguard/privatekey";
-      peers = [
-        {
-           publicKey = "7xftkjp1e6o3PpMxQPTZH62Uk/rqBXgAt/Zoyd3iAm0=";
-           allowedIPs = [ "10.104.105.0/24" "192.168.1.0/24" ];
-           endpoint = "194.140.210.51:51820";
-           persistentKeepalive = 30;
-           presharedKeyFile = "/home/alyx/.config/wireguard/psk";
-        }
-      ];
-    };
-  };
+  #networking.wireguard.interfaces = {
+  #  wg0 = {
+  #    ips = [ "10.104.105.2/24" ];
+  #    privateKeyFile = "/home/alyx/.config/wireguard/privatekey";
+  #    peers = [
+  #      {
+  #         publicKey = "7xftkjp1e6o3PpMxQPTZH62Uk/rqBXgAt/Zoyd3iAm0=";
+  #         allowedIPs = [ "10.104.105.0/24" "192.168.1.0/24" ];
+  #         endpoint = "194.140.210.51:51820";
+  #         persistentKeepalive = 30;
+  #         presharedKeyFile = "/home/alyx/.config/wireguard/psk";
+  #      }
+  #    ];
+  #  };
+  #};
 
   virtualisation.spiceUSBRedirection.enable = true;
 
