@@ -7,6 +7,7 @@
     amberol
     blender
     brightnessctl
+    cinny-desktop
     distrobox
     easyeffects
     element-desktop
@@ -39,7 +40,9 @@
     vlc
     vscodium
     wdisplays
+    wireguard-tools
     wl-clipboard
     wofi
+    yuzu-mainline
   ];
 }

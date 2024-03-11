@@ -104,11 +104,13 @@
     "$mod, J, togglesplit,"
     "$mod SHIFT, F, exec, hyprctl dispatch exit"
     "$mod SHIFT, S, exec, grim -g \"$(slurp)\" - | wl-copy"
+    "CONTROLALT, S, exec, grim -g \"$(slurp)\""
     "$mod, left, movewindow, l"
     "$mod, right, movewindow, r"
     "$mod, up, movewindow, up"
     "$mod, down, movewindow, down"
     "$mod, T, fullscreen"
+    "$mod, O, exec, ddcutil --bus=8 setvcp 60 11"
     # Switch workspaces
     "$mod, 1, workspace, 1"
     "$mod, 2, workspace, 2"
