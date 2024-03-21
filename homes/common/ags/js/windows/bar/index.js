@@ -22,7 +22,7 @@ const Top = () =>
         className: "barTop",
         vertical: true,
         vpack: "start",
-        children: [LauncherIcon(), SystemUsage(), Weather(), BatteryWidget()],
+        children: [LauncherIcon(), SystemUsage(), Weather()],
     });
 
 const Center = () =>
@@ -45,8 +45,8 @@ const Bottom = () =>
                 children: [
                     BluetoothWidget(),
                     AudioWidget(),
-                    Swallow(),
                     BatteryWidget(),
+                    Swallow(),
                     NetworkWidget(),
 		    nwggrid(),
 		    Keyboard(),

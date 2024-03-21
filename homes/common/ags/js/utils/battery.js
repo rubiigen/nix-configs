@@ -27,10 +27,9 @@ export const getBatteryIcon = () => {
         return "Battery percentage is not a valid value!";
 
     const icons = [
-        ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-        ["󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
+        [" 󰂎 ", " 󰁺 ", " 󰁻 ", " 󰁼 ", " 󰁽 ", " 󰁾 ", " 󰁿 ", " 󰂀 ", " 󰂁 ", " 󰂂 ", " 󰁹 "],
+        [" 󰢟 ", " 󰢜 ", " 󰂆 ", " 󰂇 ", " 󰂈 ", " 󰢝 ", " 󰂉 ", " 󰢞 ", " 󰂊 ", " 󰂋 ", " 󰂅 "],
     ];
-
     const chargingIndex = Battery.charging ? 1 : 0;
     const percentIndex = Math.floor(Battery.percent / 10);
     return icons[chargingIndex][percentIndex].toString();
