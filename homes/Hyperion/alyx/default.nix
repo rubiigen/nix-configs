@@ -47,12 +47,6 @@
     ];
   };
 
-  programs.waybar = {
-    enable = true;
-    settings = import ../../common/waybar.nix;
-    style = import ../../common/waybar-style.nix;
-  };
-
   home.pointerCursor = {
     name = "Adwaita";
     package = pkgs.gnome.adwaita-icon-theme;

@@ -65,6 +65,9 @@
       url = "github:horriblename/hyprgrass";
       inputs.hyprland.follows = "hyprland";
     };
+      
+    hyprpicker.url = "github:hyprwm/hyprpicker";
+
     neovim-flake = {
       url = "github:notashelf/neovim-flake";
       inputs.nixpkgs.follows = "nixpkgs";
