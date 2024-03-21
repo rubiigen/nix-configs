@@ -22,7 +22,7 @@ const Top = () =>
         className: "barTop",
         vertical: true,
         vpack: "start",
-        children: [LauncherIcon(), SystemUsage(), Weather()],
+        children: [LauncherIcon(), SystemUsage(), Weather(), BatteryWidget()],
     });
 
 const Center = () =>
