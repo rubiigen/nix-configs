@@ -10,7 +10,7 @@
     ../../common/programs.nix # programs.<programName>.enable
     ../../common/gita.nix
     ../../common/nvim-flake.nix
-    ../../ags
+    ../../common/ags
   ];
 
   home = {
