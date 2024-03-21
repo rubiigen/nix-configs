@@ -10,6 +10,7 @@
     ../../common/programs.nix # programs.<programName>.enable
     ../../common/gita.nix
     ../../common/nvim-flake.nix
+    ../../ags
   ];
 
   home = {
@@ -17,6 +18,13 @@
     homeDirectory = "/home/alyx";
     file.".config/lockonsleep/config.sh".source = ../../common/lock.sh;
     file.".config/foot/foot.ini".source = ../../common/foot.ini;
+    pointerCursor = {
+      gtk.enable = true;
+      x11.enable = true;
+      package = pkgs.catppuccin-cursors.mochaMauve;
+      name = "Catppuccin-Mocha-Mauve-Cursors";
+      size = 40;
+    };
   };
 
   gtk = {
@@ -28,7 +36,16 @@
         variant = "mocha";
       };
     };
+
+    cursorTheme = {
+      name = "Catppuccin-Mocha-Mauve-Cursors";
+      package = pkgs.catppuccin-cursors.mochaMauve;
+      size = 40;
+    };
   };
+  
+  qt.enable = true;
+  qt.platformTheme = "gtk";
 
   systemd.user.targets.tray = {
     Unit = {

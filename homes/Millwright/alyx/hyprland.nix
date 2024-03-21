@@ -1,14 +1,8 @@
 {
   exec-once = [
-    "waybar"
     "swaybg --image ~/.config/nixos/wallpapers/christmas.png --mode fill"
-    "nm-applet"
-    "blueman-applet"
-    "swaync"
-    "udiskie &"
     "dbus-update-activation-environmnt --systemd DISPLAY WAYLAND-DISPLAY"
     "bash ~/.config/lockonsleep/config.sh"
-    "swayosd-server"
   ];
 
   monitor = [
@@ -16,13 +10,13 @@
     "DVI-D-1,1600x1200,0x0,1,transform,3"
   ];
 
-  "env" = "XCURSOR_SIZE,24";
+  "env" = "XCURSOR_SIZE,40";
   "$mod" = "SUPER";
   input = {
     kb_layout = "us";
     follow_mouse = 1;
     touchpad.natural_scroll = "no";
-    sensitivity = 0;
+    sensitivity = 1;
     accel_profile = "flat";
   };
 
@@ -88,9 +82,9 @@
 
   binde = [
     # Volume stuffs
-    ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise"
-    ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower"
-    ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
+    ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+    ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+    ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
   ];
   bind = [
     # basic binds

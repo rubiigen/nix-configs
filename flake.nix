@@ -58,6 +58,8 @@
 
     lanzaboote.url = "github:nix-community/lanzaboote";
 
+    ags.url = "github:Aylur/ags";
+
     hyprland.url = "github:hyprwm/Hyprland";
     hyprgrass = {
       url = "github:horriblename/hyprgrass";

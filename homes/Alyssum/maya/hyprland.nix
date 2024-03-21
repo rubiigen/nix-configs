@@ -1,11 +1,6 @@
 {
   exec-once = [
-    "waybar"
     "swaybg --image ~/.config/nixos/wallpapers/front.png --mode fill"
-    "nm-applet"
-    "blueman-applet"
-    "swaync"
-    "udiskie &"
     "dbus-update-activation-environmnt --systemd DISPLAY WAYLAND-DISPLAY"
     "bash ~/.config/lockonsleep/config.sh"
   ];
@@ -86,9 +81,9 @@
 
   binde = [
     # Volume stuffs
-    ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise"
-    ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower"
-    ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
+    ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+    ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+    ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
   ];
   bind = [
     # basic binds

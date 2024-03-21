@@ -28,8 +28,11 @@
 
 
   services.xserver = {
+    enable = true;
     videoDrivers = ["amdgpu"];
   };
+
+  environment.pathsToLink = [ "/libexec" ];
 
   hardware.enableAllFirmware = true;
 
