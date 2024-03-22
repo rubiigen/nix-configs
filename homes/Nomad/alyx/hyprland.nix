@@ -1,26 +1,20 @@
 {
   exec-once = [
-    "waybar"
-    "swaybg --image ~/.config/nixos/wallpapers/front.png --mode fill"
-    "nm-applet"
-    "blueman-applet"
-    "swaync"
-    "udiskie &"
+    "swaybg --image ~/.config/nixos/wallpapers/gooba_laptop.png"
     "dbus-update-activation-environmnt --systemd DISPLAY WAYLAND-DISPLAY"
     "bash ~/.config/lockonsleep/config.sh"
   ];
 
   monitor = [
-    "eDP-1,3000x2000,0x0,2"
+    "eDP-1,1920x1080,0x0,1"
   ];
 
   "env" = "XCURSOR_SIZE,24";
   "$mod" = "SUPER";
   input = {
     kb_layout = "us";
+    kb_variant = "colemak";
     follow_mouse = 1;
-    sensitivity = 0;
-    accel_profile = "flat";
     touchpad = {
       disable_while_typing = false;
       natural_scroll = true;
@@ -28,14 +22,22 @@
       clickfinger_behavior = true;
       middle_button_emulation = false;
     };
+    sensitivity = 0;
+    accel_profile = "flat";
+  };
+
+  plugin.touch_gestures = {
+    sensitivity = 5;
+    workspace_swipe_fingers = 3;
+    workspace_swipe_edge = "g";
   };
 
   general = {
     gaps_in = 5;
     gaps_out = 20;
     border_size = 2;
-    "col.active_border" = "rgba(cba6f7ff)";
-    "col.inactive_border" = "rgba(440c88ff)";
+    "col.active_border" = "rgba(cba6f7ff) rgba(cba6f7ff) 45deg";
+    "col.inactive_border" = "rgba(440C88FF)";
     layout = "dwindle";
   };
 
@@ -45,8 +47,9 @@
       enabled = true;
       size = 7;
       passes = 1;
+      new_optimizations = 1;
     };
-    drop_shadow = "yes";
+    drop_shadow = "no";
     shadow_range = 4;
     shadow_render_power = 3;
     "col.shadow" = "rgba(1a1a1aee)";
@@ -82,7 +85,7 @@
   };
 
   gestures = {
-    workspace_swipe = false;
+    workspace_swipe = true;
   };
 
   misc = {
@@ -91,7 +94,7 @@
 
   binde = [
     # Volume stuffs
-    ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
+    ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
     ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
     ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
   ];
@@ -103,7 +106,7 @@
     "$mod SHIFT, Q, killactive, "
     "$mod, M, exit, "
     "$mod SHIFT, space, togglefloating, "
-    "$mod, D, exec, wofi --show drun"
+    "$mod, S, exec, wofi --show drun"
     "$mod, E, exec, nemo"
     "$mod, P, pseudo,"
     "$mod, J, togglesplit,"
@@ -113,7 +116,11 @@
     "$mod, right, movewindow, r"
     "$mod, up, movewindow, up"
     "$mod, down, movewindow, down"
-    "$mod, F, fullscreen"
+    "$mod, T, fullscreen"
+    " , edge:r:l, workspace, +1"
+    " , edge:l:r, workspace, -1"
+    " , edge:u:d, exec, foot"
+    " , edge:d:u, fullscreen"
     # Switch workspaces
     "$mod, 1, workspace, 1"
     "$mod, 2, workspace, 2"
@@ -141,5 +148,7 @@
   bindm = [
     "$mod, mouse:272, movewindow"
     "$mod, mouse:273, resizewindow"
+    " , longpress:2, movewindow"
+    " , longpress:3, resizewindow"
   ];
 }

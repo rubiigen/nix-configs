@@ -36,14 +36,14 @@ in {
     ];
   };
 
-  "Hyperion" = mkSystem {
+  "Nomad" = mkSystem {
     specialArgs = commonArgs;
     modules = [
       # this list defines which files will be imported to be used as "modules" in the system config
-      ./Hyperion/configuration.nix
+      ./Nomad/configuration.nix
       # use the nixos-module for home-manager
       home-manager
-      homeHyperion
+      homeNomad
       lanzaboote.nixosModules.lanzaboote
     ];
   };
@@ -57,17 +57,6 @@ in {
       home-manager
       homeVenus
     ];
-  };
-
-  "Nomad" = mkSystem {
-     specialArgs = commonArgs;
-     modules = [
-       nixos-hardware.nixosModules.microsoft-surface-common
-       lanzaboote.nixosModules.lanzaboote
-       ./Nomad/configuration.nix
-       home-manager
-       homeNomad
-     ];
   };
 
   "Alyssum" = mkSystem {

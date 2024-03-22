@@ -1,21 +1,25 @@
 {
   pkgs,
-  outputs,
   lib,
+  inputs,
   ...
 }: {
   imports = [
     ../../common/arrpc.nix
-    ../../common/packages.nix
-    ../../common/programs.nix
-    ../../common/gitm.nix
+    ../../common/packages.nix # home.packages and similar stuff
+    ../../common/programs.nix # programs.<programName>.enable
+    ../../common/gita.nix
+    ../../common/nvim-flake.nix
+    ../../common/ags
   ];
 
   home = {
-    username = "maya";
-    homeDirectory = "/home/maya";
+    username = "alyx";
+    homeDirectory = "/home/alyx";
+    file.".config/lockonsleep/config.sh".source = ../../common/lock.sh;
     file.".config/foot/foot.ini".source = ../../common/foot.ini;
   };
+
   gtk = {
     enable = true;
     theme = {
@@ -26,16 +30,18 @@
       };
     };
   };
+
+  systemd.user.targets.tray = {
+    Unit = {
+      Description = "Home Manager System Tray";
+      Requires = ["graphical-session-pre.target"];
+    };
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
     settings = import ./hyprland.nix;
-  };
-
-  programs.waybar = {
-    enable = true;
-    settings = import ../../common/waybar.nix;
-    style = import ../../common/waybar-style.nix;
   };
 
   home.pointerCursor = {
@@ -45,13 +51,6 @@
     x11 = {
       enable = true;
       defaultCursor = "Adwaita";
-    };
-  };
-
-  systemd.user.targets.tray = {
-    Unit = {
-      Description = "Home Manager System Tray";
-      Requires = ["graphical-session-pre.target"];
     };
   };
 
