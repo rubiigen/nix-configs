@@ -21,6 +21,13 @@ export const getBatteryTime = () => {
         : "";
 };
 
+export const getBatteryTooltip = () => {
+    const time = getBatteryTime();
+    const percent = Battery.percent;
+
+    return `${percent}% | ${time}`;
+};
+
 export const getBatteryIcon = () => {
     // if Battery.percent is not between 0 and 100, handle the error
     if (Battery.percent < 0 || Battery.percent > 100)
@@ -30,6 +37,7 @@ export const getBatteryIcon = () => {
         [" 󰂎 ", " 󰁺 ", " 󰁻 ", " 󰁼 ", " 󰁽 ", " 󰁾 ", " 󰁿 ", " 󰂀 ", " 󰂁 ", " 󰂂 ", " 󰁹 "],
         [" 󰢟 ", " 󰢜 ", " 󰂆 ", " 󰂇 ", " 󰂈 ", " 󰢝 ", " 󰂉 ", " 󰢞 ", " 󰂊 ", " 󰂋 ", " 󰂅 "],
     ];
+
     const chargingIndex = Battery.charging ? 1 : 0;
     const percentIndex = Math.floor(Battery.percent / 10);
     return icons[chargingIndex][percentIndex].toString();

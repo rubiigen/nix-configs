@@ -6,5 +6,5 @@ export const Keyboard = () =>
         className: "keyboard",
         cursor: "pointer",
         child: Label("󰌌"),
-        onClicked: () => Utils.subprocess("/home/alyx/.config/nixos/homes/common/toggle-keyboard.sh"),
+        onClicked: () => Utils.subprocess("bash /home/alyx/.config/nixos/homes/common/toggle-keyboard.sh"),
     });

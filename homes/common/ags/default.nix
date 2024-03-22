@@ -41,6 +41,8 @@
     pavucontrol
     networkmanagerapplet
     blueman
+    nwg-launchers
+    wvkbd
   ];
 
   dependencies = coreDeps ++ widgetDeps;
@@ -104,6 +106,7 @@ in {
           # /run/user/1000 for the socket
           "%t"
           "/tmp/hypr"
+          "/home/alyx/.config"
         ];
 
         # restart on failure
