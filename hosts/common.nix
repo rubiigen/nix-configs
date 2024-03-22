@@ -75,6 +75,7 @@
 
   hardware.bluetooth.enable = true;
 
+  services.acpid.enable = true;
   services.blueman.enable = true;
   services.dbus.enable = true;
   services.lvm.enable = true;
@@ -113,6 +114,7 @@
   };
 
   security.pam.services.gtklock.text = lib.readFile "${pkgs.gtklock}/etc/pam.d/gtklock";
+
 
   networking.networkmanager.enable = true;
 

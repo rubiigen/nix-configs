@@ -43,6 +43,7 @@
     blueman
     nwg-launchers
     wvkbd
+    brightnessctl
   ];
 
   dependencies = coreDeps ++ widgetDeps;

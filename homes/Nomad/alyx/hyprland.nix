@@ -26,12 +26,6 @@
     accel_profile = "flat";
   };
 
-  plugin.touch_gestures = {
-    sensitivity = 5;
-    workspace_swipe_fingers = 3;
-    workspace_swipe_edge = "g";
-  };
-
   general = {
     gaps_in = 5;
     gaps_out = 20;
@@ -99,8 +93,8 @@
     ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
   ];
   bind = [
-    ", XF86MonBrightnessUp, exec, brightnessctl --device=intel_backlight s 5%+"
-    ", XF86MonBrightnessDown, exec, brightnessctl --device=intel_backlight s 5%-"
+    ", XF86MonBrightnessUp, exec, brightnessctl --device=amdgpu_bl0 s 5%+"
+    ", XF86MonBrightnessDown, exec, brightnessctl --device=amdgpu_bl0 s 5%-"
     # basic binds
     "$mod, Return, exec, foot"
     "$mod SHIFT, Q, killactive, "
@@ -117,10 +111,6 @@
     "$mod, up, movewindow, up"
     "$mod, down, movewindow, down"
     "$mod, T, fullscreen"
-    " , edge:r:l, workspace, +1"
-    " , edge:l:r, workspace, -1"
-    " , edge:u:d, exec, foot"
-    " , edge:d:u, fullscreen"
     # Switch workspaces
     "$mod, 1, workspace, 1"
     "$mod, 2, workspace, 2"
@@ -148,7 +138,5 @@
   bindm = [
     "$mod, mouse:272, movewindow"
     "$mod, mouse:273, resizewindow"
-    " , longpress:2, movewindow"
-    " , longpress:3, resizewindow"
   ];
 }
