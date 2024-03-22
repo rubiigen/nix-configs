@@ -43,6 +43,5 @@
     wireguard-tools
     wl-clipboard
     wofi
-    yuzu-mainline
   ];
 }
