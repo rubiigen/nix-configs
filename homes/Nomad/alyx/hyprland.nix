@@ -12,7 +12,7 @@
   "env" = "XCURSOR_SIZE,24";
   "$mod" = "SUPER";
   input = {
-    kb_layout = "us";
+    kb_layout = "gb";
     kb_variant = "colemak";
     follow_mouse = 1;
     touchpad = {
@@ -47,6 +47,11 @@
     shadow_range = 4;
     shadow_render_power = 3;
     "col.shadow" = "rgba(1a1a1aee)";
+  };
+
+  device = {
+    name = "etps/2-elantech-touchpad";
+    enabled = false;
   };
 
   windowrulev2 = [
