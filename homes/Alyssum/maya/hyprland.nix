@@ -7,7 +7,7 @@
 
    monitor = [
     "HDMI-A-1,1920x1080,0x0,1,transform,1"
-    "HDMI-A-3,1920x1080,1080x200,1"
+    "HDMI-A-3,1920x1080,1080x0,1"
   ];
 
   "env" = "XCURSOR_SIZE,24";
