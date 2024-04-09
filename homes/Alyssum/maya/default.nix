@@ -37,6 +37,17 @@
     settings = import ./hyprland.nix;
   };
 
+  
+  home.pointerCursor = {
+    name = "Adwaita";
+    package = pkgs.gnome.adwaita-icon-theme;
+    size = 24;
+    x11 = {
+      enable = true;
+      defaultCursor = "Adwaita";
+    };
+  };
+
   services.udiskie.enable = true;
 
   # let HM manage itself when in standalone mode
