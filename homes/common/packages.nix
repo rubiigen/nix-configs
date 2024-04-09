@@ -15,6 +15,7 @@
     firefox-devedition
     gomuks
     gparted
+    gzdoom
     hyfetch
     krita
     libreoffice
