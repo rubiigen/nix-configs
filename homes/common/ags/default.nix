@@ -107,7 +107,7 @@ in {
           # /run/user/1000 for the socket
           "%t"
           "/tmp/hypr"
-          "/home/alyx/.config"
+          "~/.config"
         ];
 
         # restart on failure
