@@ -18,6 +18,7 @@
     homeDirectory = "/home/alyx";
     file.".config/lockonsleep/config.sh".source = ../../common/lock.sh;
     file.".config/foot/foot.ini".source = ../../common/foot.ini;
+    file.".config/hypr/hyprlock.conf".source = ../../common/hyprlock.conf;
   };
 
   gtk = {

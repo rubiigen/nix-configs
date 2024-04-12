@@ -72,6 +72,16 @@
   services.fprintd.tod.enable = true;
   services.fprintd.tod.driver = pkgs.libfprint-2-tod1-vfs0090;
 
+  security.pam.services.hyprlock = {
+      text = ''
+        # Authentication management.
+        auth sufficient pam_unix.so try_first_pass likeauth nullok
+        auth sufficient /nix/store/mfsx2wn5plqwdiprxl59a3qwgyzxlsx9-fprintd-tod-1.90.9/lib/security/pam_fprintd.so # fprintd (order 11300)
+      '';
+  };
+
+  security.pam.services.login.fprintAuth = false;
+
   powerManagement.powertop.enable = true;
   services.thermald.enable = true;
 

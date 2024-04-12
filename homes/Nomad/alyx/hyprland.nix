@@ -98,8 +98,8 @@
     ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
   ];
   bind = [
-    ", XF86MonBrightnessUp, exec, brightnessctl --device=amdgpu_bl0 s 5%+"
-    ", XF86MonBrightnessDown, exec, brightnessctl --device=amdgpu_bl0 s 5%-"
+    ", XF86MonBrightnessUp, exec, brightnessctl --device=amdgpu_bl1 s 5%+"
+    ", XF86MonBrightnessDown, exec, brightnessctl --device=amdgpu_bl1 s 5%-"
     # basic binds
     "$mod, Return, exec, foot"
     "$mod SHIFT, Q, killactive, "
