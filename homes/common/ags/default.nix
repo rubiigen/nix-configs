@@ -107,7 +107,7 @@ in {
           # /run/user/1000 for the socket
           "%t"
           "/tmp/hypr"
-          "~/.config"
+          "%h/.config"
         ];
 
         # restart on failure
