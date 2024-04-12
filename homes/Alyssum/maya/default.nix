@@ -11,6 +11,7 @@
     ../../common/gitm.nix
     ../../common/nvim-flake.nix
     ../../common/ags
+    ../../common/files.nix
   ];
 
   home = {

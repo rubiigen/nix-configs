@@ -11,13 +11,12 @@
     ../../common/gita.nix
     ../../common/nvim-flake.nix
     ../../common/ags
+    ../../common/files.nix
   ];
 
   home = {
     username = "alyx";
     homeDirectory = "/home/alyx";
-    file.".config/lockonsleep/config.sh".source = ../../common/lock.sh;
-    file.".config/foot/foot.ini".source = ../../common/foot.ini;
     pointerCursor = {
       gtk.enable = true;
       x11.enable = true;

@@ -9,7 +9,7 @@
   inherit (nixpkgs) lib;
   mkSystem = lib.nixosSystem;
 
-  homeHyperion = ../homes/Hyperion;
+  homeJupiter = ../homes/Jupiter;
   homeMillwright = ../homes/Millwright;
   homeVenus = ../homes/Venus;
   homeAlyssum = ../homes/Alyssum;
@@ -34,6 +34,15 @@ in {
       homeMillwright
       lanzaboote.nixosModules.lanzaboote
     ];
+  };
+
+  "Jupiter" = mkSystem {
+     specialArgs = commonArgs;
+     modules = [
+       ./Jupiter/configuration.nix
+       home-manager
+       homeJupiter
+     ];
   };
 
   "Nomad" = mkSystem {

@@ -12,12 +12,12 @@
     ../../common/gitm.nix
     ../../common/nvim-flake.nix
     ../../common/ags
+    ../../common/files.nix
   ];
 
   home = {
     username = "maya";
     homeDirectory = "/home/maya";
-    file.".config/foot/foot.ini".source = ../../common/foot.ini;
   };
   gtk = {
     enable = true;

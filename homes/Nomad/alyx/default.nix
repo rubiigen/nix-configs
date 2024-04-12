@@ -11,14 +11,12 @@
     ../../common/gita.nix
     ../../common/nvim-flake.nix
     ../../common/ags
+    ../../common/files.nix
   ];
 
   home = {
     username = "alyx";
     homeDirectory = "/home/alyx";
-    file.".config/lockonsleep/config.sh".source = ../../common/lock.sh;
-    file.".config/foot/foot.ini".source = ../../common/foot.ini;
-    file.".config/hypr/hyprlock.conf".source = ../../common/hyprlock.conf;
   };
 
   gtk = {

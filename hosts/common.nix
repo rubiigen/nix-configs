@@ -32,7 +32,6 @@
     dbus
     gnome3.adwaita-icon-theme
     grim
-    gtklock
     hyprlock
     libsForQt5.qt5ct
     lxqt.lxqt-policykit
