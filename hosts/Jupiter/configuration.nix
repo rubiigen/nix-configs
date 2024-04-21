@@ -26,10 +26,18 @@
     ];
   };
 
+  hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
+    open = true;
+    nvidiaSettings = true;
+  };
 
   services.xserver = {
     enable = true;
-    videoDrivers = ["amdgpu"];
+    videoDrivers = ["nvidia"];
   };
 
   environment.pathsToLink = [ "/libexec" ];
@@ -119,11 +127,10 @@
 
   boot.loader.efi.efiSysMountPoint = "/boot/";
   boot.supportedFilesystems = ["exfat" "xfs" "ntfs"];
-  boot.kernelParams = ["preempt=voluntary" "module_blacklist=nouveau" "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction"];
-  boot.initrd.kernelModules = ["vfio_pci" "vfio_iommu_type1" "vfio" "kvm-intel"];
+  boot.kernelParams = ["preempt=voluntary" "intel_iommu=on" "iommu=pt"];
+  boot.initrd.kernelModules = ["vfio" "kvm-intel"];
   boot.kernelModules = ["vfio_virqfd" "vhost-net"];
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
-  boot.blacklistedKernelModules = ["nouveau"];
 
   # enable networking
   networking.networkmanager.wifi.backend = "iwd";

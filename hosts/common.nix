@@ -136,8 +136,6 @@
     pulse.enable = true;
   };
 
-  hardware.pulseaudio.enable = false;
-
   security.polkit.enable = true;
 
   systemd = {
