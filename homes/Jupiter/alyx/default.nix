@@ -44,7 +44,7 @@
   };
   
   qt.enable = true;
-  qt.platformTheme = "gtk";
+  qt.platformTheme.name = "gtk";
 
   systemd.user.targets.tray = {
     Unit = {

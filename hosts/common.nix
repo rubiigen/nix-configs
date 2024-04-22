@@ -120,7 +120,6 @@
   networking.networkmanager.enable = true;
 
   boot.supportedFilesystems = ["exfat" "ntfs" "xfs"];
-  boot.blacklistedKernelModules = ["nouveau"];
 
   nix.gc = {
     automatic = true;

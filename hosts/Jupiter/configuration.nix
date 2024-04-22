@@ -26,18 +26,8 @@
     ];
   };
 
-  hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    powerManagement.finegrained = true;
-    open = true;
-    nvidiaSettings = true;
-  };
-
   services.xserver = {
     enable = true;
-    videoDrivers = ["nvidia"];
   };
 
   environment.pathsToLink = [ "/libexec" ];
