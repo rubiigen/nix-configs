@@ -6,6 +6,7 @@
 + Millwright - alyx's Coffee Lake Rig
 + Hyperion - alyx's Acer ConceptD (CC715)
 + Nomad - alyx's ThinkPad L13 Gen 2 (AMD)
++ Jupiter - alyx's MacPro5,1 
 
 # But, why?
 There was a couple motivators that moved me personally to nix, here are a couple
