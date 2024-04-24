@@ -110,7 +110,7 @@
     "$mod, up, movewindow, up"
     "$mod, down, movewindow, down"
     "$mod, T, fullscreen"
-    "$mod, O, exec, ddcutil --bus=8 setvcp 60 11"
+    "$mod, O, exec, ddcutil --display 2 setvcp 60 11"
     # Switch workspaces
     "$mod, 1, workspace, 1"
     "$mod, 2, workspace, 2"
