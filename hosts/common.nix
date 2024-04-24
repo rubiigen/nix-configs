@@ -16,6 +16,12 @@
     driSupport32Bit = true;
   };
 
+  nix.settings.substituters = [
+    "https://nix-community.cachix.org"
+    "https://hyprland.cachix.org"
+    "https://nixpkgs-wayland.cachix.org"
+  ];
+
   programs.dconf.enable = true;
 
   programs.fish.enable = true;
