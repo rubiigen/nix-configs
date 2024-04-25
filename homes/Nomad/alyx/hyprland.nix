@@ -51,7 +51,7 @@
 
   device = {
     name = "etps/2-elantech-touchpad";
-    enabled = true;
+    enabled = false;
   };
 
   windowrulev2 = [
