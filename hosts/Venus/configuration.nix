@@ -28,8 +28,8 @@
     ];
   };
 
-
   environment.localBinInPath = true;
+
 
 
   nixpkgs = {

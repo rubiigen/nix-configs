@@ -5,7 +5,6 @@
 
   home.packages = with pkgs; [
     amberol
-    androidStudioPackages.dev
     blender
     brightnessctl
     cinny-desktop
