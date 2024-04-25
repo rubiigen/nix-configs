@@ -2,21 +2,45 @@
   pkgs,
   lib,
   inputs,
+  osConfig,
   ...
-}: {
+}:
+
+let
+  hyprConfig = lib.mkMerge [
+    (lib.mkIf (osConfig.networking.hostName == "Alyssum") (import ./Alyssum.nix))
+    (lib.mkIf (osConfig.networking.hostName == "Venus") (import ./Venus.nix))
+  ];
+
+  touchPlugin = lib.mkMerge [
+    (lib.mkIf (osConfig.networking.hostName == "Venus") (inputs.hyprgrass.packages.${pkgs.system}.default))
+  ];
+in
+
+ {
   imports = [
     ../../common/arrpc.nix
     ../../common/packages.nix # home.packages and similar stuff
     ../../common/programs.nix # programs.<programName>.enable
-    ../../common/gita.nix
+    ../../common/gitm.nix
     ../../common/nvim-flake.nix
     ../../common/ags
     ../../common/files.nix
   ];
 
   home = {
-    username = "alyx";
-    homeDirectory = "/home/alyx";
+    username = "maya";
+    homeDirectory = "/home/maya";
+    pointerCursor = {
+      gtk.enable = true;
+      package = pkgs.gnome.adwaita-icon-theme;
+      name = "Adwaita";
+      x11 = {
+        enable = true;
+        defaultCursor = "Adwaita";
+      };
+      size = 24;
+    };
   };
 
   gtk = {
@@ -28,7 +52,16 @@
         variant = "mocha";
       };
     };
+
+    cursorTheme = {
+      package = pkgs.gnome.adwaita-icon-theme;
+      size = 24;
+      name = "Adwaita";
+    };
   };
+  
+  qt.enable = true;
+  qt.platformTheme.name = "gtk";
 
   systemd.user.targets.tray = {
     Unit = {
@@ -40,17 +73,10 @@
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
-    settings = import ./hyprland.nix;
-  };
-
-  home.pointerCursor = {
-    name = "Adwaita";
-    package = pkgs.gnome.adwaita-icon-theme;
-    size = 24;
-    x11 = {
-      enable = true;
-      defaultCursor = "Adwaita";
-    };
+    settings = hyprConfig;
+    plugins = [
+      touchPlugin
+    ];
   };
 
   services.udiskie.enable = true;

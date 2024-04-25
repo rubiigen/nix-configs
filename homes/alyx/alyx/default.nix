@@ -2,8 +2,19 @@
   pkgs,
   lib,
   inputs,
+  osConfig,
   ...
-}: {
+}:
+
+let
+  hyprConfig = lib.mkMerge [
+    (lib.mkIf (osConfig.networking.hostName == "Millwright") (import ./Millwright.nix))
+    (lib.mkIf (osConfig.networking.hostName == "Nomad") (import ./Nomad.nix))
+    (lib.mkIf (osConfig.networking.hostName == "Jupiter") (import ./Jupiter.nix))
+  ];
+in
+
+ {
   imports = [
     ../../common/arrpc.nix
     ../../common/packages.nix # home.packages and similar stuff
@@ -56,7 +67,7 @@
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
-    settings = import ./hyprland.nix;
+    settings = hyprConfig;
   };
 
   services.udiskie.enable = true;

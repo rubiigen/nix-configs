@@ -9,11 +9,9 @@
   inherit (nixpkgs) lib;
   mkSystem = lib.nixosSystem;
 
-  homeJupiter = ../homes/Jupiter;
-  homeMillwright = ../homes/Millwright;
-  homeVenus = ../homes/Venus;
-  homeAlyssum = ../homes/Alyssum;
-  homeNomad = ../homes/Nomad;
+
+  homesAlyx = ../homes/alyx;
+  homesMaya = ../homes/maya;
 
   # define a sharedArgs variable that we can simply inherit
   # across all hosts to avoid traversing the file whenever
@@ -23,6 +21,7 @@
   # specialArgs = commonArgs // { newArg = "value"; };
 
   commonArgs = {inherit self inputs;};
+
 in {
   "Millwright" = mkSystem {
     specialArgs = commonArgs;
@@ -31,7 +30,7 @@ in {
       ./Millwright/configuration.nix
       # use the nixos-module for home-manager
       home-manager
-      homeMillwright
+      homesAlyx
       lanzaboote.nixosModules.lanzaboote
     ];
   };
@@ -41,7 +40,7 @@ in {
      modules = [
        ./Jupiter/configuration.nix
        home-manager
-       homeJupiter
+       homesAlyx
      ];
   };
 
@@ -52,7 +51,7 @@ in {
       ./Nomad/configuration.nix
       # use the nixos-module for home-manager
       home-manager
-      homeNomad
+      homesAlyx
       lanzaboote.nixosModules.lanzaboote
     ];
   };
@@ -64,7 +63,7 @@ in {
       lanzaboote.nixosModules.lanzaboote
       ./Venus/configuration.nix
       home-manager
-      homeVenus
+      homesMaya
     ];
   };
 
@@ -73,7 +72,7 @@ in {
     modules = [
       ./Alyssum/configuration.nix
       home-manager
-      homeAlyssum
+      homesMaya
     ];
   };
 }
