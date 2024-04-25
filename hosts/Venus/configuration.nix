@@ -209,12 +209,6 @@
       # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
     ];
   };
-  users.users.nixvmtest = {
-    isNormalUser = true;
-    description = "nixvmtest";
-    extraGroups = ["wheel" "networkmanager" "adbusers" "libvirtd" "surface-control"];
-    initialPassword = "nixvm";
-  };
 
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.
