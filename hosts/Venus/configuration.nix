@@ -25,12 +25,31 @@
       vaapiIntel
       vaapiVdpau
       libvdpau-va-gl
+      nvidia-vaapi-driver
     ];
+  };
+
+  services.xserver = {
+    videoDrivers = ["nvidia"];
   };
 
   environment.localBinInPath = true;
 
-
+  hardware.nvidia = {
+    powerManagement.enable = true;
+    open = false;
+    nvidiaSettings = true;
+    modesetting.enable = true;
+    nvidiaPersistenced = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    prime = {
+      offload = {
+        enable= true;
+        enableOffloadCmd = true;
+      };
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:2:0:0";
+  };
 
   nixpkgs = {
     # Configure your nixpkgs instance
@@ -78,6 +97,11 @@
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
+    DXVK_FILTER_DEVICE_NAME="Intel";
+    VKD3D_FILTER_DEVICE_NAME="Intel"
+    __GLX_VENDOR_LIBRARY_NAME="mesa"
+    VDPAU_DRIVER=va_gl
+    CUDA_VISIBLE_DEVICES=""
   };
 
   services.localtimed.enable = true;
@@ -147,7 +171,7 @@
 #    preLVM = false;
   };
   boot.initrd.kernelModules = [ "uas" "usbcore" "usb_storage" "vfat" "nls_cp437" "nls_iso8859_1" ];
-  boot.blacklistedKernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" "nouveau"];
+  boot.blacklistedKernelModules = ["nouveau"];
 
   # secure boot shit
   boot.lanzaboote = {
@@ -156,21 +180,25 @@
   };
   boot.bootspec.enable = true;
 
-  boot.extraModprobeConfig = ''
-    blacklist nouveau
-    options nouveau modeset=0
+  services.udev.extraRules = ''
+    ACTION=="add|change", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{power/control}="auto"
   '';
 
-  services.udev.extraRules = ''
-  # Remove NVIDIA USB xHCI Host Controller devices, if present
-  ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330", ATTR{power/control}="auto", ATTR{remove}="1"
-  # Remove NVIDIA USB Type-C UCSI devices, if present
-  ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000", ATTR{power/control}="auto", ATTR{remove}="1"
-  # Remove NVIDIA Audio devices, if present
-  ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{power/control}="auto", ATTR{remove}="1"
-  # Remove NVIDIA VGA/3D controller devices
-  ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
+  boot.extraModprobeConfig = ''
+    blacklist i2c_nvidia_gpu
+    blacklist nouveau
+    blacklist nvidia
+    blacklist nvidia-drm
+    blacklist nvidia-modeset
+    blacklist nvidia_uvm
+    alias i2c_nvidia_gpu off
+    alias nouveau off
+    alias nvidia off
+    alias nvidia-drm off
+    alias nvidia-modeset off
+    alias nvidia_uvm off
   '';
+
   # enable networking
   networking.networkmanager = {
     wifi.backend = "iwd";
