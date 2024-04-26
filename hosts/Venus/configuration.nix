@@ -43,12 +43,13 @@
     nvidiaPersistenced = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     prime = {
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:2:0:0";
       offload = {
         enable= true;
         enableOffloadCmd = true;
       };
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:2:0:0";
+    };
   };
 
   nixpkgs = {
@@ -98,10 +99,10 @@
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     DXVK_FILTER_DEVICE_NAME="Intel";
-    VKD3D_FILTER_DEVICE_NAME="Intel"
-    __GLX_VENDOR_LIBRARY_NAME="mesa"
-    VDPAU_DRIVER=va_gl
-    CUDA_VISIBLE_DEVICES=""
+    VKD3D_FILTER_DEVICE_NAME="Intel";
+    __GLX_VENDOR_LIBRARY_NAME="mesa";
+    VDPAU_DRIVER="va_gl";
+    CUDA_VISIBLE_DEVICES="";
   };
 
   services.localtimed.enable = true;
