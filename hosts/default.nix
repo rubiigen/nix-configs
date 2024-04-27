@@ -67,6 +67,17 @@ in {
     ];
   };
 
+  "Helium" = mkSystem {
+    specialArgs = commonArgs;
+    modules = [
+      nixos-hardware.nixosModules.microsoft-surface-common
+      lanzaboote.nixosModules.lanzaboote
+      ./Helium/configuration.nix
+      home-manager
+      homesMaya
+    ];
+  };
+
   "Alyssum" = mkSystem {
     specialArgs = commonArgs;
     modules = [

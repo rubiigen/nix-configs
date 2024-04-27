@@ -10,6 +10,7 @@ let
   hyprConfig = lib.mkMerge [
     (lib.mkIf (osConfig.networking.hostName == "Alyssum") (import ./Alyssum.nix))
     (lib.mkIf (osConfig.networking.hostName == "Venus") (import ./Venus.nix))
+    (lib.mkIf (osConfig.networking.hostName == "Helium") (import ./Helium.nix))
   ];
 
   touchPlugin = lib.mkMerge [

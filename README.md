@@ -7,7 +7,7 @@
 + Hyperion - alyx's Acer ConceptD (CC715)
 + Nomad - alyx's ThinkPad L13 Gen 2 (AMD)
 + Jupiter - alyx's MacPro5,1 
-
++ Helium - maya's Surface Laptop 2
 # But, why?
 There was a couple motivators that moved me personally to nix, here are a couple
 + Firstly, NVIDIA. I was fed up of having to go through the effort to fix nvidia every time i reinstalled my OS
