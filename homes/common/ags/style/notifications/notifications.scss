@@ -2,19 +2,23 @@
 	@include window;
 	margin: 5px 5px 5px 12px;
 	min-width: 25rem;
+
 	background-color: $primary;
+	color: $onPrimary;
 
-	.normal {
-		border: 1px solid $blue;
+	// low priority
+	&.low {
+		border: 1.5px solid $lavender;
 	}
 
-	.critical {
-		border: 1px solid red;
+	// medium priority
+	&.normal {
+		border: 1.5px solid $blue;
 	}
 
-	&:hover {
-		border: 2px solid $lavender;
-		background-color: darken($primary, 3%);
+	// critical priority
+	&.critical {
+		border: 1.5px solid $red;
 	}
 }
 
@@ -41,7 +45,7 @@
 .notification .actions .action-button {
 	@include window;
 	@include animated;
-	padding: 0.5rem 0;
+	padding: 4px 0;
 
 	&:hover {
 		background: $onSurfaceVariant;
@@ -49,15 +53,17 @@
 }
 
 .notification .text {
-	margin: 0.5rem;
+	margin: 6px 4px;
 
 	.title {
-		margin-bottom: 0.2rem;
-		font-weight: 500;
+		margin: 4px 6px;
+		color: $onPrimary;
+		font-weight: 900;
 	}
 
 	.body {
-		color: $onSurface;
-		font-weight: 500;
+		margin: 4px 6px;
+		color: $onPrimary;
+		font-weight: 600;
 	}
 }

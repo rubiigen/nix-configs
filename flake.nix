@@ -68,8 +68,8 @@
       
     hyprpicker.url = "github:hyprwm/hyprpicker";
 
-    neovim-flake = {
-      url = "github:notashelf/neovim-flake";
+    nvf = {
+      url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

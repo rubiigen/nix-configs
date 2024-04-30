@@ -26,4 +26,5 @@ export const BluetoothWidget = () =>
         child: BluetoothModule(),
         visible: Bluetooth.connectedDevices.length > 0,
         onClicked: () => Utils.exec("blueman-manager"),
+
     });

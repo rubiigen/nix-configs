@@ -1,6 +1,6 @@
 {inputs, ...}: { 
  # i apologise for how much of a fucking mess this file is lmfao -maya
-  imports = [ inputs.neovim-flake.homeManagerModules.default ];
+  imports = [ inputs.nvf.homeManagerModules.default ];
   # enable programs
   programs = {
     neovim-flake = {
@@ -26,6 +26,10 @@
             enableLSP = true;
             enableTreesitter = true;
           };
+          
+          startPlugins = [
+            "plenary-nvim"
+          ];
 
           autopairs.enable = true;
 

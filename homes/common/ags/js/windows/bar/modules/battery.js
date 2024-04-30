@@ -1,18 +1,35 @@
 import { Widget, Battery } from "../../../imports.js";
-import { getBatteryTime, getBatteryIcon, getBatteryTooltip } from "../../../utils/battery.js";
-const { Box, Label } = Widget;
+import {
+    getBatteryPercentage,
+    getBatteryTooltip,
+    getBatteryIcon,
+} from "../../../utils/battery.js";
+const { Button, Box, Label, Revealer } = Widget;
 
 const BatIcon = () =>
-    Label({ className: "batIcon" })
+    Label({ className: "battery" })
         // NOTE: label needs to be used instead of icon here
         .bind("label", Battery, "percent", getBatteryIcon)
         .bind("label", Battery, "charging", getBatteryIcon)
-        .bind("tooltip-text", Battery, "percent", getBatteryTooltip); // TODO: add battery percentage in here
+        .bind("tooltip-text", Battery, "percent", getBatteryTooltip);
+
+const BatStatus = () =>
+    Revealer({
+        transition: "slide_down",
+        transition_duration: 200,
+        child: Label().bind("label", Battery, "percent", getBatteryPercentage),
+    });
 
 export const BatteryWidget = () =>
-    Box({
-        className: "battery",
-        cursor: "pointer",
-        child: BatIcon(),
-        visible: Battery.bind("available"),
+    Button({
+        onPrimaryClick: (self) => {
+            self.child.children[1].revealChild =
+                !self.child.children[1].revealChild;
+        },
+        child: Box({
+            cursor: "pointer",
+            vertical: true,
+            children: [BatIcon(), BatStatus()],
+            visible: Battery.bind("available"),
+        }),
     });

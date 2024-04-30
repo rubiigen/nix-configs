@@ -17,6 +17,6 @@ export const AudioWidget = () => {
         cursor: "pointer",
         visible: true,
         child: AudioIcon(),
-        onClicked: () => Utils.subprocess("pavucontrol"),
+        onClicked: () => launchApp("pavucontrol"),
     });
 };

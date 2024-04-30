@@ -8,14 +8,14 @@ import { Tray } from "./modules/tray.js";
 import { BatteryWidget } from "./modules/battery.js";
 import { Clock } from "./modules/clock.js";
 import { PowerMenu } from "./modules/power.js";
-// import { Swallow } from "./modules/swallow.js";
+import { Swallow } from "./modules/swallow.js";
 import { BluetoothWidget } from "./modules/bluetooth.js";
 import { AudioWidget } from "./modules/audio.js";
 import { NetworkWidget } from "./modules/network.js";
 import { SystemUsage } from "./modules/system.js";
 import { Weather } from "./modules/weather.js";
 import { nwggrid } from "./modules/nwg.js";
-import { Keyboard } from "./modules/keyboard.js";
+import { Keyboard} from "./modules/keyboard.js";
 
 const Top = () =>
     Box({
@@ -45,18 +45,18 @@ const Bottom = () =>
                 children: [
                     BluetoothWidget(),
                     AudioWidget(),
+                    Swallow(),
                     BatteryWidget(),
-//                    Swallow(),
                     NetworkWidget(),
-		    nwggrid(),
-		    Keyboard(),
+                    nwggrid(),
+                    Keyboard(),
                 ],
             }),
             Clock(),
             PowerMenu(),
         ],
     });
-
+;
 export const Bar = ({ monitor } = {}) =>
     Window({
         name: "bar",
@@ -64,7 +64,7 @@ export const Bar = ({ monitor } = {}) =>
         exclusivity: "exclusive",
         layer: "top",
         margins: [8, 0, 8, 8],
-        monitor: 0,
+        monitor,
         child: CenterBox({
             className: "bar",
             vertical: true,
