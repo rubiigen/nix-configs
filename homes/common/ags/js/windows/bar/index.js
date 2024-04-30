@@ -8,7 +8,7 @@ import { Tray } from "./modules/tray.js";
 import { BatteryWidget } from "./modules/battery.js";
 import { Clock } from "./modules/clock.js";
 import { PowerMenu } from "./modules/power.js";
-import { Swallow } from "./modules/swallow.js";
+// import { Swallow } from "./modules/swallow.js";
 import { BluetoothWidget } from "./modules/bluetooth.js";
 import { AudioWidget } from "./modules/audio.js";
 import { NetworkWidget } from "./modules/network.js";
@@ -46,7 +46,7 @@ const Bottom = () =>
                     BluetoothWidget(),
                     AudioWidget(),
                     BatteryWidget(),
-                    Swallow(),
+//                    Swallow(),
                     NetworkWidget(),
 		    nwggrid(),
 		    Keyboard(),
