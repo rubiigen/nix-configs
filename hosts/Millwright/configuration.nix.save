@@ -100,21 +100,21 @@
     extraConfig = ''
       user="alyx"
     '';
-    qemu.ovmf.enable = true;
-    qemu.package = pkgs.qemu;
+    qemu.Qovmf.enable = true;
     qemu.ovmf.packages = [
-      pkgs.OVMF.fd
+      pkgs.OVMFFull.fd
       pkgs.pkgsCross.aarch64-multiplatform.OVMF.fd
     ];
+    qemu.package = pkgs.qemu;
     qemu.runAsRoot = true;
     qemu.swtpm.enable = true;
   };
 
+  virtualisation.spiceUSBRedirection.enable = true;
+
   boot.binfmt.emulatedSystems = [
     "aarch64-linux"
   ];
-
-  virtualisation.spiceUSBRedirection.enable = true;
 
   boot.bootspec.enable = true;
   boot.loader.systemd-boot.enable = lib.mkForce false;

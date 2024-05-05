@@ -6,7 +6,7 @@
     ...
   }: let
     forAllSystems = nixpkgs.lib.genAttrs [
-      #"aarch64-linux"
+      "aarch64-linux"
       "x86_64-linux"
       #"i686-linux"
       #"aarch64-darwin"
@@ -67,6 +67,10 @@
     };
       
     hyprpicker.url = "github:hyprwm/hyprpicker";
+
+    mobile-nixos = {
+      url = "github:nixos/mobile-nixos";
+    };
 
     nvf = {
       url = "github:notashelf/nvf";

@@ -35,6 +35,12 @@ in {
     ];
   };
 
+  "Millwright-Traveller" = mkSystem {
+     specialArgs = commonArgs;
+     modules = [
+       ./Millwright-Traveller/configuration.nix
+     ];
+
   "Jupiter" = mkSystem {
      specialArgs = commonArgs;
      modules = [
