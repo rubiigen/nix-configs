@@ -60,17 +60,14 @@
 
     ags.url = "github:Aylur/ags";
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    
     hyprgrass = {
       url = "github:horriblename/hyprgrass";
       inputs.hyprland.follows = "hyprland";
     };
       
     hyprpicker.url = "github:hyprwm/hyprpicker";
-
-    mobile-nixos = {
-      url = "github:nixos/mobile-nixos";
-    };
 
     nvf = {
       url = "github:notashelf/nvf";
