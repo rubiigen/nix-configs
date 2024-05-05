@@ -18,6 +18,8 @@
       ];
     };
 
+    networking.hostName = "Millwright-Traveller";
+
     nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
     
     services.xserver.desktopManager.phosh = {
