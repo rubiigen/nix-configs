@@ -6,14 +6,16 @@
   ];
 
   monitor = [
-    "HDMI-A-1,1600x1200,1680x0,1,transform,3"
-    "DVI-D-1,1680x1050,0x0,1"
-    "DP-1,1920x1080@239.760,2880x520,1"
+    #"DP-2,1920x1080@165.003,0x0,1"
+    "DVI-D-1,1680x1050,1920x39,1"
+    "DP-3,1600x1200,3600x33,1,transform,3"
+    "DP-1,1920x1080@239.760,4800x447,1"
   ];
 
   workspace = [
-    "1, monitor:HDMI-A-1"
-    "2, monitor:DVI-D-1"
+    #"1, monitor:DP-2"
+    "1, monitor:DVI-D-1"
+    "2, monitor:DP-3"
     "3, monitor:DP-1"
   ];
 
