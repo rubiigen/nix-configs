@@ -71,6 +71,7 @@
     alvr
     ddcutil
     i2c-tools
+    lact
     (pkgs.python3.withPackages (ps: with ps; [tkinter]))
     sidequest
     tpm2-tss
@@ -86,6 +87,12 @@
   services.ddccontrol.enable = true;
   services.logind = {
     extraConfig = "HandlePowerKey=suspend";
+  };
+
+  services.sunshine = {
+    enable = true;
+    openFirewall = true;
+    autoStart = true;
   };
 
   console.useXkbConfig = true;
@@ -113,6 +120,16 @@
   boot.binfmt.emulatedSystems = [
     "aarch64-linux"
   ];
+
+  systemd.services.lactd = {
+   after = [ "multi-user.target" ];
+   description = "AMDGPU Control Daemon";
+   wantedBy = [ "multi-user.target" ];
+   serviceConfig = {
+     ExecStart = ''${pkgs.lact}/bin/lact daemon'';
+     Nice = "-10";
+   };
+  };
 
   virtualisation.spiceUSBRedirection.enable = true;
 
