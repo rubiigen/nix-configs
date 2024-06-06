@@ -14,10 +14,10 @@
     driSupport32Bit = true;
     extraPackages = with pkgs; [
       amdvlk
-      libvdpau-va-gl
-      mesa
-      vaapiVdpau
       vulkan-validation-layers
+      libvdpau-va-gl
+      vaapiVdpau
+      mesa
       rocmPackages.clr.icd
     ];
     extraPackages32 = with pkgs; [
@@ -26,9 +26,10 @@
     ];
   };
 
+
   services.xserver = {
     enable = true;
-    videoDrivers = ["nvidia"];
+    videoDrivers = ["amdgpu"];
   };
 
   environment.pathsToLink = [ "/libexec" ];
@@ -70,7 +71,6 @@
     alvr
     ddcutil
     i2c-tools
-    lact
     (pkgs.python3.withPackages (ps: with ps; [tkinter]))
     sidequest
     tpm2-tss
@@ -78,10 +78,7 @@
 
   environment.variables = {
     ROC_ENABLE_PRE_VEGA = "1";
-    NIXOS_OZONE_WL = "1";
   };
-
-  
 
   hardware.i2c.enable = true;
   hardware.keyboard.qmk.enable = true;
@@ -103,31 +100,21 @@
     extraConfig = ''
       user="alyx"
     '';
-    qemu.ovmf.enable = true;
-    qemu.package = pkgs.qemu;
+    qemu.Qovmf.enable = true;
     qemu.ovmf.packages = [
-      pkgs.OVMF.fd
+      pkgs.OVMFFull.fd
       pkgs.pkgsCross.aarch64-multiplatform.OVMF.fd
     ];
+    qemu.package = pkgs.qemu;
     qemu.runAsRoot = true;
     qemu.swtpm.enable = true;
   };
 
+  virtualisation.spiceUSBRedirection.enable = true;
+
   boot.binfmt.emulatedSystems = [
     "aarch64-linux"
   ];
-
-  systemd.services.lactd = {
-   after = [ "multi-user.target" ];
-   description = "AMDGPU Control Daemon";
-   wantedBy = [ "multi-user.target" ];
-   serviceConfig = {
-     ExecStart = ''${pkgs.lact}/bin/lact daemon'';
-     Nice = "-10";
-   };
-  };
-
-  virtualisation.spiceUSBRedirection.enable = true;
 
   boot.bootspec.enable = true;
   boot.loader.systemd-boot.enable = lib.mkForce false;
@@ -148,12 +135,13 @@
 
   boot.loader.efi.efiSysMountPoint = "/boot/";
   boot.supportedFilesystems = ["exfat" "xfs" "ntfs"];
-  boot.kernelParams = [ "preempt=voluntary" "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction"];
+  boot.kernelParams = ["preempt=voluntary" "module_blacklist=nouveau" "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction"];
   boot.initrd.kernelModules = ["vfio_pci" "vfio_iommu_type1" "vfio" "kvm-intel"];
   boot.kernelModules = ["vfio_virqfd" "vhost-net"];
-  #boot.extraModprobeConfig = "options vfio-pci ids=1b21:2142,10de:1c03,10de:10f1";
+  boot.extraModprobeConfig = "options vfio-pci ids=1b21:2142,10de:1c03,10de:10f1";
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
-  
+  boot.blacklistedKernelModules = ["nouveau"];
+
   # enable networking
   networking.networkmanager.wifi.backend = "iwd";
 

@@ -7,19 +7,18 @@
 
   monitor = [
     "DP-2,1920x1080@239.760,0x0,1"
-    #"DVI-D-1,1680x1050,1920x39,1"
-    #"DP-3,1600x1200,3600x33,1,transform,3"
-    "DP-1,2560x1080@75,1920x125,1"
+    "DP-4,2560x1080@86,1920x0,1"
   ];
 
   workspace = [
-    #"1, monitor:DP-2"
-    "1, monitor:DVI-D-1"
-    "2, monitor:DP-3"
-    "3, monitor:DP-1"
+    "1, monitor:DP-2"
+    "2, monitor:DP-4"
   ];
 
-  "env" = "XCURSOR_SIZE,40";
+  "env" = [
+    "XCURSOR_SIZE,40"
+  ];
+
   "$mod" = "SUPER";
   input = {
     kb_layout = "us";
@@ -27,6 +26,12 @@
     touchpad.natural_scroll = "no";
     sensitivity = 1;
     accel_profile = "flat";
+  };
+
+  device = {
+    name = "at-translated-set-2-keyboard";
+    kb_layout="gb";
+    kb_variant = "colemak";
   };
 
   general = {
