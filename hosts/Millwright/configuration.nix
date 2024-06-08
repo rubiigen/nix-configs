@@ -13,17 +13,25 @@
   hardware.opengl = {
     driSupport32Bit = true;
     extraPackages = with pkgs; [
-      amdvlk
       libvdpau-va-gl
       mesa
+      nvidia-vaapi-driver
       vaapiVdpau
       vulkan-validation-layers
-      rocmPackages.clr.icd
     ];
     extraPackages32 = with pkgs; [
-      driversi686Linux.amdvlk
       driversi686Linux.mesa
+      pkgsi686Linux.nvidia-vaapi-driver
     ];
+  };
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    nvidiaPersistenced = true;
+    powerManagement.enable = true;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 
   services.xserver = {
@@ -68,17 +76,29 @@
 
   environment.systemPackages = with pkgs; [
     alvr
+    clinfo
     ddcutil
+    gwe
     i2c-tools
     lact
+    nvtopPackages.nvidia
     (pkgs.python3.withPackages (ps: with ps; [tkinter]))
     sidequest
     tpm2-tss
+    vulkan-loader
+    vulkan-tools
   ];
 
   environment.variables = {
     ROC_ENABLE_PRE_VEGA = "1";
     NIXOS_OZONE_WL = "1";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    LIBVA_DRIVER_NAME = "nvidia";
+    XDG_SESSION_TYPE = "wayland";
+    __GL_THREADED_OPTIMIZATION = "1";
+    __GL_SHADER_CACHE = "1";
+    NVD_BACKEND = "direct";
   };
 
   
@@ -148,12 +168,10 @@
 
   boot.loader.efi.efiSysMountPoint = "/boot/";
   boot.supportedFilesystems = ["exfat" "xfs" "ntfs"];
-  boot.kernelParams = [ "preempt=voluntary" "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction"];
-  boot.initrd.kernelModules = ["vfio_pci" "vfio_iommu_type1" "vfio" "kvm-intel"];
-  boot.kernelModules = ["vfio_virqfd" "vhost-net"];
-  #boot.extraModprobeConfig = "options vfio-pci ids=1b21:2142,10de:1c03,10de:10f1";
+  boot.extraModulePackages = [config.boot.kernelPackages.nvidia_x11_beta];
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
-  
+  boot.blacklistedKernelModules = ["nouveau"];  
+
   # enable networking
   networking.networkmanager.wifi.backend = "iwd";
 
