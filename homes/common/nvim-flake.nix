@@ -19,8 +19,8 @@
 	    nix.enable = true;
             nix.lsp.enable = true;
 	    ts.enable = true;
-#	    python.enable = true;
-#            python.lsp.enable = true;
+	    python.enable = true;
+            python.lsp.enable = true;
 	    html.enable = true;
             enableFormat = true;
             enableLSP = true;
