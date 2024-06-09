@@ -66,12 +66,11 @@
       url = "github:horriblename/hyprgrass";
       inputs.hyprland.follows = "hyprland";
     };
-      
+  
     hyprpicker.url = "github:hyprwm/hyprpicker";
 
     nvf = {
       url = "github:notashelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }

@@ -38,6 +38,8 @@
     xwayland.enable = true;
   };
 
+  programs.hyprlock.enable = true;
+
   environment.systemPackages = with pkgs; [
     bluez-alsa
     bluez
@@ -45,7 +47,6 @@
     dbus
     gnome3.adwaita-icon-theme
     grim
-    hyprlock
     libsForQt5.qt5ct
     lxqt.lxqt-policykit
     mesa

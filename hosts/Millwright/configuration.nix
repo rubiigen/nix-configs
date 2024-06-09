@@ -13,13 +13,16 @@
   hardware.opengl = {
     driSupport32Bit = true;
     extraPackages = with pkgs; [
+      amdvlk
       libvdpau-va-gl
       mesa
       nvidia-vaapi-driver
       vaapiVdpau
       vulkan-validation-layers
+      rocmPackages.clr.icd
     ];
     extraPackages32 = with pkgs; [
+      driversi686Linux.amdvlk
       driversi686Linux.mesa
       pkgsi686Linux.nvidia-vaapi-driver
     ];
@@ -74,7 +77,34 @@
     ];
   };
 
-  environment.systemPackages = with pkgs; [
+  #programs.hyprlock = {
+  #  enable = true;
+  #  package = inputs.hyprlock.packages.${pkgs.system}.default.overrideAttrs {
+  #     patchPhase = ''
+  #        substituteInPlace src/core/hyprlock.cpp \
+  #        --replace "5000" "16"
+  #     '';
+  #  };
+  #};
+
+  programs.hyprlock = {
+    enable = true;
+    package = pkgs.hyprlock.overrideAttrs (old: {
+      version = "git";
+      src = pkgs.fetchFromGitHub {
+        owner = "hyprwm";
+        repo = "hyprlock";
+        rev = "2bce52f";
+        sha256 = "36qa6MOhCBd39YPC0FgapwGRHZXjstw8BQuKdFzwQ4k=";
+      };
+      patchPhase = ''
+        substituteInPlace src/core/hyprlock.cpp \
+        --replace "5000" "16"
+      '';
+      });
+  };
+
+ environment.systemPackages = with pkgs; [
     alvr
     clinfo
     ddcutil
@@ -171,6 +201,9 @@
   boot.extraModulePackages = [config.boot.kernelPackages.nvidia_x11_beta];
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   boot.blacklistedKernelModules = ["nouveau"];  
+  boot.kernelParams = [ "preempt=voluntary" "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction"];
+  boot.initrd.kernelModules = ["vfio_pci" "vfio_iommu_type1" "vfio" "kvm-intel"];
+  boot.kernelModules = ["vfio_virqfd" "vhost-net"];  
 
   # enable networking
   networking.networkmanager.wifi.backend = "iwd";
