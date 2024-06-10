@@ -11,7 +11,7 @@
   ];
 
   workspace = [
-    "1, monitor:DP-2"
+    "1, monitor:DP-1"
     #"2, monitor:DP-4"
   ];
 
