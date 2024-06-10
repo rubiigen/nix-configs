@@ -1,7 +1,7 @@
 {
   exec-once = [
     "swaybg --image ~/.config/nixos/wallpapers/christmas.png --mode fill"
-    "dbus-update-activation-environmnt --systemd DISPLAY WAYLAND-DISPLAY"
+    "dbus-update-activation-environment --systemd DISPLAY WAYLAND-DISPLAY"
     "bash ~/.config/lockonsleep/config.sh"
   ];
 

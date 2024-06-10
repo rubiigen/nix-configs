@@ -67,6 +67,11 @@
     wvkbd
   ];
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-hyprland];
+  };
+
   environment.variables = {
     EDITOR = "nvim";
   };
