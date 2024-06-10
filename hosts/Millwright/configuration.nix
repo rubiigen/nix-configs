@@ -77,14 +77,31 @@
     ];
   };
 
+  #programs.hyprlock = {
+  #  enable = true;
+  #  package = inputs.hyprlock.packages.${pkgs.system}.default.overrideAttrs {
+  #     patchPhase = ''
+  #        substituteInPlace src/core/hyprlock.cpp \
+  #        --replace "5000" "16"
+  #     '';
+  #  };
+  #};
+
   programs.hyprlock = {
     enable = true;
-    package = inputs.hyprlock.packages.${pkgs.system}.default.overrideAttrs {
-       patchPhase = ''
-          substituteInPlace src/core/hyprlock.cpp \
-          --replace "5000" "16"
-       '';
-    };
+    package = pkgs.hyprlock.overrideAttrs (old: {
+      version = "git";
+      src = pkgs.fetchFromGitHub {
+        owner = "hyprwm";
+        repo = "hyprlock";
+        rev = "2bce52f";
+        sha256 = "36qa6MOhCBd39YPC0FgapwGRHZXjstw8BQuKdFzwQ4k=";
+      };
+      patchPhase = ''
+        substituteInPlace src/core/hyprlock.cpp \
+        --replace "5000" "16"
+      '';
+      });
   };
 
  environment.systemPackages = with pkgs; [
@@ -102,8 +119,9 @@
     vulkan-tools
   ];
 
-  environment.sessionVariables = {
+  environment.variables = {
     ROC_ENABLE_PRE_VEGA = "1";
+    NIXOS_OZONE_WL = "1";
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     LIBVA_DRIVER_NAME = "nvidia";
