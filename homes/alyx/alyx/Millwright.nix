@@ -6,18 +6,17 @@
   ];
 
   monitor = [
-    "DP-2,1920x1080@279.857,0x0,1"
-    #"DP-3,2560x1080@86,1920x0,1"
-    "Unknown-1,disable"
+    "DP-2,1920x1080@239.760,0x0,1"
+    "DP-4,2560x1080@86,1920x0,1"
   ];
 
   workspace = [
     "1, monitor:DP-2"
-    #"2, monitor:DP-3"
+    "2, monitor:DP-4"
   ];
 
   "env" = [
-    "HYPRCURSOR_SIZE,40"
+    "XCURSOR_SIZE,40"
   ];
 
   "$mod" = "SUPER";
