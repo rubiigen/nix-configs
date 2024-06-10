@@ -1,4 +1,4 @@
-{
+r{
   exec-once = [
     "swaybg --image ~/.config/nixos/wallpapers/christmas.png --mode fill"
     "dbus-update-activation-environmnt --systemd DISPLAY WAYLAND-DISPLAY"
@@ -6,13 +6,13 @@
   ];
 
   monitor = [
-    "DP-2,1920x1080@239.760,0x0,1"
-    "DP-4,2560x1080@86,1920x0,1"
+    "DP-1,1920x1080@239.760,0x0,1"
+    #"DP-4,2560x1080@86,1920x0,1"
   ];
 
   workspace = [
     "1, monitor:DP-2"
-    "2, monitor:DP-4"
+    #"2, monitor:DP-4"
   ];
 
   "env" = [
