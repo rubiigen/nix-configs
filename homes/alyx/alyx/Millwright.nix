@@ -1,4 +1,4 @@
-r{
+{
   exec-once = [
     "swaybg --image ~/.config/nixos/wallpapers/christmas.png --mode fill"
     "dbus-update-activation-environmnt --systemd DISPLAY WAYLAND-DISPLAY"
