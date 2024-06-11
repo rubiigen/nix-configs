@@ -124,6 +124,11 @@
    };
   };
 
+  services.input-remapper = {
+    enable = true;
+    enableUdevRules = true;
+  };
+
   virtualisation.spiceUSBRedirection.enable = true;
 
   boot.bootspec.enable = true;
