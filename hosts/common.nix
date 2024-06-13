@@ -56,7 +56,6 @@
     slurp
     swaybg
     swayidle
-    swaynotificationcenter
     swayosd
     temurin-bin-18
     temurin-jre-bin-8
