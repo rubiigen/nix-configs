@@ -10,8 +10,7 @@
   mkSystem = lib.nixosSystem;
 
 
-  homesAlyx = ../homes/alyx;
-  homesMaya = ../homes/maya;
+  homes = ../homes;
 
   # define a sharedArgs variable that we can simply inherit
   # across all hosts to avoid traversing the file whenever
@@ -30,7 +29,7 @@ in {
       ./Millwright/configuration.nix
       # use the nixos-module for home-manager
       home-manager
-      homesAlyx
+      homes
       lanzaboote.nixosModules.lanzaboote
     ];
   };
@@ -40,7 +39,7 @@ in {
      modules = [
        ./Jupiter/configuration.nix
        home-manager
-       homesAlyx
+       homes
      ];
   };
 
@@ -51,39 +50,8 @@ in {
       ./Nomad/configuration.nix
       # use the nixos-module for home-manager
       home-manager
-      homesAlyx
+      homes
       lanzaboote.nixosModules.lanzaboote
-    ];
-  };
-
-  "Venus" = mkSystem {
-    specialArgs = commonArgs;
-    modules = [
-      nixos-hardware.nixosModules.microsoft-surface-common
-      lanzaboote.nixosModules.lanzaboote
-      ./Venus/configuration.nix
-      home-manager
-      homesMaya
-    ];
-  };
-
-  "Helium" = mkSystem {
-    specialArgs = commonArgs;
-    modules = [
-      nixos-hardware.nixosModules.microsoft-surface-common
-      lanzaboote.nixosModules.lanzaboote
-      ./Helium/configuration.nix
-      home-manager
-      homesMaya
-    ];
-  };
-
-  "Alyssum" = mkSystem {
-    specialArgs = commonArgs;
-    modules = [
-      ./Alyssum/configuration.nix
-      home-manager
-      homesMaya
     ];
   };
 }
