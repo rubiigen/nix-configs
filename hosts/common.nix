@@ -41,14 +41,13 @@
     cinnamon.nemo
     dbus
     gnome3.adwaita-icon-theme
-    grim
+    grimblast
     libsForQt5.qt5ct
     lxqt.lxqt-policykit
     mesa
     pavucontrol
     playerctl
     pulseaudio
-    slurp
     swaybg
     swayidle
     swayosd
