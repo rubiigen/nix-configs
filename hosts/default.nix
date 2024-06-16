@@ -41,6 +41,7 @@ in {
        ./Jupiter/configuration.nix
        home-manager
        homes
+       nur.nixosModules.nur
      ];
   };
 
