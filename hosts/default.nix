@@ -53,6 +53,7 @@ in {
       home-manager
       homes
       lanzaboote.nixosModules.lanzaboote
+      nur.nixosModules.nur
     ];
   };
 }
