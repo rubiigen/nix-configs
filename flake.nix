@@ -71,6 +71,8 @@
   
     hyprpicker.url = "github:hyprwm/hyprpicker";
 
+    nur.url = "github:nix-community/NUR";
+
     nvf = {
       url = "github:notashelf/nvf";
     };

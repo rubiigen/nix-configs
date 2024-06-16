@@ -80,6 +80,7 @@
     source-han-sans
     source-han-sans-japanese
     source-han-serif-japanese
+    config.nur.repos.ilya-fedin.exo2
   ];
 
   fonts.fontconfig.defaultFonts = {
