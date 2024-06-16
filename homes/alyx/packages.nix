@@ -45,5 +45,6 @@
     wireguard-tools
     wl-clipboard
     wofi
+    xfce.thunar
   ];
 }
