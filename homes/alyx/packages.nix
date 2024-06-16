@@ -13,7 +13,7 @@
     element-desktop
     fastfetch
     firefox-devedition
-    floorp
+    floorp-unwrapped
     gomuks
     gparted
     gzdoom
