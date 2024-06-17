@@ -53,9 +53,6 @@
     home-manager.url = "github:nix-community/home-manager/";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # nixos-hardware
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
     lanzaboote.url = "github:nix-community/lanzaboote";
 
     ags.url = "github:Aylur/ags";
