@@ -8,6 +8,7 @@
     blender
     brightnessctl
     cinny-desktop
+    clonehero
     distrobox
     easyeffects
     element-desktop
