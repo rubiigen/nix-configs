@@ -9,7 +9,7 @@
     "eDP-1,1920x1080,0x0,1"
   ];
 
-  "env" = "XCURSOR_SIZE,24";
+  "env" = "XCURSOR_SIZE,40";
   "$mod" = "SUPER";
   input = {
     kb_layout = "gb";
