@@ -32,6 +32,7 @@ No. God no. While I kid, the documentation is a bit lacklustre so do go in with 
 + notashelf - otherwise known as raf - got me into nixos in the first place - is also the person i stole the really nice ags conf from
 + floppydisk - shamelessly stole stuff from his config on more than one occasion
 + multiple others I forget
++ aegiscarr - halftone-hot-pink.png && halftone-purple.png @ wallpapers/
 
 # Thanks for taking the time to read this dumpster fire!
 

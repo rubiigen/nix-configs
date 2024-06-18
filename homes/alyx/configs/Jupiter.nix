@@ -1,6 +1,6 @@
 {
   exec-once = [
-    "swaybg --image ~/.config/nixos/wallpapers/ski.jpg --mode fill"
+    "swaybg --image ~/.config/nixos/wallpapers/halftone-purple.png --mode fill"
     "dbus-update-activation-environment --systemd DISPLAY WAYLAND-DISPLAY"
     "bash ~/.config/lockonsleep/config.sh"
     "hyprctl dispatch workspace 1"
