@@ -10,7 +10,7 @@ There was a couple motivators that moved me personally to nix, here are a couple
 + Firstly, NVIDIA. I was fed up of having to go through the effort to fix nvidia every time i reinstalled my OS
 + Secondly, talk of reinstalling... I reinstall my OS often and installing drivers, etc got boring fast.
 + Furthermore, the configuration is genuinely quicker to do in nixos because its just a programming language essentially
-+ Lastly, I know how to set up qemu-kvm w/ gpu passthrough in nixos, can't say that about most other distros
++ Lastly, I know how to set up qemu-kvm w/ gpu passthrough in nixos, can't say that about most other distros (not as big a thing as it used to be, for now i run my OS in a PVE container)
 
 # Thats all well and good, what is in this config?
 
