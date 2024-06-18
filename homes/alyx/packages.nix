@@ -18,6 +18,7 @@
     gparted
     gzdoom
     hyfetch
+    jetbrains.idea-ultimate
     krita
     libreoffice
     libsForQt5.ark
