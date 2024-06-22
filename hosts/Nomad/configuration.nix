@@ -13,7 +13,7 @@
     ../common.nix
   ];
   
-  hardware.opengl.extraPackages = with pkgs; [
+  hardware.graphics.extraPackages = with pkgs; [
     vulkan-validation-layers
     vaapiVdpau
     libvdpau-va-gl
