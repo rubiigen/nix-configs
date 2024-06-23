@@ -1,83 +1,85 @@
 {
   inputs,
+  osConfig,
   config,
   pkgs,
   lib,
   ...
 }: let
-  inherit (lib.fileset) fileFilter unions difference toSource;
-  
-  # dependencies required for the ags runtime to function properly
-  # some of those dependencies are used internally for setting variables
-  # or basic functionality where built-in services do not suffice
-  coreDeps = with pkgs; [
-    inputs.hyprpicker.packages.${pkgs.system}.default
-    inputs.hyprland.packages.${pkgs.system}.default
-    config.programs.foot.package
+  inherit (builtins) elem path;
+  inherit (lib.modules) mkIf;
+  inherit (import ./bin {inherit pkgs lib;}) ags-open-window ags-move-window ags-hyprctl-swallow;
 
-    # basic functionality
-    inotify-tools
-    gtk3
+  agsPkg = inputs.ags.packages.${pkgs.stdenv.system}.ags;
 
-    # script and service helpers
-    bash
-    brightnessctl
-    coreutils
-    gawk
-    gvfs
-    imagemagick
-    libnotify
-    procps
-    ripgrep
-    slurp
-    sysstat
-
-    # for weather widget
-    (python3.withPackages (ps: [ps.requests]))
-  ];
-
-  # applications that are not necessarily required to compile ags
-  # but are used by the widgets to launch certain applications
-  widgetDeps = with pkgs; [
-    pavucontrol
-    networkmanagerapplet
-    blueman
-    wvkbd
-    nwg-launchers
-  ];
-
-  dependencies = coreDeps ++ widgetDeps;
-  filterNixFiles = fileFilter (file: lib.hasSuffix ".nix" file.name) ./.;
-
-  baseSrc = unions [
-    # runtime executables
-    ./bin
-
-    # ags widgets and utilities
-    ./js
-    ./config.js
-
-    # compiled stylesheet
-    # should be generated using the below command
-    # `sassc -t compressed style/main.scss style.css`
-    ./style.css
-  ];
-
-  filter = difference baseSrc filterNixFiles;
-
-  cfg = config.programs.ags;
 in {
-  imports = [inputs.ags.homeManagerModules.default];
   config = {
-    programs.ags = {
-      enable = true;
-      configDir = toSource {
-        root = ./.;
-        fileset = filter;
-      };
-    };
+    home.packages = [agsPkg];
+    systemd.user.services.ags = let
+      # dependencies required for the ags runtime to function properly
+      # some of those dependencies are used internally for setting variables
+      # or basic functionality where built-in services do not suffice
+      coreDeps = with pkgs; [
+        inputs.hyprpicker.packages.${pkgs.stdenv.system}.default
+        inputs.hyprland.packages.${pkgs.stdenv.system}.default
+        config.programs.foot.package
 
-    systemd.user.services.ags = {
+        # basic functionality
+        inotify-tools
+        gtk3
+
+        # script and service helpers
+        bash
+        brightnessctl
+        coreutils
+        gawk
+        gvfs
+        imagemagick
+        libnotify
+        procps
+        ripgrep
+        slurp
+        sysstat
+
+        # runtime scripts
+        ags-open-window
+        ags-move-window
+        ags-hyprctl-swallow
+      ];
+
+      # applications that are not necessarily required to compile ags
+      # but are used by the widgets to launch certain applications
+      widgetDeps = with pkgs; [
+        pavucontrol
+        networkmanagerapplet
+        blueman
+      ];
+
+      dependencies = coreDeps ++ widgetDeps;
+
+      agsSrc = path {
+        name = "ags-configuration-src";
+        path = ./src;
+      };
+
+      agsSource = pkgs.runCommand "build-ags-configuration" {nativeBuildInputs = with pkgs; [bun dart-sass];} ''
+        mkdir -p $out
+
+        # Compile stylesheet
+        sass --verbose --style=compressed --no-source-map \
+          ${agsSrc}/style/main.scss \
+          $out/style.css
+
+        # Build the configuration file with Bun
+        bun build ${agsSrc}/main.ts \
+          --external 'resource://*' \
+          --external 'gi://*' \
+          --external 'file://*' \
+          --public-path ${agsSrc} \
+          --target bun \
+          --outfile $out/config.js
+      '';
+    in {
       Install.WantedBy = ["graphical-session.target"];
 
       Unit = {
@@ -92,8 +94,16 @@ in {
       Service = {
         Type = "simple";
         Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies}";
-        ExecStart = "${cfg.package}/bin/ags";
-        ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID"; # hot-reloading
+        ExecStart = pkgs.writeShellScript "ags-start" ''
+          # Use $XDG_RUNTIME_DIR/ags as the configuration directory
+          # with compiled configuration and stylesheet files
+          ${agsPkg}/bin/ags --config ${agsSource}/config.js
+        '';
+
+        # Kill and restart ags on SIGUSR2
+        # provides some kind of a hot-reloading functionality
+        # which is not *really* necessary, but is there anyway
+        ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
 
         # Takes a value between -20 and 19. Higher values (e.g. 19) mean lower priority.
         # Lower priority means the process will get less CPU time and therefore will be slower.
@@ -148,12 +158,17 @@ in {
         CacheDirectory = ["ags"];
         UMask = "0027";
         ReadWritePaths = [
-          # socket access
-          # %t refers to /run/user/<id>
-          "%t"
+          # Socket and runtime directory access
+          # %t refers to $XDG_RUNTIME_DIR
+          "%t/hypr"
+          "%t/dconf/user"
+          "%t/pulse"
+          "%t/ags"
           "%h/.config"
-          # for thumbnail caching
-          "%h/.cache/ags/media"
+
+          # Additional directories required for
+          # working with cached files
+          "%h/.cache/ags"
         ];
 
         # restart on failure
