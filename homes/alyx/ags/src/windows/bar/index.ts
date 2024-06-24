@@ -55,10 +55,11 @@ const Bottom = () =>
 const Bar = ({ monitor: number } = {}) =>
     Window({
         name: "bar",
-        anchor: ["top", "bottom", "left"],
+        anchor: ["top", "bottom", "right"],
         exclusivity: "exclusive",
         layer: "top",
-        margins: [8, 0, 8, 8],
+        margins: [8, 8, 8, 0],
+        monitor: 0,
         child: CenterBox({
             className: "bar",
             vertical: true,
