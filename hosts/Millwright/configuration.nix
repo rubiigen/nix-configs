@@ -10,8 +10,7 @@
     ../common.nix
   ];
 
-  hardware.opengl = {
-    driSupport32Bit = true;
+  hardware.graphics = {
     extraPackages = with pkgs; [
       amdvlk
       libvdpau-va-gl
