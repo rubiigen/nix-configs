@@ -43,15 +43,16 @@ in
   gtk = {
     enable = true;
     theme = {
-      name = "Catppuccin-Mocha-Standard-Mauve-Dark";
+      name = "catppuccin-mocha-mauve-standard+default";
       package = pkgs.catppuccin-gtk.override {
         accents = ["mauve"];
+        size = "standard";
         variant = "mocha";
       };
     };
 
     cursorTheme = {
-      name = "Catppuccin-Mocha-Mauve-Cursors";
+      name = "catppuccin-mocha-mauve-cursors";
       package = pkgs.catppuccin-cursors.mochaMauve;
       size = 40;
     };
