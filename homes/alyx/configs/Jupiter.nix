@@ -16,7 +16,7 @@
     "2, monitor:DP-1"
   ];
 
-  "env" = "XCURSOR_SIZE,40";
+  "env" = "HYPRCURSOR_SIZE,48";
   "$mod" = "SUPER";
   input = {
     kb_layout = "us";

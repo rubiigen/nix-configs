@@ -34,7 +34,7 @@ in
       x11.enable = true;
       package = pkgs.catppuccin-cursors.mochaMauve;
       name = "catppuccin-mocha-mauve-cursors";
-      size = 40;
+      size = 48;
     };
   };
 
@@ -54,7 +54,7 @@ in
     cursorTheme = {
       name = "catppuccin-mocha-mauve-cursors";
       package = pkgs.catppuccin-cursors.mochaMauve;
-      size = 40;
+      size = 48;
     };
   };
   

@@ -16,7 +16,7 @@
   ];
 
   "env" = [
-    "XCURSOR_SIZE,40"
+    "HYPRCURSOR_SIZE,48"
   ];
 
   "$mod" = "SUPER";
