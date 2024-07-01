@@ -4,6 +4,7 @@
 + Millwright - alyx's Coffee Lake Rig
 + Nomad - alyx's ThinkPad L13 Gen 2 (AMD)
 + Jupiter - alyx's MacPro5,1 
++ Firefly - Dell XPS M1330 (not added yet. Has not arrived yet.
 
 # But, why?
 There was a couple motivators that moved me personally to nix, here are a couple
