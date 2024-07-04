@@ -11,6 +11,7 @@ let
     (lib.mkIf (osConfig.networking.hostName == "Millwright") (import ./configs/Millwright.nix))
     (lib.mkIf (osConfig.networking.hostName == "Nomad") (import ./configs/Nomad.nix))
     (lib.mkIf (osConfig.networking.hostName == "Jupiter") (import ./configs/Jupiter.nix))
+    (lib.mkIf (osConfig.networking.hostName == "Hyperion") (import ./configs/Hyperion.nix))
   ];
 in
 

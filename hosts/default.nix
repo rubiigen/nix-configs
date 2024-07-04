@@ -22,6 +22,18 @@
   commonArgs = {inherit self inputs;};
 
 in {
+
+  "Hyperion" = mkSystem {
+     specialArgs = commonArgs;
+     modules = [
+       ./Hyperion/configuration.nix
+       home-manager
+       homes
+       lanzaboote.nixosModules.lanzaboote
+       nur.nixosModules.nur
+     ];
+  };
+
   "Millwright" = mkSystem {
     specialArgs = commonArgs;
     modules = [

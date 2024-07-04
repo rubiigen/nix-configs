@@ -38,7 +38,7 @@
     stellarium
     tetrio-desktop
     timidity
-    transmission-qt
+    transmission_4-qt
     vesktop
     vlc
     vscodium
