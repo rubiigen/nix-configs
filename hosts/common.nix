@@ -28,9 +28,14 @@
     "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
     "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
   ];
+
+  nix.package = pkgs.lix;
+
   programs.dconf.enable = true;
 
   programs.fish.enable = true;
+
+  programs.flashrom.enable = true;
 
   programs.hyprlock.enable = true;
 
