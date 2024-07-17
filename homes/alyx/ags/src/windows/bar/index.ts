@@ -59,7 +59,7 @@ const Bar = ({ monitor: number } = {}) =>
         exclusivity: "exclusive",
         layer: "top",
         margins: [8, 8, 8, 0],
-        monitor: 0,
+        monitor,
         child: CenterBox({
             className: "bar",
             vertical: true,

@@ -44,7 +44,6 @@
     bluez
     cinnamon.nemo
     dbus
-    gnome3.adwaita-icon-theme
     grimblast
     libsForQt5.qt5ct
     lxqt.lxqt-policykit
@@ -55,7 +54,7 @@
     swaybg
     swayidle
     swayosd
-    temurin-bin-18
+    temurin-bin
     temurin-jre-bin-8
     udiskie
     wget
