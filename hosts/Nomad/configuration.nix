@@ -72,34 +72,6 @@
   services.fprintd.tod.enable = true;
   services.fprintd.tod.driver = pkgs.libfprint-2-tod1-vfs0090;
 
-  security.pam.services.hyprlock = {
-      text = ''
-        # Authentication management.
-        auth sufficient pam_unix.so try_first_pass likeauth nullok
-        auth sufficient /nix/store/mfsx2wn5plqwdiprxl59a3qwgyzxlsx9-fprintd-tod-1.90.9/lib/security/pam_fprintd.so # fprintd (order 11300)
-      '';
-  };
-
-  security.pam.services.greetd = {
-    text = ''
-      account required pam_unix.so # unix (order 10900)
-
-      # Authentication management.
-      auth sufficient pam_unix.so likeauth nullok try_first_pass # unix (order 11500)
-      auth sufficient /nix/store/mfsx2wn5plqwdiprxl59a3qwgyzxlsx9-fprintd-tod-1.90.9/lib/security/pam_fprintd.so # fprintd (order 11300)
-      auth required pam_deny.so # deny (order 12300)
-
-      # Password management.
-      password sufficient pam_unix.so nullok yescrypt # unix (order 10200)
-
-      # Session management.
-      session required pam_env.so conffile=/etc/pam/environment readenv=0 # env (order 10100)
-      session required pam_unix.so # unix (order 10200)
-      session required pam_loginuid.so # loginuid (order 10300)
-      session optional /nix/store/4npvfi1zh3igsgglxqzwg0w7m2h7sr9b-systemd-255.4/lib/security/pam_systemd.so # systemd (order 12000)
-      '';
-  };
-
   powerManagement.powertop.enable = true;
   services.thermald.enable = true;
 
