@@ -54,7 +54,6 @@ in {
        home-manager
        homes
        nur.nixosModules.nur
-       catppuccin.nixosModules.catppuccin
      ];
   };
 
