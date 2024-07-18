@@ -7,12 +7,12 @@
   ];
 
   monitor = [
-    "DVI-D-1,1600x1200,0x0,1,transform,3"
-    "DP-1,1920x1080@239.760,1200x520,1"
+    "DP-1,2560x1080@75,1920x0,1"
+    "DP-2,1920x1080@239.760,0x0,1"
   ];
 
   workspace = [
-    "1, monitor:DVI-D-1"
+    "1, monitor:DP-2"
     "2, monitor:DP-1"
   ];
 

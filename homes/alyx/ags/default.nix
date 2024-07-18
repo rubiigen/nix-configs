@@ -20,7 +20,7 @@ in {
       # some of those dependencies are used internally for setting variables
       # or basic functionality where built-in services do not suffice
       coreDeps = with pkgs; [
-        inputs.hyprpicker.packages.${pkgs.stdenv.system}.default
+#        inputs.hyprpicker.packages.${pkgs.stdenv.system}.default
         inputs.hyprland.packages.${pkgs.stdenv.system}.default
         config.programs.foot.package
 
@@ -62,7 +62,7 @@ in {
         path = ./src;
       };
 
-      agsSource = pkgs.runCommand "build-ags-configuration" {nativeBuildInputs = with pkgs; [bun dart-sass];} ''
+      agsSource = pkgs.runCommand "build-ags-configuration" {nativeBuildInputs = with pkgs; [(pkgs.callPackage (import ./bun-baseline.nix) {}) dart-sass];} ''
         mkdir -p $out
 
         # Compile stylesheet

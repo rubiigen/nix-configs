@@ -2,7 +2,7 @@
   # get inputs from self
   inherit (self) inputs;
   # get necessary inputs from self.inputs
-  inherit (inputs) nixpkgs lanzaboote nur;
+  inherit (inputs) nixpkgs lanzaboote nur catppuccin;
   inherit (inputs.home-manager.nixosModules) home-manager;  
   # get lib from nixpkgs and create and alias  for lib.nixosSystem
   # for potential future overrides & abstractions
@@ -54,6 +54,7 @@ in {
        home-manager
        homes
        nur.nixosModules.nur
+       catppuccin.nixosModules.catppuccin
      ];
   };
 

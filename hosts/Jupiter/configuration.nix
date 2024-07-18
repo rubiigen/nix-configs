@@ -10,8 +10,8 @@
     ../common.nix
   ];
 
-  hardware.opengl = {
-    driSupport32Bit = true;
+  hardware.graphics = {
+    enable32Bit = true;
     extraPackages = with pkgs; [
       amdvlk
       vulkan-validation-layers
