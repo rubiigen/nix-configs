@@ -5,7 +5,7 @@
 
   home.packages = with pkgs; [
     amberol
-    blender
+    blender-hip
     brightnessctl
     cinny-desktop
     clonehero
