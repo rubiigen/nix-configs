@@ -92,6 +92,7 @@
   };
 
   hardware.bluetooth.enable = true;
+  hardware.openrazer.enable = true;
 
   services.acpid.enable = true;
   services.blueman.enable = true;

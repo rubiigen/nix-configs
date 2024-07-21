@@ -108,8 +108,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices = {
     crypted = {
-      device = "/dev/disk/by-partuuid/f1afe0b2-9f0b-4f4d-8eab-9c1bea57c705";
-      header = "/dev/disk/by-partuuid/59e2c3fa-be93-477a-a06f-455e848043d1";
+      device = "/dev/disk/by-partuuid/8f546776-2d5d-45aa-8ffb-25c1a46318bd";
+      header = "/dev/disk/by-partuuid/846c8623-b488-4c2f-b324-6b3ee294dbb6";
       allowDiscards = true;
       preLVM = true;
     };
