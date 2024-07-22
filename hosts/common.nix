@@ -48,6 +48,7 @@
     libsForQt5.qt5ct
     lxqt.lxqt-policykit
     mesa
+    openrazer-daemon
     pavucontrol
     playerctl
     pulseaudio

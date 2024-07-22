@@ -145,7 +145,7 @@
   users.users.alyx = {
     isNormalUser = true;
     description = "alyx";
-    extraGroups = ["networkmanager" "wheel" "adbusers" "libvirtd" "kvm"];
+    extraGroups = ["networkmanager" "wheel" "adbusers" "libvirtd" "kvm" "openrazer"];
     openssh.authorizedKeys.keys = [
       # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
     ];
