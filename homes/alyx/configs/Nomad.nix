@@ -1,6 +1,6 @@
 {
   exec-once = [
-    "swaybg --image ~/.config/nixos/wallpapers/halftone-purple.png"
+    "swaybg --image ~/.config/nixos/images/halftone-purple.png"
     "dbus-update-activation-environment --systemd DISPLAY WAYLAND-DISPLAY"
     "bash ~/.config/lockonsleep/config.sh"
   ];
