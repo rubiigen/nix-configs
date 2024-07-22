@@ -35,7 +35,7 @@ No. God no. While I kid, the documentation is a bit lacklustre so do go in with 
 + multiple others I forget
 + aegiscarr - halftone-purple.png @ images + pfp2 @ images
 + catppuccin - gtk theme hyprlock config
-+ [This repo] (https://github.com/zhichaoh/catppuccin-wallpapers) - for some of the wallpapers @ images
++ [This repo][https://github.com/zhichaoh/catppuccin-wallpapers] - for some of the wallpapers @ images
 # Thanks for taking the time to read this dumpster fire!
 
 -alyx
